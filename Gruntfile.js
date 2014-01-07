@@ -158,6 +158,44 @@ module.exports = function (grunt) {
           dest: 'www'
         }
         ]
+      },
+      jquery: {
+        files: [
+          {
+            expand: true,
+            cwd: 'bower_components/jquery',
+            src: ['*.js'],
+            dest: 'assets/js/vendor'
+          }
+        ]
+      },
+      bootstrap: {
+        files: [
+          {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist/css',
+            src: ['*.css'],
+            dest: 'assets/styles'
+          },
+          {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist',
+            src: ['fonts/**'],
+            dest: 'assets'
+          },
+          {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist/js',
+            src: ['*.js'],
+            dest: 'assets/js/vendor'
+          }
+        ]
+      },
+      normalize: {
+        expand: true,
+        cwd: 'bower_components/normalize-css',
+        src: ['*.css'],
+        dest: 'assets/styles'
       }
     },
 
@@ -465,6 +503,8 @@ module.exports = function (grunt) {
     'sails-linker:prodStylesJADE',
     'sails-linker:devTplJADE'
   ]);
+
+  grunt.registerTask('f2e-init', ['copy:jquery', 'copy:bootstrap', 'copy:normalize'])
 
   // When API files are changed:
   // grunt.event.on('watch', function(action, filepath) {
