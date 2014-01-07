@@ -18,15 +18,16 @@ block body
       .panel-heading
         h3(class='panel-title') 管理者登入
       .panel-body
-        form(class='form-horizontal', role='form')
+        form(class='form-horizontal', role='form', method='post', action='/auth/admin')
+          input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
           .form-group
             label(for='account', class='col-sm-2 control-label') 帳號
             .col-sm-9
-              input(type='text', class='form-control', id='account')
+              input(type='text', class='form-control', id='account', name='account')
           .form-group
             label(for='password', class='col-sm-2 control-label') 密碼
             .col-sm-9
-              input(type='password', class='form-control', id='password')
+              input(type='password', class='form-control', id='password', name='password')
           button(class="btn btn-lg btn-info btn-block", type='submit') 登入
 
 block javascript

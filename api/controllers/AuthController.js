@@ -15,6 +15,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var bcrypt = require('bcrypt');
+
 module.exports = {
 
   facebook: function (req, res, next) {
@@ -22,7 +24,53 @@ module.exports = {
   },
 
   admin: function (req, res, next) {
+    if (req.method != 'POST') {
+      res.redirect('/');
+      return;
+    }
 
+    if (req.session.authenticated) {
+      res.redirect('/root/index');
+      return;
+    } else {
+      Admin.findOneByAccount(req.param('account'), function (err, admin) {
+        if (err) return next(err);
+
+        // If no admin is found...
+        if (!admin) {
+          var noAccountError = [{ name: 'noAccount', message: '帳號錯誤' }];
+          req.session.flash = {
+            err: noAccountError
+          };
+          res.redirect('/');
+          return;
+        }
+
+        // Compare password from the form params to the encrypted password of the admin found.
+        bcrypt.compare(req.param('password'), admin.encryptedPassword, function (err, valid) {
+          if (err) return next(err);
+
+          // If the password from the form doesn't match the password from the database...
+          if (!valid) {
+            var adminAccountPasswordMismatchError = [{ name: 'adminAccountPasswordMismatch', message: '錯誤的帳號密碼' }];
+            req.session.flash = {
+              err: adminAccountPasswordMismatchError
+            };
+            res.redirect('/');
+            return;
+          }
+
+          // Log user in and let session expired after an hour
+          var hour = 3600000;
+          req.session.cookie.expires = new Date(Date.now() + hour);
+          req.session.authenticated = true;
+          req.session.Admin = admin.toJSON();
+
+          res.redirect('/root/index');
+          return;
+        });
+      });
+    }
   },
 
 
