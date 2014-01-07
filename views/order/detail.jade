@@ -1,18 +1,78 @@
 extends ../layout
 
 block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
   style.
     body {
       padding-top: 60px;
     }
-    .panel.center {
+    .center {
       margin: 0 auto;
-      width: 30rem;
+      float: none;
+    }
+    span.divider {
+      display: inline-block;
+      width: 5px;
     }
 
 block body
   include ../partials/topbar
 
   .container
-    
+    .row
+      .col-sm-8.center
+        .panel.panel-default
+          .panel-heading
+            h3(class='panel-title') 單筆訂單
+          form(class='form-horizontal', role='form', method='post', action='')
+            .panel-body
+              
+                //- input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
+                .form-group
+                  label(for='orderNo', class='col-sm-2 control-label') 訂單編號
+                  .col-sm-6
+                    p(class='form-control-static', id='orderNo') 20140101000001
+                .form-group
+                  label(for='fbId', class='col-sm-2 control-label') Facebook Id
+                  .col-sm-6
+                    p(class='form-control-static', id='fbId') 4
+                .form-group
+                  label(for='contactName', class='col-sm-2 control-label') 收件人
+                  .col-sm-6
+                    p(class='form-control-static', id='contactName') 收件人姓名
+                .form-group
+                  label(for='contactBirthday', class='col-sm-2 control-label ') 收件人生日
+                  .col-sm-6
+                    p(class='form-control-static', id='contactBirthday') 2014/01/01
+                .form-group
+                  label(for='delivery', class='col-sm-2 control-label') 配送方式
+                  .col-sm-6
+                    p(class='form-control-static', id='delivery') 現場領取
+                .form-group
+                  label(for='commodity', class='col-sm-2 control-label') 商品資料
+                  .col-sm-6
+                    input(type='text', class='form-control', id='commodity')
+                .form-group
+                  label(for='paymentStatus', class='col-sm-2 control-label') 付款狀態
+                  .col-sm-6
+                    p(class='form-control-static', id='paymentStatus')
+                      span(class='label label-danger') 逾期繳費
+                .form-group
+                  label(for='expressStauts', class='col-sm-2 control-label') 物流處理進度
+                  .col-sm-6
+                    p(class='form-control-static', id='expressStauts')
+                      span(class='label label-success') 已寄送
+                .form-group
+                  label(for='trackingNumber', class='col-sm-2 control-label') 配送單號
+                  .col-sm-6
+                    p(class='form-control-static', id='trackingNumber') 52-3831-9003
+          .panel-footer.text-right
+            a(class='btn btn-success') 編輯
+
 block javascript
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
+  script.
+    $(function() {
+      $('.datepicker').datepicker();
+    });
