@@ -63,7 +63,7 @@ module.exports = {
     // 電子郵件
     // Ex: zuck@facebook.com
     email: {
-      type: 'string'
+      type: 'string',
       email: true
     },
 
