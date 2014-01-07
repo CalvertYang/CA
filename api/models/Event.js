@@ -92,6 +92,12 @@ module.exports = {
     // 報名所需資料
     registrationData: {
       type: 'json'
+    },
+
+    // 報名人數限制
+    quantity: {
+      type: 'integer',
+      defaultsTo: 0
     }
 
   }
