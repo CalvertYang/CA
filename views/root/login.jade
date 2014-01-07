@@ -7,7 +7,7 @@ block styles
     }
     .panel.center {
       margin: 0 auto;
-      width: 30rem;
+      width: 32rem;
     }
 
 block body
@@ -21,11 +21,11 @@ block body
         form(class='form-horizontal', role='form', method='post', action='/auth/admin')
           input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
           .form-group
-            label(for='account', class='col-sm-2 control-label') 帳號
+            label(for='account', class='col-sm-3 control-label') 帳號
             .col-sm-9
               input(type='text', class='form-control', id='account', name='account')
           .form-group
-            label(for='password', class='col-sm-2 control-label') 密碼
+            label(for='password', class='col-sm-3 control-label') 密碼
             .col-sm-9
               input(type='password', class='form-control', id='password', name='password')
           button(class="btn btn-lg btn-info btn-block", type='submit') 登入
