@@ -9,13 +9,13 @@ block styles
       margin: 0 auto;
       width: 30rem;
     }
-    .w180 {
-      width: 180px;
+    .w30 {
+      width: 30px;
     }
-    span.divider {
-      width: 5px;
-      display: inline-block;
-      height: 100%;
+    .block {
+      width: 90%;
+      height: 2rem;
+      margin: 2px 0;
     }
 
 block body
@@ -31,22 +31,32 @@ block body
     .row
       hr
     .row
+      .col-sm-3
+        .block
+          span(class="glyphicon glyphicon-user")
+          span(class='badge') 9999
+
+
+    .row
       .col-sm-12
         table(class='table table-bordered table-hover table-condensed table-responsive')
           tr
-            th 活動名稱
-            th 報名日期（起始）
-            th 報名人數
-            th 金額（已入賬 / 未入賬）
+            th Facebook
+            th 姓名
+            th 生日
+            th 性別
+            th Email
+            th 驗證狀態
             th
+
           tr
             td
             td
             td
             td
-            td(class='w180')
-              a(href='', class='btn btn-primary btn-sm') 詳細資訊
-              span(class="divider")
-              a(href='', class='btn btn-success btn-sm') 查看訂單
+            td
+            td
+            td(class='w30')
+              a(href='', class='btn btn-sm') 訂單資訊
     
 block javascript
