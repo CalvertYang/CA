@@ -9,10 +9,41 @@ block styles
       margin: 0 auto;
       width: 30rem;
     }
+    .f30 {
+      width: 30px;
+    }
 
 block body
   include ../partials/topbar
 
   .container
+    .row
+      .col-sm-3
+        .input-group
+          input(type='text', class='form-control', placeholder='搜尋...')
+          span(class='input-group-btn')
+            button(class='btn btn-default', type='button') 搜尋
+    .row
+      hr
+    .row
+      .col-sm-12
+        table(class='table table-bordered table-hover table-condensed table-responsive')
+          tr
+            th 訂單編號
+            th 活動名稱
+            th 配送方式
+            th 金流狀態
+            th 物流狀態
+            th 追蹤貨號
+            th 
+          tr
+            td
+            td
+            td
+            td
+            td
+            td
+            td(class='f30')
+              a(href='', class='btn btn-primary btn-sm') 詳細資訊
     
 block javascript
