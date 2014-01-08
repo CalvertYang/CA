@@ -16,11 +16,25 @@
  */
 
 var bcrypt = require('bcrypt');
+var passport = require('passport');
 
 module.exports = {
 
   facebook: function (req, res, next) {
+    passport.authenticate('facebook', { scope: ['email', 'user_birthday'], failureRedirect: '/login' },
+      function (err, user) {
+        req.logIn(user, function (err) {
+          if (err) {
+            console.log(err);
+            res.serverError(err);
+            return;
+          }
 
+          res.redirect('/');
+          return;
+        });
+      }
+    )(req, res);
   },
 
   admin: function (req, res, next) {
@@ -71,6 +85,11 @@ module.exports = {
         });
       });
     }
+  },
+
+  logout: function (req, res, next) {
+    req.logout();
+    res.redirect('/');
   },
 
 

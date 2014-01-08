@@ -21,6 +21,10 @@ module.exports = {
     res.view();
   },
 
+  login: function (req, res, next) {
+    res.view();
+  },
+
 
   /**
    * Overrides for the settings in `config/controllers.js`
