@@ -2,30 +2,28 @@ extends ../layout
 
 block styles
   style.
-    body {
-      padding-top: 60px;
-    }
-    .panel.center {
+    .header {
+      width: 1440px;
+      max-width: 1440px;
       margin: 0 auto;
-      width: 30rem;
+      height: 185px;
+      background: url('/images/header-bg.png');
+    }
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .footer {
+      width: 1440px;
+      margin: 0 auto;
     }
 
 block body
-  include ../partials/topbar
-
+  .header
   .container
-    .panel.panel-default.center
-      .panel-heading
-        h3(class='panel-title') 管理者登入
-      .panel-body
-        form(class='form-horizontal', role='form')
-          .form-group
-            label(for='account', class='col-sm-2 control-label') 帳號
-            .col-sm-9
-              input(type='text', class='form-control', id='account')
-          .form-group
-            label(for='password', class='col-sm-2 control-label') 密碼
-            .col-sm-9
-              input(type='password', class='form-control', id='password')
-          button(class="btn btn-lg btn-info btn-block", type='submit') 登入
+    img(src='/images/main.png', width='1440px', height='500px')
+    img(src='/images/about-title.png', width='1440px', height='165px')
+  .footer
+    | abc
 block javascript
