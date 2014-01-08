@@ -9,8 +9,8 @@ block styles
       margin: 0 auto;
       width: 30rem;
     }
-    .w180 {
-      width: 180px;
+    .w {
+      width: 210px;
     }
     span.divider {
       width: 5px;
@@ -36,17 +36,20 @@ block body
             th 活動名稱
             th 報名日期（起始）
             th 報名人數
-            th 金額（已入賬 / 未入賬）
+            th 金額（已入帳 / 未入帳）
             th 
-              a(href='', class='btn btn-primary btn-sm') 新增
-          tr
-            td
-            td
-            td
-            td
-            td(class='w180')
-              a(href='', class='btn btn-default btn-sm') 詳細資訊
-              span(class="divider")
-              a(href='', class='btn btn-default btn-sm') 查看訂單
+              a(href='/event/create', class='btn btn-primary btn-sm') 新增
+          each event in events
+            tr
+              td= event.title
+              td= event.registrationStartOn
+              td
+              td
+              td(class='w')
+                a(href='/event/update/#{event.id}', class='btn btn-success btn-sm') 編輯
+                span(class="divider")
+                a(href='/event/detail/#{event.id}', class='btn btn-default btn-sm') 詳細資訊
+                span(class="divider")
+                a(href='', class='btn btn-default btn-sm') 查看訂單
     
 block javascript

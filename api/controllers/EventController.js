@@ -14,23 +14,153 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var moment = require('moment');
 
 module.exports = {
     
   index: function (req, res, next) {
+    Event.find().done(function (err, events) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+      }
 
+      // Change datetime format
+      events.forEach(function (event) {
+        event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
+        event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
+        event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
+        event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+      });
+
+      return res.view({ events: events });
+    });
   },
 
   create: function (req, res, next) {
+    if (req.method != 'POST') {
+      return res.view();
+    } else {
+      var eventObj = {};
+      eventObj.title = req.param('title');
+      eventObj.startOn = new Date(req.param('startOn'));
+      eventObj.endOn = new Date(req.param('endOn'));
+      eventObj.registrationStartOn = new Date(req.param('registrationStartOn'));
+      eventObj.registrationEndOn = new Date(req.param('registrationEndOn'));
+      eventObj.sponsor = req.param('sponsor');
+      eventObj.contact = req.param('contact');
+      eventObj.contactPhone = req.param('contactPhone');
+      eventObj.contactEmail = req.param('contactEmail');
+      eventObj.quantity = req.param('quantity');
 
+      // Create registrationDataObj
+      var registrationDatas = sails.util._.flatten(req.param('registrationData'));
+      var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
+      eventObj.registrationData = [];
+
+      for(var idx in registrationDatas) {
+        var registrationDataItem = {};
+        registrationDataItem.name = registrationDatas[idx];
+        registrationDataItem.type = registrationDataTypes[idx];
+
+        eventObj.registrationData.push(registrationDataItem);
+      }
+
+      // Add record
+      Event.create(eventObj, function eventCreated (err, event) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          req.session.flash = {
+            err: err
+          }
+        }
+
+        return res.redirect('/event/index');
+      });
+    }
   },
 
   detail: function (req, res, next) {
+    Event.findOne(req.param('id')).done(function (err, event) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+      }
 
+      // Change datetime format
+      event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
+      event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
+      event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
+      event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+
+      return res.view({ event: event });
+    });
   },
 
   update: function (req, res, next) {
+    if (req.method != 'POST') {
+      Event.findOne(req.param('id')).done(function (err, event) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          req.session.flash = {
+            err: err
+          }
+        }
 
+        // Change datetime format
+        event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
+        event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
+        event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
+        event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+
+        return res.view({ event: event });
+      });
+    } else {
+      var eventObj = {};
+      eventObj.title = req.param('title');
+      eventObj.startOn = new Date(req.param('startOn'));
+      eventObj.endOn = new Date(req.param('endOn'));
+      eventObj.registrationStartOn = new Date(req.param('registrationStartOn'));
+      eventObj.registrationEndOn = new Date(req.param('registrationEndOn'));
+      eventObj.sponsor = req.param('sponsor');
+      eventObj.contact = req.param('contact');
+      eventObj.contactPhone = req.param('contactPhone');
+      eventObj.contactEmail = req.param('contactEmail');
+      eventObj.quantity = req.param('quantity');
+
+      // Create registrationDataObj
+      var registrationDatas = sails.util._.flatten(req.param('registrationData'));
+      var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
+      eventObj.registrationData = [];
+
+      for(var idx in registrationDatas) {
+        var registrationDataItem = {};
+        registrationDataItem.name = registrationDatas[idx];
+        registrationDataItem.type = registrationDataTypes[idx];
+
+        eventObj.registrationData.push(registrationDataItem);
+      }
+
+      Event.update(req.param('id'), eventObj, function (err, events) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          req.session.flash = {
+            err: err
+          }
+        }
+
+        return res.redirect('/event/index');
+      });
+    }
   },
 
 

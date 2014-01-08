@@ -27,7 +27,6 @@ module.exports = {
     // Ex: xx河濱公園
     place: {
       type: 'string',
-      required: true
     },
 
     // 地址
@@ -91,7 +90,7 @@ module.exports = {
 
     // 報名所需資料
     registrationData: {
-      type: 'json'
+      type: 'array'
     },
 
     // 報名人數限制

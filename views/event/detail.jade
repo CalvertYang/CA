@@ -23,7 +23,7 @@ block body
       .col-sm-8.center
         .panel.panel-default
           .panel-heading
-            h3(class='panel-title') 單筆活動-美國隊長路跑
+            h3(class='panel-title') 單筆活動 - #{event.title}
           form(class='form-horizontal', role='form', method='post', action='')
             .panel-body
               
@@ -31,52 +31,72 @@ block body
                 .form-group
                   label(for='title', class='col-sm-2 control-label') 活動名稱
                   .col-sm-6
-                    p(class='form-control-static', id='title') 美國隊長路跑
+                    p(class='form-control-static', id='title')= event.title
                 .form-group
                   label(for='registrationStartOn', class='col-sm-2 control-label') 報名日期-起
                   .col-sm-6
-                    p(class='form-control-static', id='registrationStartOn') 2014/01/01
+                    p(class='form-control-static', id='registrationStartOn')= event.registrationStartOn
                 .form-group
                   label(for='registrationEndOn', class='col-sm-2 control-label') 報名日期-迄
                   .col-sm-6
-                    p(class='form-control-static', id='registrationEndOn') 2014/02/02
+                    p(class='form-control-static', id='registrationEndOn')= event.registrationEndOn
                 .form-group
                   label(for='startOn', class='col-sm-2 control-label ') 活動日期-起
                   .col-sm-6
-                    p(class='form-control-static', id='startOn') 2014/03/03
+                    p(class='form-control-static', id='startOn')= event.startOn
                 .form-group
                   label(for='endOn', class='col-sm-2 control-label') 活動日期-迄
                   .col-sm-6
-                    p(class='form-control-static', id='endOn') 2014/04/04
+                    p(class='form-control-static', id='endOn')= event.endOn
                 .form-group
                   label(for='sponsor', class='col-sm-2 control-label') 主辦單位
                   .col-sm-6
-                    p(class='form-control-static', id='sponsor') Marvel
+                    p(class='form-control-static', id='sponsor')= event.sponsor
                 .form-group
                   label(for='contact', class='col-sm-2 control-label') 聯絡人
                   .col-sm-6
-                    p(class='form-control-static', id='contact') Zuck
+                    p(class='form-control-static', id='contact')= event.contact
                 .form-group
                   label(for='contactPhone', class='col-sm-2 control-label') 聯絡電話
                   .col-sm-6
-                     p(class='form-control-static', id='contactPhone') 0912345678
+                     p(class='form-control-static', id='contactPhone')= event.contactPhone
                 .form-group
                   label(for='contactEmail', class='col-sm-2 control-label') 聯絡電子郵件
                   .col-sm-6
-                    p(class='form-control-static', id='contactEmail') zuck@facebook.com
+                    p(class='form-control-static', id='contactEmail')= event.contactEmail
                 .form-group
                   label(for='quantity', class='col-sm-2 control-label') 報名人數限制
                   .col-sm-6
-                    p(class='form-control-static', id='quantity') 99999
-                .form-group
-                  label(for='registrationData', class='col-sm-2 control-label') 報名所需資料
-                  .col-sm-6
-                    input(type='text', class='form-control', id='registrationData')
+                    p(class='form-control-static', id='quantity')= event.quantity
+                - var dataCount = 0
+                each regData in event.registrationData
+                  .form-group
+                    if dataCount == 0
+                      label(for='registrationData', class='col-sm-2 control-label') 報名所需資料
+                    else
+                      .col-sm-2
+                    .col-sm-6
+                      - var dataType = ''
+                      case regData.type
+                        when 'text'
+                          - dataType = '文字'
+                        when 'number'
+                          - dataType = '數字'
+                        when 'date'
+                          - dataType = '日期'
+                        when 'tel'
+                          - dataType = '電話'
+                        when 'email'
+                          - dataType = '電子郵件'
+                        when 'select'
+                          - dataType = '下拉式選單'
+                      p(class='form-control-static', id='registrationData#{dataCount}') #{regData.name}(#{dataType})
+                  - dataCount++
 
           .panel-footer.text-right
-            a(class='btn btn-default') 取消
+            a(href='/event/index', class='btn btn-default') 返回
             span.divider
-            a(class='btn btn-primary') 確認
+            a(href='/event/update/#{event.id}', class='btn btn-success') 編輯
 
 block javascript
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
