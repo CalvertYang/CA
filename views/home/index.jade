@@ -62,49 +62,36 @@ block styles
       bottom: -18px;
 
     }
-    .nav ul {
+    ul {
       list-style-type: none;
       width: 960px;
       margin: 0 auto;
     }
-    .nav ul li {
+    ul li {
       display: inline-block;
       height: 3rem;
       padding: 0.5rem;
       margin-right: 1rem;
     }
-    .nav ul.right li {
-      float: right;
-      border-bottom: 5px solid rgba(170, 31, 36, 0);
-      margin-top: 2px;
-    }
-    .nav ul.right li:hover {
-      border-bottom: 5px solid rgba(170, 31, 36, 0.8);
-    }
+    
 
-    .nav ul li a {
-      color: #b2b2b2;
-      text-decoration: none;
-    }
-    .nav ul li a:hover {
-      color: #aa1f24;
-      text-decoration: none;
-    }
+    
     .menu ul li {
       border-bottom: 5px solid rgba(170, 31, 36, 0);
       line-height: 1.8rem;
+      text-decoration: none;
     }
     .menu ul li a {
       color: rgba(255, 255, 255, 0.7);
       font-size: 1.4rem;
       margin: 2px;
       font-weight: 500;
+      text-decoration: none;
     }
     .menu ul li:hover, .menu ul li.active{
-      
       border-bottom: 5px solid rgba(170, 31, 36, 0.9);
     }
-    .menu ul li.active a {
+    .menu ul li a:hover, .menu ul li.active a {
       color: #aa1f24;
     }
     .tab {
@@ -136,16 +123,57 @@ block styles
     a.buy:hover {
       background-position: 0 -106px;
     }
+    .topbar > ul {
+      position: relative;
+      color: #b2b2b2;
+      text-align: right;
+    }
+
+    .topbar ul a {
+       color: #b2b2b2;
+    }
+    .topbar ul a:hover {
+       color: rgba(170, 31, 36, 0.9);
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      max-width: 8rem;
+      top: 2.8rem;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 0.9);
+    }
+    .topbar ul ul li {
+      display: block !important;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
 
 block body
   .header
     .topbar
-      .nav
-        ul.right
-          li
-            a(href='/auth/facebook') Facebook 登入
-          li
-            a(href='') 我要協助
+      ul
+        li
+          a(href='/auth/facebook') Facebook 登入
+        li
+          a(href='') 帳號
+          ul
+            li 
+              a(href='') 訂單查詢
+            li 
+              a(href='') 登出
+        li
+          a(href='') 我要協助
+          ul
+            li 
+              a(href='') 退款說明
+            li 
+              a(href='') 參賽說明
     .menu
       .nav
         ul
