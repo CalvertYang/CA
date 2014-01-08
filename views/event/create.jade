@@ -2,6 +2,7 @@ extends ../layout
 
 block styles
   link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
+  link(rel='stylesheet', href='/styles/jquery-ui-timepicker-addon.css')
   style.
     body {
       padding-top: 60px;
@@ -99,9 +100,10 @@ block body
 block javascript
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
+  script(src='/js/vendor/jquery-ui-timepicker-addon.js')
   script.
     $(function() {
-      $('.datepicker').datepicker();
+      $('.datepicker').datetimepicker();
 
       $('.col-plus').on('click', function (e) {
         var index = $('.registration-data').length;
