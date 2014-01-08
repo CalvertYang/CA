@@ -211,7 +211,7 @@ block body
     img(src='/images/main.png', width='1440px', height='490px')
     .content
       img(src='/images/about.png', width='1440px', class='title')
-      .tab.about.active
+      .tab.about(id='about', name='about')
         hr
         h3 活動介紹
         hr
@@ -228,7 +228,7 @@ block body
         a(href='', class='buy')
         
         
-      .tab.how
+      .tab.how(id='how',name='how')
         hr
         h3 活動資訊
         hr
@@ -256,7 +256,7 @@ block body
         p 即可在取物帳篷領取限量禮品包。/費用0元
         a(href='', class='buy')
 
-      .tab.when
+      .tab.when(id='when',name='when')
         hr
         h3 活動流程
         hr
@@ -289,7 +289,7 @@ block body
         h4 活動結束
         a(href='', class='buy')
 
-      .tab.where
+      .tab.where(id='where',name='where')
         hr
         h3 交通資訊
         hr
@@ -311,7 +311,7 @@ block body
         p 至果菜市場站或205、212、藍29、棕22至青年路下車即可達。
         a(href='', class='buy')
 
-      .tab.qna
+      .tab.qna(id='qna',name='qna')
         hr
         h4 Q1：怎麼參加活動？
         hr
@@ -328,7 +328,7 @@ block body
         p 五公里是專業路跑最基礎的里程數，對於初級路跑者剛剛好，而且特別設計在90分鐘內，只要配合呼吸，
         p 緩慢規律的持續行走，在寒冷的冬天，也會微微的發熱、出汗，消耗一定的卡路里。
         a(href='', class='buy')
-      .tab.flow
+      .tab.flow(id='flow',name='flow')
         hr
         h4 Step1-上網訂購禮品包
         hr
@@ -434,8 +434,8 @@ block body
         var path = '/images/' + $(this).attr('href').slice(1) + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
-        $('html, body').scrollTop(650);
-        e.preventDefault();
+        
+
 
       });
 
