@@ -126,11 +126,11 @@ block body
 
       $(document).on('change', 'select.registration-data-type', function (e) {
         if ($(this).val() == 'select') {
-          console.log('aaa');
+          var index = $(this).attr('id').replace("registrationDataType-", "");
           var btnTypePlus = $("<div class='col-sm-1 reset-gap type-plus'><a class='btn btn-sm btn-info'><span class='glyphicon glyphicon-plus-sign'></span></a></div>")
-          var firstColumn = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' /></div></div>");
+          var firstColumn = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div></div>");
           btnTypePlus.on('click', function (e) {
-            var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>"); 
+            var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>");
             column.find('a').on('click', function (e) {
               $(this).parent().parent().remove();
             });
@@ -144,5 +144,5 @@ block body
         }
        
       });
-      
+
     });

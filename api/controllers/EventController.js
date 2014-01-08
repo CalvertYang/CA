@@ -61,10 +61,16 @@ module.exports = {
       var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
       eventObj.registrationData = [];
 
+      var selectCount = 0;
       for(var idx in registrationDatas) {
         var registrationDataItem = {};
         registrationDataItem.name = registrationDatas[idx];
         registrationDataItem.type = registrationDataTypes[idx];
+
+        if (registrationDataItem.type == 'select') {
+          registrationDataItem.value = req.param('selectItem')[selectCount];
+          selectCount++;
+        }
 
         eventObj.registrationData.push(registrationDataItem);
       }
@@ -141,10 +147,16 @@ module.exports = {
       var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
       eventObj.registrationData = [];
 
+      var selectCount = 0;
       for(var idx in registrationDatas) {
         var registrationDataItem = {};
         registrationDataItem.name = registrationDatas[idx];
         registrationDataItem.type = registrationDataTypes[idx];
+
+        if (registrationDataItem.type == 'select') {
+          registrationDataItem.value = req.param('selectItem')[selectCount];
+          selectCount++;
+        }
 
         eventObj.registrationData.push(registrationDataItem);
       }

@@ -91,6 +91,14 @@ block body
                         when 'select'
                           - dataType = '下拉式選單'
                       p(class='form-control-static', id='registrationData#{dataCount}') #{regData.name}(#{dataType})
+                        if regData.type == 'select'
+                          |  -  
+                          - itemCount = 1
+                          each item in regData.value
+                            = item
+                            if itemCount < regData.value.length
+                              | 、
+                            - itemCount++
                   - dataCount++
 
           .panel-footer.text-right

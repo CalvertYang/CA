@@ -18,6 +18,10 @@ block styles
     .reset-gap {
       padding: 0;
       margin: 0;
+      width: 3.5rem;
+    }
+    .mt {
+      margin-top: 8px;
     }
 
 block body
@@ -82,13 +86,13 @@ block body
                     .col-sm-3
                       input(type='text', class='form-control', id='registrationData-#{dataCount}', name='registrationData[]', value='#{regData.name}')
                     .col-sm-3
-                      select(id='registrationDataType-#{dataCount}', name='registrationDataType[]', class='form-control')
+                      select(id='registrationDataType-#{dataCount}', name='registrationDataType[]', class='form-control registration-data-type')
                         option(value='text', selected=regData.type == 'text') 文字
                         option(value='number', selected=regData.type == 'number') 數字
                         option(value='date', selected=regData.type == 'date') 日期
                         option(value='tel', selected=regData.type == 'tel') 電話
                         option(value='email', selected=regData.type == 'email') 電子郵件
-                        //- option(value='select') 下拉式選單
+                        option(value='select', selected=regData.type == 'select') 下拉式選單
                     .col-sm-1.reset-gap
                       if dataCount == 0
                         a(class='btn btn-sm btn-success col-plus')
@@ -96,6 +100,20 @@ block body
                       else
                         a(class='btn btn-sm btn-danger col-minus', onclick='removeRegistrationDataType(#{dataCount});')
                           span(class='glyphicon glyphicon-minus')
+                    if regData.type == 'select'
+                      .col-sm-1.reset-gap.type-plus
+                        a(class='btn btn-sm btn-info', onclick='addSelectItem(this, #{dataCount});return false;')
+                          span(class="glyphicon glyphicon-plus-sign")
+                      - selectCount = 0
+                      each selectItem in regData.value
+                        .registration-type-column
+                          .col-sm-offset-5.col-sm-3.mt
+                            input(type='text', class='form-control' name='selectItem[#{dataCount}]', value='#{selectItem}')
+                          if selectCount > 0
+                            .col-sm-1.reset-gap.mt
+                              a(class='btn btn-sm btn-warning', onclick='removeSelectItem(this);return false;')
+                                span(class='glyphicon glyphicon-minus-sign')
+                        - selectCount++
                   - dataCount++
 
             .panel-footer.text-right
@@ -116,7 +134,7 @@ block javascript
         var row = $('<div></div>').addClass('form-group registration-data');
         var label = $("<label for='' class='col-sm-2 control-label'></label>")
         var input = $("<div class='col-sm-3'><input type='text' class='form-control' id='registrationData-" + index + "' name='registrationData[]' /></div>");
-        var select = $("<div class='col-sm-3'> <select id='registrationDataType-" + index + "' name='registrationDataType[]' class='form-control'> <option value='text' selected>文字 <option value='number'>數字 <option value='date'>日期 <option value='tel'>電話 <option value='email'>電子郵件 <option value='select'>下拉式選單 </select> </div>");
+        var select = $("<div class='col-sm-3'> <select id='registrationDataType-" + index + "' name='registrationDataType[]' class='form-control registration-data-type'> <option value='text' selected>文字 <option value='number'>數字 <option value='date'>日期 <option value='tel'>電話 <option value='email'>電子郵件 <option value='select'>下拉式選單 </select> </div>");
         var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
         row.append(label);
         row.append(input);
@@ -128,8 +146,42 @@ block javascript
         $('.registration-data').last().after(row);
         e.preventDefault();
       });
+
+      $(document).on('change', 'select.registration-data-type', function (e) {
+        if ($(this).val() == 'select') {
+          var index = $(this).attr('id').replace("registrationDataType-", "");
+          var btnTypePlus = $("<div class='col-sm-1 reset-gap type-plus'><a class='btn btn-sm btn-info'><span class='glyphicon glyphicon-plus-sign'></span></a></div>")
+          var firstColumn = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div></div>");
+          btnTypePlus.on('click', function (e) {
+            var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>");
+            column.find('a').on('click', function (e) {
+              $(this).parent().parent().remove();
+            });
+            $(this).nextAll().last().after(column);
+          });
+          $(this).parent().next().after(btnTypePlus);
+          $(this).parent().parent().append(firstColumn);
+        } else {
+          $(this).parent().parent().find('.type-plus').remove();
+          $(this).parent().parent().find('.registration-type-column').remove();
+        }
+
+      });
+
     });
 
     function removeRegistrationDataType (num) {
       $('#registrationDatas' + num).remove();
+    }
+
+    function addSelectItem (obj, index) {
+      var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>"); 
+      column.find('a').on('click', function (e) {
+        $(this).parent().parent().remove();
+      });
+      $(obj).parent().nextAll().last().after(column);
+    }
+
+    function removeSelectItem (obj) {
+      $(obj).parent().parent().remove();
     }
