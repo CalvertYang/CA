@@ -18,6 +18,10 @@ block styles
     .reset-gap {
       padding: 0;
       margin: 0;
+      width: 3.5rem;
+    }
+    .mt {
+      margin-top: 8px;
     }
 
 block body
@@ -78,7 +82,7 @@ block body
                   .col-sm-3
                     input(type='text', class='form-control', id='registrationData-0', name='registrationData[]')
                   .col-sm-3
-                    select(id='registrationDataType-0', name='registrationDataType[]', class='form-control')
+                    select(id='registrationDataType-0', name='registrationDataType[]', class='form-control registration-data-type')
                       option(value='text', selected) 文字
                       option(value='number') 數字
                       option(value='date') 日期
@@ -94,7 +98,7 @@ block body
               span.divider
               input(type='submit', class='btn btn-primary', value='確認')
 
-block javascript
+
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
   script(src='/js/vendor/jquery-ui-timepicker-addon.js')
@@ -119,4 +123,25 @@ block javascript
         $('.registration-data').last().after(row);
         e.preventDefault();
       });
+
+      $(document).on('change', 'select.registration-data-type', function (e) {
+        if ($(this).val() == 'select') {
+          var btnTypePlus = $("<div class='col-sm-1 reset-gap type-plus'><a class='btn btn-sm btn-info'><span class='glyphicon glyphicon-plus-sign'></span></a></div>")
+          var firstColumn = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' /></div></div>");
+          btnTypePlus.on('click', function (e) {
+            var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>"); 
+            column.find('a').on('click', function (e) {
+              $(this).parent().parent().remove();
+            });
+            $(this).nextAll().last().after(column);
+          });
+          $(this).parent().next().after(btnTypePlus);
+          $(this).parent().parent().append(firstColumn);
+        } else {
+          $(this).parent().parent().find('.type-plus').remove();
+          $(this).parent().parent().find('.registration-type-column').remove();
+        }
+       
+      });
+      
     });
