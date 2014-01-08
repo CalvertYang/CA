@@ -5,6 +5,7 @@ block styles
   style.
     body {
       overflow-x: hidden;
+      background-color: #080605;
     }
     .header {
       width: 1440px;
@@ -385,6 +386,7 @@ block body
   script(src='/js/vendor/perfect-scrollbar-with-mousewheel.min.js')
   script.
     $(function () {
+
       var hash = window.location.hash.slice(1);
       if (hash.length > 0) {
         $('.tab-menu').parent().removeClass('active');
@@ -404,7 +406,7 @@ block body
         $('img.title').attr('src', path);
       }
       
-      $('.tab-menu').on('click', function () {
+      $('.tab-menu').on('click', function (e) {
         $('.tab-menu').parent().removeClass('active');
         $(this).parent().addClass('active');
         $('.tab').removeClass('active');
@@ -412,6 +414,9 @@ block body
         var path = '/images/' + $(this).attr('href').slice(1) + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
+        $('html, body').scrollTop(650);
+        e.preventDefault();
+
       });
 
     });
