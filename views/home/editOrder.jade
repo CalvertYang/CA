@@ -1,0 +1,208 @@
+extends ../layout
+
+block styles
+  style.
+    .header {
+      width: 1440px;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 185px;
+      background: url('/images/header-bg.png');
+      position: relative;
+    }
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .footer {
+      width: 1440px;
+      height: 260px;
+      margin: 0 auto;
+      background: #6d0019; /* Old browsers */
+      background: -moz-linear-gradient(top, #6d0019 0%, #8f0222 44%, #a90329 99%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d0019), color-stop(44%,#8f0222), color-stop(99%,#a90329)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* IE10+ */
+      background: linear-gradient(to bottom, #6d0019 0%,#8f0222 44%,#a90329 99%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329',GradientType=0 ); /* IE6-9 */
+    }
+    .footer .body {
+      padding-top: 5rem;
+      color: white;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .footer .body  img {
+      margin: 5px;
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: url('/images/main-bg.png');
+      background-repeat: repeat-y;
+      text-align: center;
+      color: white;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.2rem;
+      background: rgba(0,0,0,0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.2);
+    }
+    .menu {
+      width: 100%;
+      height: 4rem;
+      background: transparent;
+      position: absolute;
+      bottom: -18px;
+
+    }
+    ul {
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+    }
+    ul li {
+      display: inline-block;
+      height: 3rem;
+      padding: 0.5rem;
+      margin-right: 1rem;
+    }
+    .menu ul li {
+      border-bottom: 5px solid rgba(170, 31, 36, 0);
+      line-height: 1.8rem;
+      text-decoration: none;
+    }
+    .menu ul li a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.4rem;
+      margin: 2px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .menu ul li:hover, .menu ul li.active{
+      border-bottom: 5px solid rgba(170, 31, 36, 0.9);
+    }
+    .menu ul li a:hover, .menu ul li.active a {
+      color: #aa1f24;
+    }
+    .ml {
+      margin-left: 10px;
+    }
+    a.buy {
+      display: block;
+      width: 376px;
+      height: 106px;
+      background: url('/images/btn-buy.png');
+      background-repeat: no-repeat;
+      margin: 2rem auto;
+    }
+    a.buy:hover {
+      background-position: 0 -106px;
+    }
+    .topbar > ul {
+      position: relative;
+      color: #b2b2b2;
+      text-align: right;
+    }
+
+    .topbar ul a {
+       color: #b2b2b2;
+    }
+    .topbar ul a:hover {
+       color: rgba(170, 31, 36, 0.9);
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      max-width: 8rem;
+      top: 2.8rem;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 0.9);
+    }
+    .topbar ul ul li {
+      display: block !important;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+
+block body
+  .header
+    .topbar
+      ul
+        li
+          a(href='/auth/facebook') Facebook 登入
+        li
+          a(href='') 帳號
+          ul
+            li 
+              a(href='') 訂單查詢
+            li 
+              a(href='') 登出
+        li
+          a(href='') 我要協助
+          ul
+            li 
+              a(href='') 退款說明
+            li 
+              a(href='') 參賽說明
+    .menu
+      .nav
+        ul
+          li
+            a(href='/home/index#about', class='tab-menu') 關於 Captain America Run
+          li
+            a(href='/home/index#how', class='tab-menu') 怎麼跑
+          li
+            a(href='/home/index#when', class='tab-menu') 何時跑
+          li
+            a(href='/home/index#where', class='tab-menu') 哪裡跑
+          li
+            a(href='/home/index#qna', class='tab-menu') Q&A
+          li
+            a(href='/home/index#flow', class='tab-menu') 報名流程
+
+
+          
+  .container
+    img(src='/images/main.png', width='1440px', height='490px')
+    .content
+    
+
+
+  .footer
+    .body
+      .col-sm-6
+        .row
+          h4 主辦單位
+        .row
+        img(src='/images/suppor-logo.png')
+        img(src='/images/suppor-logo.png')
+      .col-sm-6
+        .row
+          h4 聯絡方式
+        .row
+          h5
+            span(class='glyphicon glyphicon-earphone') 
+            span(class='ml') (02)2222-2222
+          h5
+            span(class='glyphicon glyphicon-envelope')
+            a(class='ml', href='mailto:who@passer.com') who@passer.com
+          h5
+            span(class='glyphicon glyphicon-home') 
+            a(class='ml', href='') www.google.com
+  block javascript
+  script.
+    $(function () {
+      
+
+    });

@@ -3,6 +3,9 @@ extends ../layout
 block styles
   link(rel='stylesheet', href='/styles/perfect-scrollbar.min.css')
   style.
+    body {
+      overflow-x: hidden;
+    }
     .header {
       width: 1440px;
       max-width: 1440px;
@@ -41,8 +44,7 @@ block styles
     .content {
       width: 100%;
       height: auto;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden;
       background: url('/images/main-bg.png');
       background-repeat: repeat-y;
       text-align: center;
@@ -187,7 +189,7 @@ block body
     .menu
       .nav
         ul
-          li(class='active')
+          li
             a(href='#about', class='tab-menu') 關於 Captain America Run
           li
             a(href='#how', class='tab-menu') 怎麼跑
@@ -392,8 +394,16 @@ block body
         var path = '/images/' + hash + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
+      } else {
+        $('.tab-menu').parent().removeClass('active');
+        $('.tab-menu[href=#about]').parent().addClass('active');
+        $('.tab').removeClass('active');
+        var tabname = '.tab.about';
+        var path = '/images/' + 'about' + '.png';
+        $(tabname).addClass('active');
+        $('img.title').attr('src', path);
       }
-      //- $('.tab.how').perfectScrollbar();
+      
       $('.tab-menu').on('click', function () {
         $('.tab-menu').parent().removeClass('active');
         $(this).parent().addClass('active');

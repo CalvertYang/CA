@@ -1,5 +1,5 @@
 /**
- * RootController
+ * HomeController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,25 +16,36 @@
  */
 
 module.exports = {
-    
+
   index: function (req, res, next) {
     res.view();
   },
 
-  login: function (req, res, next) {
+  // 條款
+  term: function (req, res, next) {
     res.view();
   },
 
+  // 填寫訂單資料
+  register: function (req, res, next) {
+    res.view();
+  },
+
+  // 修改訂單資料
+  editOrder: function (req, res, next) {
+    res.view();
+  },
+
+  // 填寫信用卡資訊
+  payment: function (req, res, next) {
+    res.view();
+  }, 
   
-
-  
-
-
 
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to RootController)
+   * (specific to HomeController)
    */
   _config: {}
 
