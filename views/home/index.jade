@@ -1,6 +1,7 @@
 extends ../layout
 
 block styles
+  link(rel='stylesheet', href='/styles/perfect-scrollbar.min.css')
   style.
     .header {
       width: 1440px;
@@ -39,12 +40,11 @@ block styles
     }
     .content {
       width: 100%;
-      min-height: 900px;
-      max-height: 900px;
-      overflow-y: hidden;
-      overflow-x: auto;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       background: url('/images/main-bg.png');
-      background-repeat: no-repeat;
+      background-repeat: repeat-y;
       text-align: center;
       color: white;
     }
@@ -104,9 +104,19 @@ block styles
       width: 80%;
       height:1px; 
       background-color: rgba(255, 255, 255, 0.2);
+      transation: all 1s linear 2s;
+    }
+    .tab h3 {
+      text-shadow: 0 0 20px red;
+    }
+    .tab h4, .tab h5 {
+      color: #cabf3b;
+    }
+    .tab p {
+      color: #ddd;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
     }
     .tab.active {
-      transation: all 1s linear 2s;
       display: block;
     }
     .ml {
@@ -118,7 +128,7 @@ block styles
       height: 106px;
       background: url('/images/btn-buy.png');
       background-repeat: no-repeat;
-      margin: 1rem auto;
+      margin: 2rem auto;
     }
     a.buy:hover {
       background-position: 0 -106px;
@@ -195,31 +205,158 @@ block body
   .container
     img(src='/images/main.png', width='1440px', height='490px')
     .content
-      img(src='/images/about-title.png', width='1440px')
+      img(src='/images/about.png', width='1440px', class='title')
       .tab.about.active
-        h3 --- 活動介紹 ---
-        p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬•羅傑斯)正式加入神盾局
-        | 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人，
-        | 對手竟是昔日的戰友，今日他化身「酷寒戰士」。
-        | 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，
-        | 協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
         hr
-        h3 --- 活動規則 ---
+        h3 活動介紹
+        hr
+        p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬•羅傑斯)正式加入神盾局
+        p 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人，
+        p 對手竟是昔日的戰友，今日他化身「酷寒戰士」。
+        p 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，
+        p 協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
+        hr
+        h3 活動規則
+        hr
         p 凡是購買限量禮品包的民眾，憑著號碼布即可在3/2號當日，參加我們精心規劃的
         | Captain America Run 神盾局探員招募測驗。
         a(href='', class='buy')
         
         
       .tab.how
-        h3 --- 如何跑 ---
+        hr
+        h3 活動資訊
+        hr
+        p 活動時間：3/2 早上10:00~下午1點30
+        p 活動地點：臺北馬場町紀念公園
+        p 活動總長：5 KM
+        hr
+        img(src='/images/how-gift.png')
+        h3 禮物包介紹
+        hr
+        p a. Marvel官方美國隊長限量禮品包內容：
+        p 美國隊長2酷寒戰士電影票*1 (市價310元)
+        p 神盾局專屬紀念T恤*1(市價699元)
+        p 美國隊長盾牌卡套*1(市價320元)
+        p 美國隊長運動水壺*1（市價450元）
+        p Marvel Logo紀念小方巾*1(市價250元)
+        p 美國隊長盾牌束口背包*1（市價390元）
+        p 活動參賽號碼布*1
+        p b. 開放販售時間：2014/1/15中午12點～2013/1/22中午12點
+        p c. 售價：新臺幣1280元整(市價超過2400元)
+        p d. 限量禮品包數量：12,000份
+        p e. 領取方式：1. 活動前一周宅配 /需要自行負擔運費
+        p 1人：000元（尚未確定）; 2人：000元（尚未確定）; 3人：000元(尚未確定)
+        p 2.活動當日領取(3/2)：活動當日憑個人的身分證，
+        p 即可在取物帳篷領取限量禮品包。/費用0元
+        a(href='', class='buy')
+
       .tab.when
-        h3 --- 何時跑 ---
+        hr
+        h3 活動流程
+        hr
+        p 活動時間：3/2 早上10:00~下午1點30
+        p 活動地點：臺北馬場町紀念公園
+        p 活動總長：5 KM
+        hr
+        img(src='/images/how-time.png')
+        h3 10:00-10:45
+        h4 跑者集合
+        p 跑者取物/集合
+        hr
+        h3 10:45-10:55
+        h4 起跑準備
+        p 1.主持人/貴賓致詞  2.規則說明  3.暖身操
+        hr
+        h3 10:55-11:00
+        h4 準備出發/迎戰
+        p 1.倒數準備  2.跑者穿著佩戴號碼布/紀念T恤，分組出發前進關卡
+        hr
+        h3 11:00-12:30
+        h4 Captain America Run 
+        p 帶上印有盾牌的背包，準備接受神盾局的考驗
+        hr
+        h3 12:30-13:30
+        h4 完跑活動
+        p 攤位活動/完跑活動
+        hr
+        h3 13:30
+        h4 活動結束
+        a(href='', class='buy')
+
       .tab.where
-        h3 --- 哪裡跑 ---
+        hr
+        h3 交通資訊
+        hr
+        h4 活動地點：臺北馬場町紀念公園
+
+        p a. 大會接駁車：
+        p 建議跑者搭乘大眾運輸系統至中正紀念堂站1號出口(2021南門市場站 
+        p   牌)轉搭大會接駁公車到達會場，時間為13：30-15：30及20：30-22：30，
+        p 總共4小時，每時段不間斷接駁
+        p 。
+        p b. 自行開車前往：
+        p 建議從華中河濱公園之華中疏散門進入停放於華中露營區
+        p （計次：50元/次）或停放於青年公園地下停車場再步行進會場；
+        p 騎乘機車前往者，建議停放於青年公園地下停車場或路邊機車停車格。
+        p 
+        p c. 大眾運輸工具：
+        p 目前行駛於馬場町紀念公園周邊之公車有12、49、62、204、260、601、
+        p 630、673、藍28至華中河濱公園站，或201、202、246、307、2021
+        p 至果菜市場站或205、212、藍29、棕22至青年路下車即可達。
+        a(href='', class='buy')
+
       .tab.qna
-        h3 --- Q&A ---
+        hr
+        h4 Q1：怎麼參加活動？
+        hr
+        p Captain America Run是贈送給每一位購買Marvel官方限量禮品包的民眾們，
+        p 如果您也想一起參與，請在禮品包販售期間
+        hr
+        h4 Q2：專業路跑與歡樂路跑或路跑派對的差異？
+        hr
+        p 專業路跑的周延性有其賽事性的特性，因此競賽的規則與獎勵、選手安全與保護規範、
+        p 賽道的設計等都有專業人士進行規劃。相較於歡樂路跑或路跑派對，則以休閒娛樂為主，在競爭性上較不強調。
+        hr
+        h4 Q3：為什麼是五公里？
+        hr
+        p 五公里是專業路跑最基礎的里程數，對於初級路跑者剛剛好，而且特別設計在90分鐘內，只要配合呼吸，
+        p 緩慢規律的持續行走，在寒冷的冬天，也會微微的發熱、出汗，消耗一定的卡路里。
+        a(href='', class='buy')
       .tab.flow
-        h3 --- 報名流程 ---
+        hr
+        h4 Step1-上網訂購禮品包
+        hr
+        p 1/ 15中午12點整至1/22中午12點截止，在活動官網的訂購欄位填寫相關資料，
+        p 選擇繳費方式後，在2日內完成繳費，即可完成訂購程序。
+        hr
+        h4 Step2-神盾局筆試測驗
+        hr
+        p 所有參與者需至活動官網進行神盾局的筆試測驗，
+        p 完成筆試後方可繼續進行神盾局的體能鑑測。
+        hr
+        h4 Step3-活動禮品包送達
+        hr
+        p 完成訂購程序後，將于Captain America Run活動前一周內，
+        p 寄送Marvel授權的精美活動禮品包。
+        hr
+        h4 Step4-報到領物
+        hr
+        p 3/2當日10:00AM集合，並用身分證至報到櫃檯完成現場領物/報到的流程
+        hr   
+        h4 Step5-開幕儀式
+        hr
+        p 11:00 AM活動準時開幕，會有老師帶動熱舞操。
+        hr  
+        h4 Step6-活動開始
+        hr
+        p 所有參賽者就位，帶上印有盾牌的背包，準備接受神盾局的測試流程！
+        hr
+        h4 Step7-完跑領證
+        hr
+        p 完跑後，可以在完跑點接受工作人員的授勳儀式，
+        p 取得精緻的Marvel 授權美國隊長盾牌卡套喔。
+        a(href='', class='buy')
 
   .footer
     .body
@@ -243,14 +380,28 @@ block body
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
   block javascript
+  script(src='/js/vendor/perfect-scrollbar-with-mousewheel.min.js')
   script.
     $(function () {
+      var hash = window.location.hash.slice(1);
+      if (hash.length > 0) {
+        $('.tab-menu').parent().removeClass('active');
+        $('.tab-menu[href=#'+ hash + ']').parent().addClass('active');
+        $('.tab').removeClass('active');
+        var tabname = '.tab.' + hash;
+        var path = '/images/' + hash + '.png';
+        $(tabname).addClass('active');
+        $('img.title').attr('src', path);
+      }
+      //- $('.tab.how').perfectScrollbar();
       $('.tab-menu').on('click', function () {
         $('.tab-menu').parent().removeClass('active');
         $(this).parent().addClass('active');
         $('.tab').removeClass('active');
         var tabname = '.tab.' + $(this).attr('href').slice(1);
+        var path = '/images/' + $(this).attr('href').slice(1) + '.png';
         $(tabname).addClass('active');
+        $('img.title').attr('src', path);
       });
 
     });
