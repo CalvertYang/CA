@@ -8,6 +8,7 @@ block styles
       margin: 0 auto;
       height: 185px;
       background: url('/images/header-bg.png');
+      position: relative;
     }
     .container {
       width: 1440px;
@@ -16,14 +17,212 @@ block styles
     }
     .footer {
       width: 1440px;
+      height: 260px;
       margin: 0 auto;
+      background: #6d0019; /* Old browsers */
+      background: -moz-linear-gradient(top, #6d0019 0%, #8f0222 44%, #a90329 99%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d0019), color-stop(44%,#8f0222), color-stop(99%,#a90329)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* IE10+ */
+      background: linear-gradient(to bottom, #6d0019 0%,#8f0222 44%,#a90329 99%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329',GradientType=0 ); /* IE6-9 */
+    }
+    .footer .body {
+      padding-top: 5rem;
+      color: white;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .footer .body  img {
+      margin: 5px;
+    }
+    .content {
+      width: 100%;
+      min-height: 900px;
+      max-height: 900px;
+      overflow-y: hidden;
+      overflow-x: auto;
+      background: url('/images/main-bg.png');
+      background-repeat: no-repeat;
+      text-align: center;
+      color: white;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.2rem;
+      background: rgba(0,0,0,0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.2);
+    }
+    .menu {
+      width: 100%;
+      height: 4rem;
+      background: transparent;
+      position: absolute;
+      bottom: -18px;
+
+    }
+    .nav ul {
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .nav ul li {
+      display: inline-block;
+      height: 3rem;
+      padding: 0.5rem;
+      margin-right: 1rem;
+    }
+    .nav ul.right li {
+      float: right;
+      border-bottom: 5px solid rgba(170, 31, 36, 0);
+      margin-top: 2px;
+    }
+    .nav ul.right li:hover {
+      border-bottom: 5px solid rgba(170, 31, 36, 0.8);
+    }
+
+    .nav ul li a {
+      color: #b2b2b2;
+      text-decoration: none;
+    }
+    .nav ul li a:hover {
+      color: #aa1f24;
+      text-decoration: none;
+    }
+    .menu ul li {
+      border-bottom: 5px solid rgba(170, 31, 36, 0);
+      line-height: 1.8rem;
+    }
+    .menu ul li a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.4rem;
+      margin: 2px;
+      font-weight: 500;
+    }
+    .menu ul li:hover, .menu ul li.active{
+      
+      border-bottom: 5px solid rgba(170, 31, 36, 0.9);
+    }
+    .menu ul li.active a {
+      color: #aa1f24;
+    }
+    .tab {
+      display: none;
+      width: 720px;
+      margin: 0 auto;
+    }
+    .tab hr {
+      border:0; 
+      width: 80%;
+      height:1px; 
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .tab.active {
+      transation: all 1s linear 2s;
+      display: block;
+    }
+    .ml {
+      margin-left: 10px;
+    }
+    a.buy {
+      display: block;
+      width: 376px;
+      height: 106px;
+      background: url('/images/btn-buy.png');
+      background-repeat: no-repeat;
+      margin: 1rem auto;
+    }
+    a.buy:hover {
+      background-position: 0 -106px;
     }
 
 block body
   .header
+    .topbar
+      .nav
+        ul.right
+          li
+            a(href='/auth/facebook') Facebook 登入
+          li
+            a(href='') 我要協助
+    .menu
+      .nav
+        ul
+          li(class='active')
+            a(href='#about', class='tab-menu') 關於 Captain America Run
+          li
+            a(href='#how', class='tab-menu') 怎麼跑
+          li
+            a(href='#when', class='tab-menu') 何時跑
+          li
+            a(href='#where', class='tab-menu') 哪裡跑
+          li
+            a(href='#qna', class='tab-menu') Q&A
+          li
+            a(href='#flow', class='tab-menu') 報名流程
+
+
+          
   .container
-    img(src='/images/main.png', width='1440px', height='500px')
-    img(src='/images/about-title.png', width='1440px', height='165px')
+    img(src='/images/main.png', width='1440px', height='490px')
+    .content
+      img(src='/images/about-title.png', width='1440px')
+      .tab.about.active
+        h3 --- 活動介紹 ---
+        p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬•羅傑斯)正式加入神盾局
+        | 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人，
+        | 對手竟是昔日的戰友，今日他化身「酷寒戰士」。 
+        | 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，
+        | 協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
+        hr
+        h3 --- 活動規則 ---
+        p 凡是購買限量禮品包的民眾，憑著號碼布即可在3/2號當日，參加我們精心規劃的
+        | Captain America Run 神盾局探員招募測驗。
+        a(href='', class='buy')
+        
+        
+      .tab.how
+        h3 --- 如何跑 ---
+      .tab.when
+        h3 --- 何時跑 ---
+      .tab.where
+        h3 --- 哪裡跑 ---
+      .tab.qna
+        h3 --- Q&A ---
+      .tab.flow
+        h3 --- 報名流程 ---
+
   .footer
-    | abc
-block javascript
+    .body
+      .col-sm-6
+        .row
+          h4 主辦單位
+        .row
+        img(src='/images/suppor-logo.png')
+        img(src='/images/suppor-logo.png')
+      .col-sm-6
+        .row
+          h4 聯絡方式
+        .row
+          h5
+            span(class='glyphicon glyphicon-earphone') 
+            span(class='ml') (02)2222-2222
+          h5
+            span(class='glyphicon glyphicon-envelope')
+            a(class='ml', href='mailto:who@passer.com') who@passer.com
+          h5
+            span(class='glyphicon glyphicon-home') 
+            a(class='ml', href='') www.google.com
+  block javascript
+  script.
+    $(function () {
+      $('.tab-menu').on('click', function () {
+        $('.tab-menu').parent().removeClass('active');
+        $(this).parent().addClass('active');
+        $('.tab').removeClass('active');
+        var tabname = '.tab.' + $(this).attr('href').slice(1);
+        $(tabname).addClass('active');
+      });
+
+    });
