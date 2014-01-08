@@ -15,7 +15,6 @@ block styles
     span.divider {
       width: 5px;
       display: inline-block;
-      height: 100%;
     }
 
 block body
@@ -38,15 +37,16 @@ block body
             th 報名日期（起始）
             th 報名人數
             th 金額（已入賬 / 未入賬）
-            th
+            th 
+              a(href='', class='btn btn-primary btn-sm') 新增
           tr
             td
             td
             td
             td
             td(class='w180')
-              a(href='', class='btn btn-primary btn-sm') 詳細資訊
+              a(href='', class='btn btn-default btn-sm') 詳細資訊
               span(class="divider")
-              a(href='', class='btn btn-success btn-sm') 查看訂單
+              a(href='', class='btn btn-default btn-sm') 查看訂單
     
 block javascript

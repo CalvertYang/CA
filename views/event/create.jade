@@ -14,6 +14,10 @@ block styles
       display: inline-block;
       width: 5px;
     }
+    .reset-gap {
+      padding: 0;
+      margin: 0;
+    }
 
 block body
   include ../partials/topbar
@@ -68,10 +72,24 @@ block body
                   label(for='quantity', class='col-sm-2 control-label') 報名人數限制
                   .col-sm-6
                     input(type='text', class='form-control', id='quantity')
-                .form-group
-                  label(for='registrationData', class='col-sm-2 control-label') 報名所需資料
-                  .col-sm-6
-                    input(type='text', class='form-control', id='registrationData')
+                
+                .form-group.registration-data
+                  label(for='registrationData-0', class='col-sm-2 control-label') 報名所需資料
+                  .col-sm-3
+                    input(type='text', class='form-control', id='registrationData-0')
+                  .col-sm-3
+                    select(id='registrationDataType-0', name='registrationDataType[]', class='form-control')
+                      option(value='text', selected) 文字
+                      option(value='number') 數字
+                      option(value='date') 日期
+                      option(value='tel') 電話
+                      option(value='email') 電子郵件
+                      option(value='select') 下拉式選單
+                  .col-sm-1.reset-gap
+                    a(class='btn btn-sm btn-success col-plus') 
+                      span(class='glyphicon glyphicon-plus')
+                
+
 
           .panel-footer.text-right
             a(class='btn btn-default') 取消
@@ -84,4 +102,22 @@ block javascript
   script.
     $(function() {
       $('.datepicker').datepicker();
+
+      $('.col-plus').on('click', function (e) {
+        var index = $('.registration-data').length;
+        var row = $('<div></div>').addClass('form-group registration-data').attr('id', index);
+        var label = $("<label for='' class='col-sm-2 control-label'></label>")
+        var input = $("<div class='col-sm-3'><input type='text' class='form-control' id='registrationData-" + index + "' /></div>");
+        var select = $("<div class='col-sm-3'> <select id='registrationDataType-" + index + "' name='registrationDataType-" + index + "' class='form-control'> <option value='text' selected>文字 <option value='number'>數字 <option value='date'>日期 <option value='tel'>電話 <option value='email'>電子郵件 <option value='select'>下拉式選單 </select> </div>");
+        var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
+        row.append(label);
+        row.append(input);
+        row.append(select);
+        btn.on('click', function (e) {
+          $(this).parent().remove();
+        });
+        row.append(btn);
+        $('.registration-data').last().after(row);
+        e.preventDefault();
+      });
     });
