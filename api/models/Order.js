@@ -68,10 +68,16 @@ module.exports = {
       type: 'json'
     },
 
+    // 付款方式
+    // Ex: 1-ibon / 2-線上刷卡
+    paymentType: {
+      type: 'integer'
+    },
+
     // 付款狀態
-    // Ex: 未繳費 / 已繳費 / 逾期繳費 / 退費
+    // Ex: 1-未繳費 / 2-已繳費 / 3-逾期繳費 / 4-刷卡授權失敗 / 5-退費
     paymentStatus: {
-      type: 'string'
+      type: 'integer'
     },
 
     // 物流處理進度
