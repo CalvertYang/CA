@@ -214,9 +214,29 @@ block body
           h5
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
+
+  div(class='modal fade', id='myModal', tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4(class='modal-title', id='myModalLabel') 提示
+        .modal-body
+          | 請詳閱參賽聲明並同意授權。
+        .modal-footer
+          button(type='button', class='btn btn-default', data-dismiss='modal') 關閉
+
   block javascript
   script.
     $(function () {
-      
+      $('html, body').scrollTop(700);
+
+      $('.next').on('click', function(e) {
+        if ($('input').prop("checked")) {
+          window.location.href='/home/register';
+        } else {
+          $('#myModal').modal('show');
+        }
+      });
 
     });
