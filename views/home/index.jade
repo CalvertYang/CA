@@ -171,12 +171,12 @@ block body
   .header
     .topbar
       ul
-        if !req.session.passport.user
+        if !req.user
           li
             a(href='/auth/facebook') Facebook 登入
         else
           li
-            a(href='')= req.session.User.name
+            a(href='')= req.user.name
             ul
               li
                 a(href='') 訂單查詢

@@ -26,15 +26,12 @@ module.exports = {
         req.logIn(user, function (err) {
           if (err) {
             console.log(err);
-            res.serverError(err);
-            return;
+            return res.serverError(err);
           }
 
           var hour = 3600000;
           req.session.cookie.expires = new Date(Date.now() + hour);
-          req.session.User = user.toJSON();
-          res.redirect('/');
-          return;
+          return res.redirect('/');
         });
       }
     )(req, res);
@@ -42,13 +39,11 @@ module.exports = {
 
   admin: function (req, res, next) {
     if (req.method != 'POST') {
-      res.redirect('/');
-      return;
+      return res.redirect('/');
     }
 
     if (req.session.authenticated) {
-      res.redirect('/root/index');
-      return;
+      return res.redirect('/root/index');
     } else {
       Admin.findOneByAccount(req.param('account'), function (err, admin) {
         if (err) return next(err);
@@ -59,8 +54,7 @@ module.exports = {
           req.session.flash = {
             err: noAccountError
           };
-          res.redirect('/');
-          return;
+          return res.redirect('/');
         }
 
         // Compare password from the form params to the encrypted password of the admin found.
@@ -73,8 +67,7 @@ module.exports = {
             req.session.flash = {
               err: adminAccountPasswordMismatchError
             };
-            res.redirect('/');
-            return;
+            return res.redirect('/');
           }
 
           // Log user in and let session expired after an hour
@@ -83,8 +76,7 @@ module.exports = {
           req.session.authenticated = true;
           req.session.Admin = admin.toJSON();
 
-          res.redirect('/root/index');
-          return;
+          return res.redirect('/root/index');
         });
       });
     }
