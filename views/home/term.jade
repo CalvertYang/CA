@@ -156,43 +156,8 @@ block styles
     }
     
 block body
-  .header
-    .topbar
-      ul
-        li
-          a(href='/auth/facebook') Facebook 登入
-        li
-          a(href='') 帳號
-          ul
-            li 
-              a(href='') 訂單查詢
-            li 
-              a(href='') 登出
-        li
-          a(href='') 我要協助
-          ul
-            li 
-              a(href='') 退款說明
-            li 
-              a(href='') 參賽說明
-    .menu
-      .nav
-        ul
-          li
-            a(href='/home/index#about', class='tab-menu') 關於 Captain America Run
-          li
-            a(href='/home/index#how', class='tab-menu') 怎麼跑
-          li
-            a(href='/home/index#when', class='tab-menu') 何時跑
-          li
-            a(href='/home/index#where', class='tab-menu') 哪裡跑
-          li
-            a(href='/home/index#qna', class='tab-menu') Q&A
-          li
-            a(href='/home/index#flow', class='tab-menu') 報名流程
+  include ../partials/nav
 
-
-          
   .container
     img(src='/images/main.png', width='1440px', height='490px')
     .content
