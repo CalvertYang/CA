@@ -393,8 +393,8 @@ block body
         $('.tab-menu').parent().removeClass('active');
         $(this).parent().addClass('active');
         $('.tab').removeClass('active');
-        var tabname = '.tab.' + $(this).attr('href').slice(1);
-        var path = '/images/' + $(this).attr('href').slice(1) + '.png';
+        var tabname = '.tab.' + $(this).attr('href').slice(2);
+        var path = '/images/' + $(this).attr('href').slice(2) + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
         
