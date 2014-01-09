@@ -2,6 +2,9 @@ extends ../layout
 
 block styles
   style.
+    body {
+      overflow-x: hidden;
+    }
     .header {
       width: 1440px;
       max-width: 1440px;
@@ -42,11 +45,17 @@ block styles
       height: auto;
       overflow-y: auto;
       overflow-x: hidden;
-      background: url('/images/main-bg.png');
-      background-repeat: repeat-y;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
       text-align: center;
       color: white;
     }
+    .term {
+      width: 720px;
+      margin: 0 auto 5rem auto;
+      color: #333;
+    }
+
     .topbar {
       width: 100%;
       height: 3.2rem;
@@ -134,7 +143,7 @@ block styles
     .topbar ul li:hover > ul {
       display: block;
     }
-
+    
 block body
   .header
     .topbar
@@ -176,8 +185,37 @@ block body
   .container
     img(src='/images/main.png', width='1440px', height='490px')
     .content
-    
+      img(src='/images/title-term.png')
+      .panel.panel-primary.term
+        .panel-heading
+          h3(class='panel-title') 授權，參賽條款
+        .panel-body
+          textarea(class="form-control", rows="12")
+            | == 參賽聲明 ==
 
+            | (本人/本團體)已詳細閱讀過本活動之競賽規程且同意亦保證遵守大會於競賽規程中所約定之事項，保證(本人/本團體隊員)身心健康，亦了解馬拉松比賽所需承受之風險，志願參加比賽方開始報名，競賽中若發生任何意外事件，(本人/本團體隊員)及家屬願意承擔比賽期間所發生之個人意外風險責任，亦同意放棄對於非主辦方所造成的傷害、死亡或其他任何形式的損失提出任何形式的賠償索求，一切責任與主辦單位無關；亦明白此項比賽的錄影、相片及成績於世界各地播放或展出與販售及登出於本會網站上，(本人/本團體隊員)亦同意主辦或被主辦單位授權之單位寄送相關路跑活動訊息或使用(本人/本團體隊員)肖像及成績於宣傳活動上。且保證提供有效的身份證和資料用於核實(本人/本團體隊員)身份，對以上論述予以確認並願意承擔相應的法律責任。一經報名後將不得以任何理由質疑競賽內容所列之事項。選手如曾經有不明原因的胸部不適（胸痛、胸悶），不明原因的呼吸困難，家族心臟病、糖尿病史等皆屬心肌梗塞高危險群，建議選手慎重考慮自身安全勿勉強參賽或請醫師評估參賽風險及先接受心電圖檢測並自行加保個人人身意外保險。 報名時請確認具有能力完賽，已完成報名手續者，不得以任何理由要求更換人名、參賽項目、衣服尺寸或退費亦不得因無法參賽轉讓該報名資格。無完成報名者將不具參賽資格，嚴禁陪跑。 
+
+            | == 個資條款 ==
+
+            | attack on flour創意路跑大會(以下簡稱本大會)為落實個人資料之保護，茲依據個人資料保護法（以下稱個資法）第8條規定告知下列事項： 
+            | 依個人資料保護法等相關法令規定，在主管機關所核准之特定目的範圍內蒐集您與他人的姓名、身份證字號、生日、住址、電話、電子郵件、緊急聯絡人、地址、身分證字號； 針對上該個人資料，本大會只會在由本大會擔任主辦/協辦/承辦活動的範圍及期間內處理或利用。 本大會蒐集的個人資料，原則上僅會以電子檔或紙本形式供本公司、委外廠商或與本大會具有合作、 委任等關係之第三人處理及利用。 本大會保有您所提供的個人資料，依據個資法第3條規定，您可以對您本人的個人資料行使下述的權利：
+
+            |     查詢或請求閱覽您的個人資料。
+            |     請求製給您的個人資料複製本。
+            |     請求補充或更正您的個人資料。
+            |     請求停止蒐集、處理或利用您的個人資料。
+            |     請求刪除您的個人資料。
+
+            | 您欲行使上述提及之相關權利時，本大會服務專線為02-28856129。本大會基於上述原因而需蒐集、處理或利用您的個人資料時，您可以自由選擇是否提供您的個人資料。 若您選擇不提供個人資料或是提供不完全時， 將可能導致無法成功報名相關馬拉松及路跑活動，或無法就本活動進行投保。 另您因活動所需，有蒐集選手或相關人之個人資料並提供予本大會之必要時，請依照本告知事項內容，向當事人充分說明並告知關於其個人資料保護的相關權益。 
+        .panel-footer
+          form(class="form-inline")
+            .form-group
+              .checkbox
+                label
+                  input(type='checkbox')
+                  span  同意授權
+            .form-group.pull-right
+              button(class='btn btn-sm btn-primary') 下一步
 
   .footer
     .body
