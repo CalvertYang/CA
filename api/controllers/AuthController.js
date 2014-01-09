@@ -30,6 +30,9 @@ module.exports = {
             return;
           }
 
+          var hour = 3600000;
+          req.session.cookie.expires = new Date(Date.now() + hour);
+          req.session.User = user.toJSON();
           res.redirect('/');
           return;
         });
@@ -89,6 +92,7 @@ module.exports = {
 
   logout: function (req, res, next) {
     req.logout();
+    req.session.destroy();
     res.redirect('/');
   },
 
