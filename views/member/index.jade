@@ -24,39 +24,38 @@ block body
   .container
     .row
       .col-sm-3
-        .input-group
-          input(type='text', class='form-control', placeholder='搜尋...')
-          span(class='input-group-btn')
-            button(class='btn btn-default', type='button') 搜尋
+        form(method='get', action='/member/index')
+          .input-group
+            input(type='text', name='search', class='form-control', placeholder='搜尋...', value='#{keyword}')
+            span(class='input-group-btn')
+              button(class='btn btn-default', type='submit') 搜尋
     .row
       hr
     .row
       .col-sm-3
         .block
           span(class="glyphicon glyphicon-user")
-          span(class='badge') 9999
-
-
+          span(class='badge')= members.length
     .row
       .col-sm-12
         table(class='table table-bordered table-hover table-condensed table-responsive')
           tr
-            th Facebook
+            th Facebook ID
             th 姓名
             th 生日
             th 性別
             th Email
-            th 驗證狀態
+            th 完賽註記
             th
-
-          tr
-            td
-            td
-            td
-            td
-            td
-            td
-            td(class='w30')
-              a(href='', class='btn btn-sm') 訂單資訊
+          each member in members
+            tr
+              td= member.fbid
+              td= member.name
+              td= member.birthday
+              td= member.gender !== null ? (member.gender === 'male' ? '男' : '女') : ''
+              td= member.email
+              td= member.raceFinished === true ? '是' : '否'
+              td(class='w30')
+                a(href='/member/orders', class='btn btn-sm') 訂單資訊
     
 block javascript

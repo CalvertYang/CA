@@ -79,7 +79,7 @@ module.exports = {
       type: 'string'
     },
 
-    // 已驗證
+    // 驗證註記
     // Ex: true
     verified: {
       type: 'boolean'
@@ -89,6 +89,13 @@ module.exports = {
     // Ex: 2014-01-01 00:00:00.000Z
     updatedTime: {
       type: 'datetime'
+    },
+
+    // 完賽註記
+    // Ex: true
+    raceFinished: {
+      type: 'boolean',
+      defaultsTo: false
     }
     
   }
