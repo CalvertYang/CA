@@ -33,7 +33,7 @@ block body
         .panel.panel-default
           .panel-heading
             h3(class='panel-title') 編輯活動
-          form(class='form-horizontal', role='form', method='post', action='/event/update')
+          form(class='form-horizontal', role='form', method='post', action='/event/update/#{event.id}')
             .panel-body
                 input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
                 .form-group
