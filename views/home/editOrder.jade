@@ -2,6 +2,9 @@ extends ../layout
 
 block styles
   style.
+    body {
+      overflow-x: hidden;
+    }
     .header {
       width: 1440px;
       max-width: 1440px;
@@ -42,8 +45,8 @@ block styles
       height: auto;
       overflow-y: auto;
       overflow-x: hidden;
-      background: url('/images/main-bg.png');
-      background-repeat: repeat-y;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
       text-align: center;
       color: white;
     }
@@ -176,6 +179,7 @@ block body
   .container
     img(src='/images/main.png', width='1440px', height='490px')
     .content
+      
     
 
 

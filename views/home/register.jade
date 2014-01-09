@@ -2,6 +2,11 @@ extends ../layout
 
 block styles
   style.
+    body {
+      overflow-x: hidden;
+    }
+    
+    ::-moz-focus-inner { border: 0 !important; }
     .header {
       width: 1440px;
       max-width: 1440px;
@@ -42,8 +47,8 @@ block styles
       height: auto;
       overflow-y: auto;
       overflow-x: hidden;
-      background: url('/images/main-bg.png');
-      background-repeat: repeat-y;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
       text-align: center;
       color: white;
     }
@@ -134,6 +139,150 @@ block styles
     .topbar ul li:hover > ul {
       display: block;
     }
+    button.next {
+      border: none;
+      width: 290px;
+      height: 80px;
+      background: url('/images/btn-next.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+    }
+    button.next:hover {
+      background-position: 0 -80px;
+    }
+    form {
+      color: #333;
+      width: 760px;
+      margin: 0 auto;
+    }
+    form h4 {
+      color: #595757;
+      padding: 10px;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+    form hr {
+      width: 100%;
+      clear: both;
+    }
+    .address {
+      width: 100%;
+      display: none;
+    }
+    .address .column input[type="text"]{
+      float: none;
+    }
+    .member {
+      width: 500px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    .member .column {
+      width: 50%;
+      float: left;
+      text-align: left;
+    }
+    .column.right {
+      float: right;
+    }
+    .column label, .member .column label {
+      float: left;
+      margin-right: 1rem;
+      margin-top: 1rem;
+      color: #595757;
+      text-shadow: 1px 1px 1px white; 
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .column input[type='text'],
+    .member .column input[type='text']
+    {
+      float: left;
+      border: 5px solid #595757; 
+      line-height: 1.5rem;
+      padding: 5px;
+      margin: 5px;
+      height: 3rem;
+      background: #fff; 
+      width: 60%;
+    }
+    .member .column .select, 
+    .address .column .select {
+      display:inline-block;
+      height: 34px;
+      width: 150px;
+      margin: 5px;
+      overflow: hidden;
+      background: url('/images/down-arrow.png') no-repeat right #fff;
+      border: 5px solid #595757;
+    }
+    .member .column .select select, 
+    .address .column .select select {
+      background: transparent;
+      width: 160px;
+      margin: 0;
+      padding: 0 2px;
+      line-height: 1;
+      border: 0;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .select {
+      width: 200px;
+      height: 34px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: url('/images/down-arrow.png') no-repeat right #fff;
+      border: 5px solid #595757;
+    }
+    .select select {
+      background: transparent;
+      margin: 0;
+      width: 220px;
+      padding: 0 5px;
+      line-height: 1;
+      border: 0;
+      border-radius: 0;
+      height: 2rem;
+      -webkit-appearance: none;
+    }
+    input[type="checkbox"] {
+      display:none;
+    }
+    input[type="checkbox"] + label {
+      margin-left: 2rem;
+    }
+    input[type="checkbox"] + label span {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        margin:-1px 4px 0 0;
+        vertical-align:middle;
+        background:url('/images/check-radio-sheet.png') left top no-repeat;
+        cursor:pointer;
+    }
+    input[type="checkbox"]:checked + label span {
+        background:url('/images/check-radio-sheet.png') -19px top no-repeat;
+    }
+    input[type="radio"] {
+      display:none;
+    }
+    input[type="radio"] + label {
+      margin-left: 2rem;
+    }
+    input[type="radio"] + label span {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        margin:-1px 4px 0 0;
+        vertical-align:middle;
+        background:url('/images/check-radio-sheet.png') -38px top no-repeat;
+        cursor:pointer;
+    }
+    input[type="radio"]:checked + label span {
+        background:url('/images/check-radio-sheet.png') -57px top no-repeat;
+    }
 
 block body
   .header
@@ -176,7 +325,55 @@ block body
   .container
     img(src='/images/main.png', width='1440px', height='490px')
     .content
-    
+      img(src='/images/title-term.png')
+      form
+        h4 數量選擇
+        .select
+          select(id='quantity')
+            option 1
+            option 2
+            option 3
+        .members
+        hr
+        h4 領取方式
+        input(type='radio', id='takeLive' name='way', value='live')
+        label(for='takeLive')
+          span
+          | 現場領取
+        input(type='radio', id='express' name='way', value='express')
+        label(for='express')
+          span
+          | 宅配寄送
+        .address
+          .column
+            .select
+              select
+                option 台灣
+            .select
+              select
+                option 台北市
+                option 高雄市
+            .select
+              select
+                option 中山區
+                option 松山區
+          .column
+            input(type='text')
+        hr
+        h4 付費方式
+        input(type='radio', id='ibon' name='payment')
+        label(for='ibon')
+          span
+          | IBON
+        input(type='radio', id='credit' name='payment')
+        label(for='credit')
+          span
+          | 線上刷卡
+        
+        div
+          button(class='next')
+
+     
 
 
   .footer
@@ -203,6 +400,36 @@ block body
   block javascript
   script.
     $(function () {
+      var quantity = $('select#quantity').val();
+      var generateUserForm = function (amount) {
+        var base = $('form').children('.members').first();
+        base.empty();
+        for (var i=1,_len=amount; i<=_len; i++) {
+          var hr = $('<hr>');
+          var user = $("<div class='member clearfix'></div>");
+          var title = $("<h4>成員資料 - " + i + "</h4>");
+          var field = $("<div class='column'> <label>姓名</label> <input type='text' name='userName'> </div> <div class='column'> <label>電子郵件</label> <input type='text' name='userEmail'> </div> <div class='column'> <label>生日</label> <input type='text' name='userBirthday' class='date'> </div> <div class='column'> <label>衣服尺寸</label> <div class='select'> <select> <option> S <option> M <option> L <option> XL </select> </div> </div> <div class='column right'> <label>聯絡電話</label> <input type='text' name='userPhone'> </div>");
+          user.prev(hr);
+          user.append(title);
+          user.append(field);
+          base.append(user);
+        }
+      };
+      $('input[name=way][type=radio]').on('click', function () {
+        var choose = $(this).val();
+        if (choose == 'express') {
+          $('.address').show();
+        } else {
+          $('.address').hide();
+        }
+      });
+      $(document).on('change', 'select#quantity', function () {
+        quantity = $('select#quantity').val();
+        generateUserForm(quantity);
+      }); 
+      generateUserForm(quantity);
       
+      
+
 
     });
