@@ -23,10 +23,11 @@ block body
   .container
     .row
       .col-sm-3
-        .input-group
-          input(type='text', class='form-control', placeholder='搜尋...')
-          span(class='input-group-btn')
-            button(class='btn btn-default', type='button') 搜尋
+        form(method='get', action='/event/index')
+          .input-group
+            input(type='text', name='search', class='form-control', placeholder='搜尋...', value='#{keyword}')
+            span(class='input-group-btn')
+              button(class='btn btn-default', type='submit') 搜尋
     .row
       hr
     .row

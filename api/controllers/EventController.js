@@ -19,7 +19,12 @@ var moment = require('moment');
 module.exports = {
     
   index: function (req, res, next) {
-    Event.find().done(function (err, events) {
+    var keyword = req.param('search') ? req.param('search') : '';
+    var condition = {};
+
+    condition.title = new RegExp(keyword);
+
+    Event.find(condition).done(function (err, events) {
       // If there's an error
       if (err) {
         console.log(err);
@@ -36,7 +41,7 @@ module.exports = {
         event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
       });
 
-      return res.view({ events: events });
+      return res.view({ events: events, keyword: keyword });
     });
   },
 
