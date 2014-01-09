@@ -1,5 +1,5 @@
 var passport = require('passport');
-FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 var verifyHandler = function (token, tokenSecret, profile, done) {
   process.nextTick(function () {

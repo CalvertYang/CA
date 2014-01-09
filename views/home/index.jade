@@ -387,6 +387,24 @@ block body
   script.
     $(function () {
 
+      if (window.location.hash && window.location.hash === '#_=_') {
+        // If you are using Modernizr, then the alternative is:
+        //   `if (Modernizr.history) {`
+        if (window.history && history.pushState) {
+          window.history.pushState('', document.title, window.location.pathname);
+        } else {
+          // Prevent scrolling by storing the page's current scroll offset
+          var scroll = {
+            top: document.body.scrollTop,
+            left: document.body.scrollLeft
+          };
+          window.location.hash = '';
+          // Restore the scroll offset, should be flicker free
+          document.body.scrollTop = scroll.top;
+          document.body.scrollLeft = scroll.left;
+        }
+      }
+
       var hash = window.location.hash.slice(1);
       if (hash.length > 0) {
         $('.tab-menu').parent().removeClass('active');
