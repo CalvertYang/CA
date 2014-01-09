@@ -18,6 +18,13 @@ module.exports = {
       unique: true
     },
 
+    // 歸屬活動 ID
+    // Ex: 52ccbf04a7c658ce1cd45c55
+    eventId: {
+      type: 'string',
+      required: true
+    },
+
     // 訂購人 Facebook Id
     // Ex: 4
     fbid: {

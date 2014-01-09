@@ -94,7 +94,15 @@ module.exports = {
     },
 
     // 報名人數限制
+    // Ex: 10000
     quantity: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+
+    // 已報名人數
+    // Ex: 20
+    registedQuantity: {
       type: 'integer',
       defaultsTo: 0
     }
