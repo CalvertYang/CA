@@ -16,6 +16,9 @@
  */
 
 module.exports = {
+  leading: function (req, res, next) {
+    res.view();
+  },
 
   index: function (req, res, next) {
     res.view();

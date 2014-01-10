@@ -1,0 +1,63 @@
+extends ../layout
+
+block styles
+  style.
+    body {
+      overflow-x: hidden;
+      background-color: #080605;
+    }
+    .video {
+      width: 1440px;
+      height: 680px;
+      margin: 0 auto;
+      overflow: hidden;
+      text-align: center;
+    }
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      background-color: transparent;
+    }
+
+    .header-title {
+      width: 100%;
+      position: absolute;
+      text-align: center;
+      top: 200px;
+    }
+    .marvel-logo {
+      float: right;
+      position: relative;
+      right: 30px;
+    }
+    a.btn-run {
+      display:block;
+      width: 500px;
+      height: 80px;
+      background: url('/images/btn-run.png');
+      background-repeat: no-repeat;
+      margin: 4rem auto;
+    }
+    a.btn-run:hover {
+      background-position: 0 -90px;
+    }
+
+block body
+  .video
+      video(autoplay, loop, muted, width='1200px')
+        source(src='/video/shield-loop.mp4')
+        source(src='/video/shield-loop.ogv')
+    .header-title
+      img(src='/images/leading-title.png')
+      a(class='btn-run', href='/')
+      .marvel-logo
+        img(src='/images/marvel-logo.png')
+    
+  block javascript
+  script.
+    $(function () {
+
+    });
