@@ -15,6 +15,9 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var jade = require('jade');
+var fs = require('fs');
+
 module.exports = {
   leading: function (req, res, next) {
     res.view();
@@ -31,7 +34,11 @@ module.exports = {
 
   // 填寫訂單資料
   register: function (req, res, next) {
-    res.view();
+    if (req.method != 'POST') {
+      return res.view({ id: req.param('id') });
+    } else {
+      return res.view();
+    }
   },
 
   // 修改訂單資料
@@ -42,7 +49,31 @@ module.exports = {
   // 填寫信用卡資訊
   payment: function (req, res, next) {
     res.view();
-  }, 
+  },
+
+  generateForm: function (req, res, next) {
+    Event.findOne(req.param('id'), function(err, event) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+      }
+
+      fs.readFile('views/partials/registerForm.jade', 'utf8', function (err, data) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          throw err;
+        }
+
+        var fn = jade.compile(data);
+        var html = fn({ count: req.param('count'), registrationData: event.registrationData });
+        return res.send(html);
+      });
+    });
+  },
   
 
 

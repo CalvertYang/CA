@@ -183,6 +183,20 @@ block styles
       float: left;
       text-align: left;
     }
+    .contact {
+      width: 250px;
+      margin: 0 auto;
+      text-align: center;
+      padding-left: 2rem;
+    }
+    .contact .column {
+      float: none;
+      clear: both;
+    }
+    .contact .column label {
+      width: 60px;
+      text-align: right;
+    }
     .column.right {
       float: right;
     }
@@ -292,12 +306,23 @@ block body
     .content
       img(src='/images/title-term.png')
       form
+        h4 訂購人資料
+        .contact
+          .column
+            label(for='buyerName') 姓名
+            input(type='text')
+          .column
+            label(for='buyerPhone') 電話
+            input(type='text')
+          .column
+            label(for='buyerPhone') 電子郵件
+            input(type='text')
+        hr
         h4 數量選擇
         .select
           select(id='quantity')
-            option 1
-            option 2
-            option 3
+            - for (var i = 1; i <= 10; i++)
+              option #{i}
         .members
         hr
         h4 領取方式
@@ -365,6 +390,8 @@ block body
   block javascript
   script.
     $(function () {
+      $('html, body').scrollTop(700);
+
       var quantity = $('select#quantity').val();
       var generateUserForm = function (amount) {
         var base = $('form').children('.members').first();
