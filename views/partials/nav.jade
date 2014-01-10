@@ -1,5 +1,135 @@
+style.
+  .video {
+    width: 1440px;
+    height: 720px;
+    background-color: #080605;
+    margin: 0 auto;
+    padding-top: 40px;
+    overflow: hidden;
+    text-align: left;
+  }
+  ::-moz-focus-inner { border: 0 !important; }
+  .header {
+      width: 1440px;
+      max-width: 1440px;
+      top: 0;
+      margin: 0 auto;
+      height: 600px;
+      background: transparent;
+      position: absolute;
+  }
+  .topbar {
+    width: 100%;
+    height: 3.2rem;
+    background: rgba(0,0,0,0.8);
+    border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+  }
+  .topbar > ul {
+    position: relative;
+    color: #b2b2b2;
+    text-align: right;
+  }
+  .topbar ul a {
+     color: #b2b2b2;
+  }
+  .topbar ul a:hover {
+     color: rgba(170, 31, 36, 0.9);
+     text-decoration: none;
+  }
+  .topbar ul ul {
+    display: none;
+    padding: 0;
+    max-width: 8rem;
+    top: 2.7rem;
+    position: absolute;
+    text-align: left;
+    border-top: 5px solid rgba(170, 31, 36, 0.9);
+  }
+  .topbar ul ul li {
+    display: block !important;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  .topbar ul li:hover > ul {
+    display: block;
+  }
+  .header-title {
+    width: 700px;
+    right: 20px;
+    position: absolute;
+    top: 180px;
+  }
+  .marvel-logo {
+    margin-top: 5rem;
+  }
+  .menu {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    position: absolute;
+    top: 100px;
+    
+  }
+  .menu .nav {
+    border-bottom: 5px solid rgba(255, 255, 255, 0.2);
+    background:linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.3));
+    background:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+    background:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+  }
+  ul {
+    list-style-type: none;
+    width: 960px;
+    margin: 0 auto;
+    height: 36px;
+    text-align: right;
+  }
+  ul li {
+    display: inline-block;
+    height: 3rem;
+    padding: 0.5rem;
+    margin-right: 1rem;
+  }
+  .menu ul li {
+    border-bottom: 5px solid rgba(170, 31, 36, 0);
+    line-height: 1.8rem;
+    text-decoration: none;
+    position: relative;
+    top: 5px;
+  }
+  .menu ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 20px red;
+    font-size: 1.4rem;
+    margin: 5px 2px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .menu ul li:hover, .menu ul li.active{
+    border-bottom: 5px solid rgba(170, 31, 36, 0.9);
+    background: rgba(0,0,0,0.7);
+  }
+  .menu ul li a:hover, .menu ul li.active a {
+    color: #a12124;
+  }
+  /* Modal */
+  .modal-content {
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+  }
+  .modal-header .close {
+    color: white;
+     opacity: 1;
+  }
+  .modal-header {
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .modal-body {
+    background: rgba(0,0,0,0.5);
+    color: #eee;
+  }
 .video
-  video(autoplay, loop, muted, width='1200px')
+  video(autoplay, loop, muted, width='870px')
     source(src='/video/shield-loop.mp4')
     source(src='/video/shield-loop.ogv')
 .header
@@ -20,14 +150,14 @@
         a(href='') 我要協助
         ul
           li 
-            a(href='') 退款說明
+            a(href='', data-toggle="modal" data-target="#backfee") 退款說明
           li 
-            a(href='') 參賽說明
+            a(href='', data-toggle="modal" data-target="#description") 參賽說明
   .menu
     .nav
       ul
         li
-          a(href='/#about', class='tab-menu') 關於 Captain America Run
+          a(href='/#about', class='tab-menu') 關於
         li
           a(href='/#how', class='tab-menu') 怎麼跑
         li
@@ -40,5 +170,20 @@
           a(href='/#flow', class='tab-menu') 報名流程
   .header-title
     img(src='/images/ca-title.png')
-    .marvel-logo
-      img(src='/images/marvel-logo.png')
+  //- modal of help
+  .modal.fade#backfee
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4 退款說明
+        .modal-body
+          p Hello, 退款！
+  .modal.fade#description
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4 參賽說明
+        .modal-body
+          p Hello, 參賽！

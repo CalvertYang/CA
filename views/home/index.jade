@@ -6,22 +6,6 @@ block styles
       overflow-x: hidden;
       background-color: #080605;
     }
-    .video {
-      width: 1440px;
-      height: 600px;
-      margin: 0 auto;
-      overflow: hidden;
-      text-align: center;
-    }
-    .header {
-      width: 1440px;
-      max-width: 1440px;
-      top: 0;
-      margin: 0 auto;
-      height: 600px;
-      background: transparent;
-      position: absolute;
-    }
     .container {
       width: 1440px;
       margin: 0 auto;
@@ -52,65 +36,10 @@ block styles
       color: white;
     }
     .content .title {
-      background:linear-gradient(top,rgba(0,0,0,0.7), rgba(0,0,0,0));
-      background:-moz-linear-gradient(top,rgba(0,0,0,0.7),rgba(0,0,0,0));
-      background:-webkit-linear-gradient(top,rgba(0,0,0,0.7),rgba(0,0,0,0));
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
       width: 100%;
-
-    }
-    .topbar {
-      width: 100%;
-      height: 3.2rem;
-      background: rgba(0,0,0,0.8);
-      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
-    }
-    .menu {
-      width: 100%;
-      padding: 0;
-      background: transparent;
-      position: absolute;
-      top: 100px;
-      
-    }
-    .menu .nav {
-      border-bottom: 5px solid rgba(255, 255, 255, 0.2);
-      background:linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.3));
-      background:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
-      background:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
-    }
-    ul {
-      list-style-type: none;
-      width: 960px;
-      margin: 0 auto;
-      height: 36px;
-    }
-    ul li {
-      display: inline-block;
-      height: 3rem;
-      padding: 0.5rem;
-      margin-right: 1rem;
-    }
-    .menu ul li {
-      border-bottom: 5px solid rgba(170, 31, 36, 0);
-      line-height: 1.8rem;
-      text-decoration: none;
-      position: relative;
-      top: 5px;
-    }
-    .menu ul li a {
-      color: rgba(255, 255, 255, 0.8);
-      text-shadow: 0 0 20px red;
-      font-size: 1.4rem;
-      margin: 5px 2px;
-      font-weight: 500;
-      text-decoration: none;
-    }
-    .menu ul li:hover, .menu ul li.active{
-      border-bottom: 5px solid rgba(170, 31, 36, 0.9);
-      background: rgba(0,0,0,0.7);
-    }
-    .menu ul li a:hover, .menu ul li.active a {
-      color: #ff1c20;
     }
     .tab {
       display: none;
@@ -151,51 +80,12 @@ block styles
     a.buy:hover {
       background-position: 0 -106px;
     }
-    .topbar > ul {
-      position: relative;
-      color: #b2b2b2;
-      text-align: right;
-    }
-    .topbar ul a {
-       color: #b2b2b2;
-    }
-    .topbar ul a:hover {
-       color: rgba(170, 31, 36, 0.9);
-       text-decoration: none;
-    }
-    .topbar ul ul {
-      display: none;
-      padding: 0;
-      max-width: 8rem;
-      top: 2.7rem;
-      position: absolute;
-      text-align: left;
-      border-top: 5px solid rgba(170, 31, 36, 0.9);
-    }
-    .topbar ul ul li {
-      display: block !important;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-    }
-    .topbar ul li:hover > ul {
-      display: block;
-    }
-    .header-title {
-      width: 100%;
-      position: absolute;
-      text-align: center;
-      top: 250px;
-    }
-    .marvel-logo {
-      margin-top: 5rem;
-    }
-
 block body
   include ../partials/nav
   .container
     .content
       .title
-        img(src='/images/about.png', width='dd1440px', class='title')
+        img(src='/images/about.png', width='1440px', class='title')
       .tab.about(id='about', name='about')
         hr
         h3 活動介紹
@@ -409,9 +299,11 @@ block body
         var path = '/images/' + 'about' + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
+
       }
       
       $('.tab-menu').on('click', function (e) {
+        e.preventDefault();
         $('.tab-menu').parent().removeClass('active');
         $(this).parent().addClass('active');
         $('.tab').removeClass('active');
@@ -419,7 +311,7 @@ block body
         var path = '/images/' + $(this).attr('href').slice(2) + '.png';
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
-        
+        $("html, body").animate({scrollTop: $('.title').offset().top }, 500);
 
 
       });
