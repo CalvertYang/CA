@@ -59,7 +59,7 @@ style.
     width: 700px;
     right: 20px;
     position: absolute;
-    top: 180px;
+    top: 170px;
   }
   .marvel-logo {
     margin-top: 5rem;
@@ -130,9 +130,10 @@ style.
     color: #eee;
   }
 .video
-  video(autoplay, loop, muted, width='870px')
-    source(src='/video/shield-loop.mp4')
-    source(src='/video/shield-loop.ogv')
+  video(autoplay, loop, muted, width='870px', preload)
+    source(src='/video/shield-loop.ogv', type="video/ogg" )
+    source(src='/video/shield-loop.mp4', type="video/mp4")
+   
 .header
   .topbar
     ul

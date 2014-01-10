@@ -52,9 +52,9 @@ block styles
 
 block body
   .video
-      video(autoplay, loop, muted, width='1200px')
-        source(src='/video/shield-loop.mp4')
-        source(src='/video/shield-loop.ogv')
+      video(autoplay, loop, muted, width='870px', preload)
+        source(src='/video/shield-loop.ogv', type="video/ogg" )
+        source(src='/video/shield-loop.mp4', type="video/mp4")
     .header-title
       img(src='/images/ca-title.png')
       a(class='btn-run', href='/')
