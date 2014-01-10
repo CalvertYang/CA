@@ -47,9 +47,12 @@ module.exports = {
     },
 
     // 收件人地址
-    // Ex: 台北市 xx 路 xx 巷 xx 號
+    // Ex: {
+    //   zipCode: '10000',
+    //   address: '台北市 xx 路 xx 巷 xx 號'
+    // }
     contactAddress: {
-      type: 'string',
+      type: 'json',
       required: true
     },
 
