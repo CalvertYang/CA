@@ -1,7 +1,6 @@
 extends ../layout
 
 block styles
-  link(rel='stylesheet', href='/styles/perfect-scrollbar.min.css')
   style.
     body {
       overflow-x: hidden;
@@ -12,6 +11,7 @@ block styles
       height: 600px;
       margin: 0 auto;
       overflow: hidden;
+      text-align: center;
     }
     .header {
       width: 1440px;
@@ -31,14 +31,7 @@ block styles
       width: 1440px;
       height: 260px;
       margin: 0 auto;
-      background: #6d0019; /* Old browsers */
-      background: -moz-linear-gradient(top, #6d0019 0%, #8f0222 44%, #a90329 99%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d0019), color-stop(44%,#8f0222), color-stop(99%,#a90329)); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #6d0019 0%,#8f0222 44%,#a90329 99%); /* IE10+ */
-      background: linear-gradient(to bottom, #6d0019 0%,#8f0222 44%,#a90329 99%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329',GradientType=0 ); /* IE6-9 */
+      background: #000;
     }
     .footer .body {
       padding-top: 5rem;
@@ -58,28 +51,38 @@ block styles
       text-align: center;
       color: white;
     }
+    .content .title {
+      background:linear-gradient(top,rgba(0,0,0,0.7), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,0.7),rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,0.7),rgba(0,0,0,0));
+      width: 100%;
+
+    }
     .topbar {
       width: 100%;
       height: 3.2rem;
-      background: rgba(0,0,0,0.5);
-      border-bottom: 5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0,0,0,0.8);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
     }
     .menu {
       width: 100%;
-      height: 4rem;
       padding: 0;
       background: transparent;
       position: absolute;
-      top: 120px;
+      top: 100px;
       
     }
     .menu .nav {
-      border-bottom: 5px solid rgba(255, 255, 255, 0.7);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.2);
+      background:linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.1));
+      background:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.1));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.1));
     }
     ul {
       list-style-type: none;
       width: 960px;
       margin: 0 auto;
+      height: 36px;
     }
     ul li {
       display: inline-block;
@@ -95,8 +98,8 @@ block styles
       top: 5px;
     }
     .menu ul li a {
-      color: rgba(255, 255, 255, 0.7);
-      text-shadow: 1px 1px 2px rgba(13, 27, 56, 1);
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 20px red;
       font-size: 1.4rem;
       margin: 5px 2px;
       font-weight: 500;
@@ -104,9 +107,10 @@ block styles
     }
     .menu ul li:hover, .menu ul li.active{
       border-bottom: 5px solid rgba(170, 31, 36, 0.9);
+      background: rgba(0,0,0,0.7);
     }
     .menu ul li a:hover, .menu ul li.active a {
-      color: #aa1f24;
+      color: #ff1c20;
     }
     .tab {
       display: none;
@@ -152,7 +156,6 @@ block styles
       color: #b2b2b2;
       text-align: right;
     }
-
     .topbar ul a {
        color: #b2b2b2;
     }
@@ -164,7 +167,7 @@ block styles
       display: none;
       padding: 0;
       max-width: 8rem;
-      top: 2.8rem;
+      top: 2.7rem;
       position: absolute;
       text-align: left;
       border-top: 5px solid rgba(170, 31, 36, 0.9);
@@ -177,12 +180,22 @@ block styles
     .topbar ul li:hover > ul {
       display: block;
     }
+    .header-title {
+      width: 100%;
+      position: absolute;
+      text-align: center;
+      top: 250px;
+    }
+    .marvel-logo {
+      margin-top: 5rem;
+    }
 
 block body
   include ../partials/nav
   .container
     .content
-      img(src='/images/about.png', width='dd1440px', class='title')
+      .title
+        img(src='/images/about.png', width='dd1440px', class='title')
       .tab.about(id='about', name='about')
         hr
         h3 活動介紹
@@ -197,8 +210,7 @@ block body
         hr
         p 凡是購買限量禮品包的民眾，憑著號碼布即可在3/2號當日，參加我們精心規劃的
         | Captain America Run 神盾局探員招募測驗。
-        a(href='/home/term', class='buy')
-        
+        a(href='/home/term', class='buy')   
         
       .tab.how(id='how',name='how')
         hr
