@@ -355,16 +355,14 @@ block body
         .address
           .column
             .select
-              select
-                option 台灣
+              select(id='expressAddressCountry', name='expressAddressCountry')
+                option(value='TW', selected) 台灣
             .select
-              select
-                option 台北市
-                option 高雄市
+              select(id='expressAddressCity', name='expressAddressCity')
+                option(value='') - 請選擇 -
             .select
-              select
-                option 中山區
-                option 松山區
+              select(id='expressAddressArea', name='expressAddressArea')
+                option(value='') - 請選擇 -
           .column
             input(type='text', id='expressAddress', name='expressAddress')
         hr
@@ -414,16 +412,6 @@ block body
       var generateUserForm = function (amount) {
         var base = $('form').children('.members').first();
         base.empty();
-        //- for (var i=1,_len=amount; i<=_len; i++) {
-        //-   var hr = $('<hr>');
-        //-   var user = $("<div class='member clearfix'></div>");
-        //-   var title = $("<h4>成員資料 - " + i + "</h4>");
-        //-   var field = $("<div class='column'> <label>姓名</label> <input type='text' name='userName'> </div> <div class='column'> <label>電子郵件</label> <input type='text' name='userEmail'> </div> <div class='column'> <label>生日</label> <input type='text' name='userBirthday' class='date'> </div> <div class='column'> <label>衣服尺寸</label> <div class='select'> <select> <option> S <option> M <option> L <option> XL </select> </div> </div> <div class='column right'> <label>聯絡電話</label> <input type='text' name='userPhone'> </div>");
-        //-   user.prev(hr);
-        //-   user.append(title);
-        //-   user.append(field);
-        //-   base.append(user);
-        //- }
         $.get("/home/generateForm?id=#{id}&count=" + amount, function(data) {
           base.append(data);
         });
@@ -442,7 +430,55 @@ block body
       }); 
       generateUserForm(quantity);
       
-      
+      // Get address city list
+      var cityResult = $.ajax({
+        type: 'POST',
+        url: '#{sails.config.myConf.addressApi.url}' + 'getCity',
+        data: { country: $('#expressAddressCountry option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
+        dataType: 'json',
+        async: false
+      });
 
+      cityResult.error(function(msg) {
+        console.dir(msg);
+      });
+
+      cityResult.success(function(cities) {
+        $('#expressAddressCity option').remove();
+        $('#expressAddressCity').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+        for(var idx in cities) {
+          $('#expressAddressCity').append($('<option></option>').attr('value', cities[idx].city).text(cities[idx].city));
+        }
+        $('#expressAddressCity').val($('#expressAddressCity option:first').val());
+      });
+
+      // Get address area list
+      $('#expressAddressCity').change(function() {
+        if ($('#expressAddressCity option:selected').val() == '') {
+          $("#expressAddressArea option").remove();
+          $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+        } else {
+          var cityAreaResult = $.ajax({
+            type: 'POST',
+            url: '#{sails.config.myConf.addressApi.url}' + 'getArea',
+            data: { city: $('#expressAddressCity option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
+            dataType: 'json',
+            async: false
+          });
+
+          cityAreaResult.error(function(msg) {
+            console.dir(msg);
+          });
+
+          cityAreaResult.success(function(areas) {
+            $("#expressAddressArea option").remove();
+            $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+            for(var idx in areas) {
+              $('#expressAddressArea').append($('<option></option>').attr('value', areas[idx].area).text(areas[idx].area));
+            }
+            $('#expressAddressArea').val($('#expressAddressArea option:first').val());
+          });
+        }
+      });
 
     });
