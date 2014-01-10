@@ -51,6 +51,11 @@ module.exports = {
     res.view();
   },
 
+  // 訂單資料
+  query: function (req, res, next) {
+    res.view();
+  },
+
   generateForm: function (req, res, next) {
     Event.findOne(req.param('id'), function(err, event) {
       // If there's an error

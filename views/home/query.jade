@@ -1,0 +1,182 @@
+extends ../layout
+
+block styles
+  style.
+    body {
+      overflow-x: hidden;
+    }
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .footer {
+      width: 1440px;
+      height: 260px;
+      margin: 0 auto;
+      background: #000;
+    }
+    .footer .body {
+      padding-top: 5rem;
+      color: white;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .footer .body  img {
+      margin: 5px;
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
+      text-align: center;
+      color: white;
+    }
+    .content .title {
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      width: 100%;
+    }
+    .term {
+      width: 720px;
+      margin: 0 auto;
+      color: #333;
+    }
+    .ml {
+      margin-left: 10px;
+    }
+    button.next {
+      border: none;
+      width: 290px;
+      height: 80px;
+      background: url('/images/btn-next.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+    }
+    button.next:hover {
+      background-position: 0 -80px;
+    }
+    button.finish {
+      border: none;
+      width: 170px;
+      height: 80px;
+      background: url('/images/btn-finish.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+    }
+    button.finish:hover {
+      background-position: 0 -80px;
+    }
+    table.ca {
+      width: 970px;
+      margin: 0 auto;
+    }
+    table.ca th{
+      background: #0c1a37;
+      padding: 1rem;
+      font-weight: 700;
+      text-align: center;
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 3px solid #ccc;
+    }
+    table.ca td {
+      background: rgba(0,0,0,0.3);
+      color: #333;
+      padding: 1rem;
+      border-bottom: 3px solid #ccc;
+      text-align:left;
+    }
+    table.ca th.last {
+      width: 100px;
+    }
+    table.ca td a {
+      color: #173471;
+    }
+    table.ca td a:hover {
+      color: #eee;
+      text-decoration: none;
+    }
+    
+block body
+  include ../partials/nav
+  .container
+    .content
+      .title
+        img(src='/images/title-order.png')
+
+      table.ca
+        tr
+          th 訂單編號
+          th 購買數量
+          th 購買總金額
+          th 訂單狀態
+          th 物流狀態
+          th.last 詳細資料
+        tr
+          td 1234567
+          td 10
+          td NT 99999
+          td 已付款
+          td 處理中
+          td 
+            a(href='') 查詢及編輯
+        tr
+          td 1
+          td 2
+          td 3
+          td 3
+          td 3
+          td 3
+
+      
+      button(class='finish')
+
+  .footer
+    .body
+      .col-sm-6
+        .row
+          h4 主辦單位
+        .row
+        img(src='/images/suppor-logo.png')
+        img(src='/images/suppor-logo.png')
+      .col-sm-6
+        .row
+          h4 聯絡方式
+        .row
+          h5
+            span(class='glyphicon glyphicon-earphone') 
+            span(class='ml') (02)2222-2222
+          h5
+            span(class='glyphicon glyphicon-envelope')
+            a(class='ml', href='mailto:who@passer.com') who@passer.com
+          h5
+            span(class='glyphicon glyphicon-home') 
+            a(class='ml', href='') www.google.com
+
+  div(class='modal fade', id='myModal', tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4(class='modal-title', id='myModalLabel') 提示
+        .modal-body
+          | 請詳閱參賽聲明並同意授權。
+
+  block javascript
+  script.
+    $(function () {
+      $("html, body").delay(200).animate({scrollTop: $('.title').offset().top }, 500);
+
+      $('.next').on('click', function(e) {
+        if ($('input').prop("checked")) {
+          window.location.href='/home/register/52ccbf04a7c658ce1cd45c55';
+        } else {
+          $('#myModal').modal('show');
+        }
+      });
+
+    });
