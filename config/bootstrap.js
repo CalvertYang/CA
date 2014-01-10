@@ -13,15 +13,28 @@ var bcrypt = require('bcrypt');
 module.exports.bootstrap = function (cb) {
 
   Admin.count().exec(function (err, count){
-    if (count > 0) {
-      return cb();
-    } else {
+    if (count == 0) {
       var adminObj = {};
       adminObj.account = 'admin';
       adminObj.encryptedPassword = bcrypt.hashSync("password", bcrypt.genSaltSync(10));
       adminObj.name = 'Admin';
 
       Admin.create(adminObj, function (err, event) {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+  });
+
+  System.count().exec(function (err, count) {
+    if (count == 0) {
+      var systemObj = {
+        orderDate: new Date(),
+        orderSerial: 0
+      };
+
+      System.create(systemObj, function (err, event) {
         if (err) {
           console.log(err);
         }
