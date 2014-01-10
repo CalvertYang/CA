@@ -410,16 +410,19 @@ block body
       var generateUserForm = function (amount) {
         var base = $('form').children('.members').first();
         base.empty();
-        for (var i=1,_len=amount; i<=_len; i++) {
-          var hr = $('<hr>');
-          var user = $("<div class='member clearfix'></div>");
-          var title = $("<h4>成員資料 - " + i + "</h4>");
-          var field = $("<div class='column'> <label>姓名</label> <input type='text' name='userName'> </div> <div class='column'> <label>電子郵件</label> <input type='text' name='userEmail'> </div> <div class='column'> <label>生日</label> <input type='text' name='userBirthday' class='date'> </div> <div class='column'> <label>衣服尺寸</label> <div class='select'> <select> <option> S <option> M <option> L <option> XL </select> </div> </div> <div class='column right'> <label>聯絡電話</label> <input type='text' name='userPhone'> </div>");
-          user.prev(hr);
-          user.append(title);
-          user.append(field);
-          base.append(user);
-        }
+        //- for (var i=1,_len=amount; i<=_len; i++) {
+        //-   var hr = $('<hr>');
+        //-   var user = $("<div class='member clearfix'></div>");
+        //-   var title = $("<h4>成員資料 - " + i + "</h4>");
+        //-   var field = $("<div class='column'> <label>姓名</label> <input type='text' name='userName'> </div> <div class='column'> <label>電子郵件</label> <input type='text' name='userEmail'> </div> <div class='column'> <label>生日</label> <input type='text' name='userBirthday' class='date'> </div> <div class='column'> <label>衣服尺寸</label> <div class='select'> <select> <option> S <option> M <option> L <option> XL </select> </div> </div> <div class='column right'> <label>聯絡電話</label> <input type='text' name='userPhone'> </div>");
+        //-   user.prev(hr);
+        //-   user.append(title);
+        //-   user.append(field);
+        //-   base.append(user);
+        //- }
+        $.get("/home/generateForm?id=52ccbf04a7c658ce1cd45c55&count=" + amount, function(data) {
+          base.append(data);
+        });
       };
       $('input[name=way][type=radio]').on('click', function () {
         var choose = $(this).val();

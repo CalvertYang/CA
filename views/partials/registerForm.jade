@@ -1,5 +1,5 @@
-.member.clearfix
-  - for (var i = 0; i < count; i++)
+- for (var i = 0; i < count; i++)
+  .member.clearfix
     h4 成員資料 - #{i + 1}
     - var j = 0
     each regData in registrationData
@@ -13,5 +13,5 @@
           .select
             select(name='attenderField-#{i}[#{j}]')
               each item in regData.value
-                option= item
+                option(value='#{item}')= item
       - j++
