@@ -319,18 +319,22 @@ block body
     .content
       .title
         img(src='/images/title-term.png')
-      form
+      form(method='post', action='/home/register/#{id}')
+        input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
         h4 訂購人資料
         .contact
           .column
             label(for='buyerName') 姓名
-            input(type='text')
+            input(type='text', id='buyerName', name='buyerName')
+          .column
+            label(for='buyerBirthday') 生日
+            input(type='text', id='buyerBirthday', name='buyerBirthday')
           .column
             label(for='buyerPhone') 電話
-            input(type='text')
+            input(type='text', id='buyerPhone', name='buyerPhone')
           .column
-            label(for='buyerPhone') 電子郵件
-            input(type='text')
+            label(for='buyerEmail') 電子郵件
+            input(type='text', id='buyerEmail', name='buyerEmail')
         hr
         h4 數量選擇
         .select
@@ -362,14 +366,14 @@ block body
                 option 中山區
                 option 松山區
           .column
-            input(type='text')
+            input(type='text', id='expressAddress', name='expressAddress')
         hr
         h4 付費方式
-        input(type='radio', id='ibon' name='payment')
+        input(type='radio', id='ibon' name='payment', value='ibon')
         label(for='ibon')
           span
           | IBON
-        input(type='radio', id='credit' name='payment')
+        input(type='radio', id='credit' name='payment', value='payment')
         label(for='credit')
           span
           | 線上刷卡
@@ -420,7 +424,7 @@ block body
         //-   user.append(field);
         //-   base.append(user);
         //- }
-        $.get("/home/generateForm?id=52ccbf04a7c658ce1cd45c55&count=" + amount, function(data) {
+        $.get("/home/generateForm?id=#{id}&count=" + amount, function(data) {
           base.append(data);
         });
       };

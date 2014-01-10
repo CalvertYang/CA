@@ -37,7 +37,7 @@ module.exports = {
     if (req.method != 'POST') {
       return res.view({ id: req.param('id') });
     } else {
-      return res.view();
+      return res.view({ id: req.param('id') });
     }
   },
 

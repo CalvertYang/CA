@@ -4,14 +4,14 @@
     - var j = 0
     each regData in registrationData
       .column
-        label= regData.name
+        label(for='attenderField-#{i}[#{j}]')= regData.name
         if regData.type === 'text' || regData.type === 'number' || regData.type === 'tel' || regData.type === 'email'
-          input(type='text', name='attenderField-#{i}[#{j}]')
+          input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]')
         else if regData.type === 'date'
-          input(type='text', name='attenderField-#{i}[#{j}]', class='date')
+          input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='date')
         else if regData.type === 'select'
           .select
-            select(name='attenderField-#{i}[#{j}]')
+            select(id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]')
               each item in regData.value
                 option(value='#{item}')= item
       - j++
