@@ -189,7 +189,7 @@ block styles
       text-align: left;
     }
     .contact {
-      width: 250px;
+      width: 50%;
       margin: 0 auto;
       text-align: center;
       padding-left: 2rem;
@@ -198,14 +198,14 @@ block styles
       float: none;
       clear: both;
     }
-    .contact .column label {
-      width: 60px;
+    .contact .column > label {
+      width: 10%;
       text-align: right;
     }
     .column.right {
       float: right;
     }
-    .column label, .member .column label {
+    .column > label, .member .column > label {
       float: left;
       margin-right: 1rem;
       margin-top: 1rem;
@@ -311,6 +311,12 @@ block styles
     .marvel-logo {
       margin-top: 5rem;
     }
+    label.error {
+      color: red;
+      position: relative;
+      float: left;
+      
+    }
 
 block body
   include ../partials/nav
@@ -405,22 +411,22 @@ block body
             a(class='ml', href='') www.google.com
   block javascript
   script(src='/js/vendor/jquery.validate.js')
+  script(src='/js/vendor/messages_zh_TW.js')
   script.
     $(function () {
       $('html, body').scrollTop(700);
 
       // <not test yet!>
       $("form").validate({
+        debug: true,
         rules: {
           buyerEmail:  {
             email: true,
             required: true
           }
-        },
-        submitHandler: function(form) {
-          form.submit();
         }
       });
+      $('form').valid();
       // </not test yet!>
 
       var quantity = $('select#quantity').val();
