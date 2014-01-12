@@ -3,12 +3,16 @@ html
   head
     title= title
     meta(charset='utf-8')
-    // Viewport mobile tag for sensible mobile support
-    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+    //- Viewport mobile tag for sensible mobile support
+    meta(name='viewport',content='width=device-width, initial-scale=1, maximum-scale=1')
     
     meta(name='description', content='')
     meta(name='author', content='')
-    link(rel="shortcut icon" href="/favicon.png")
+    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/images/ico/favicon_144x144.png')
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/images/ico/favicon_114x114.png')
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/images/ico/favicon_72x72.png')
+    link(rel='apple-touch-icon-precomposed', href='/images/ico/favicon_57x57.png')
+    link(rel='shortcut icon', href='/images/ico/favicon.png')
     link(rel='stylesheet', href='/styles/normalize.css')
     link(rel='stylesheet', href='/styles/bootstrap.min.css')
     block styles
@@ -19,9 +23,9 @@ html
     block body
 
     block javascript
-    // Bring in the socket.io client
-    //- script(type="text/javascript", src="/js/socket.io.js")
-    // then beef it up with some convenience logic for talking to Sails.js'
-    //- script(type="text/javascript", src="/js/sails.io.js")
-    // listen on socket.io for incoming messages
-    //- script(type="text/javascript", src="/js/app.js")
+    //- Bring in the socket.io client
+    //- script(type='text/javascript', src='/js/socket.io.js')
+    //- then beef it up with some convenience logic for talking to Sails.js'
+    //- script(type='text/javascript', src='/js/sails.io.js')
+    //- listen on socket.io for incoming messages
+    //- script(type='text/javascript', src='/js/app.js')
