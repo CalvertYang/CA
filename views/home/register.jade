@@ -325,16 +325,16 @@ block body
         .contact
           .column
             label(for='buyerName') 姓名
-            input(type='text', id='buyerName', name='buyerName')
+            input(type='text', id='buyerName', name='buyerName', required)
           .column
             label(for='buyerBirthday') 生日
-            input(type='text', id='buyerBirthday', name='buyerBirthday')
+            input(type='text', id='buyerBirthday', name='buyerBirthday', required)
           .column
             label(for='buyerPhone') 電話
-            input(type='text', id='buyerPhone', name='buyerPhone')
+            input(type='text', id='buyerPhone', name='buyerPhone', required)
           .column
             label(for='buyerEmail') 電子郵件
-            input(type='text', id='buyerEmail', name='buyerEmail')
+            input(type='text', id='buyerEmail', name='buyerEmail', required)
         hr
         h4 數量選擇
         .select
@@ -404,9 +404,24 @@ block body
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
   block javascript
+  script(src='/js/vendor/jquery.validate.js')
   script.
     $(function () {
       $('html, body').scrollTop(700);
+
+      // <not test yet!>
+      $("form").validate({
+        rules: {
+          buyerEmail:  {
+            email: true,
+            required: true
+          }
+        },
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+      // </not test yet!>
 
       var quantity = $('select#quantity').val();
       var generateUserForm = function (amount) {
