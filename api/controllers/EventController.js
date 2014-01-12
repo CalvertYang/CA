@@ -59,18 +59,30 @@ module.exports = {
       eventObj.contact = req.param('contact');
       eventObj.contactPhone = req.param('contactPhone');
       eventObj.contactEmail = req.param('contactEmail');
-      eventObj.quantity = req.param('quantity');
+      eventObj.quota = req.param('quota');
+
+      // Create ticketTypeObject
+      var ticketNames = sails.util._.flatten(req.param('ticketName'));
+      var ticketPrices = sails.util._.flatten(req.param('ticketPrice'));
+      eventObj.ticketType = [];
+
+      for(var i = 0, len = ticketNames.length; i < len; i++) {
+        var ticketTypeItem = {};
+        ticketTypeItem.name = ticketNames[i];
+        ticketTypeItem.type = ticketPrices[i];
+
+        eventObj.ticketType.push(ticketTypeItem);
+      }
 
       // Create registrationDataObj
       var registrationDatas = sails.util._.flatten(req.param('registrationData'));
       var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
       eventObj.registrationData = [];
 
-      var selectCount = 0;
-      for(var idx in registrationDatas) {
+      for(var i = 0, selectCount = 0, len = registrationDatas.length; i < len; i++) {
         var registrationDataItem = {};
-        registrationDataItem.name = registrationDatas[idx];
-        registrationDataItem.type = registrationDataTypes[idx];
+        registrationDataItem.name = registrationDatas[i];
+        registrationDataItem.type = registrationDataTypes[i];
 
         if (registrationDataItem.type == 'select') {
           registrationDataItem.value = req.param('selectItem')[selectCount];
@@ -145,18 +157,30 @@ module.exports = {
       eventObj.contact = req.param('contact');
       eventObj.contactPhone = req.param('contactPhone');
       eventObj.contactEmail = req.param('contactEmail');
-      eventObj.quantity = req.param('quantity');
+      eventObj.quota = req.param('quota');
+
+      // Create ticketTypeObject
+      var ticketNames = sails.util._.flatten(req.param('ticketName'));
+      var ticketPrices = sails.util._.flatten(req.param('ticketPrice'));
+      eventObj.ticketType = [];
+
+      for(var i = 0, len = ticketNames.length; i < len; i++) {
+        var ticketTypeItem = {};
+        ticketTypeItem.name = ticketNames[i];
+        ticketTypeItem.price = ticketPrices[i];
+
+        eventObj.ticketType.push(ticketTypeItem);
+      }
 
       // Create registrationDataObj
       var registrationDatas = sails.util._.flatten(req.param('registrationData'));
       var registrationDataTypes = sails.util._.flatten(req.param('registrationDataType'));
       eventObj.registrationData = [];
 
-      var selectCount = 0;
-      for(var idx in registrationDatas) {
+      for(var i = 0, selectCount = 0, len = registrationDatas.length; i < len; i++) {
         var registrationDataItem = {};
-        registrationDataItem.name = registrationDatas[idx];
-        registrationDataItem.type = registrationDataTypes[idx];
+        registrationDataItem.name = registrationDatas[i];
+        registrationDataItem.type = registrationDataTypes[i];
 
         if (registrationDataItem.type == 'select') {
           registrationDataItem.value = req.param('selectItem')[selectCount];

@@ -1,4 +1,6 @@
 var moment = require('moment');
+var querystring = require('querystring');
+var http = require('http');
 
 // Pad a number with leading zeros
 function padNumber(number, pad) {
@@ -10,7 +12,7 @@ module.exports = {
   generateOrderNumber: function generateOrderNumber (callback) {
     System.find().done(function (err, systems) {
       if (err) {
-        return callback({status: 'error', message: err});
+        return callback(err, null);
       }
 
       if (systems) {
@@ -25,7 +27,7 @@ module.exports = {
         } else {
           // Check orderSerial quota
           if (systems[0].orderSerial >= 999999) {
-            return callback({ err: 'Oops, order serial is reached limit quota', serial: null });
+            return callback('Oops, order serial is reached limit quota', null);
           }
 
           systemObj = {
@@ -36,15 +38,49 @@ module.exports = {
         // Update system config
         System.update({ id: systems[0].id }, systemObj, function (err, system) {
           if (err) {
-           return callback({ err: err, serial: null });
+           return callback(err, null);
           }
 
           var orderNumber = moment(system[0].orderDate).format('YYYYMMDD') + padNumber(system[0].orderSerial, 6);
-          return callback({ err: null, serial: orderNumber });
+          return callback(null, orderNumber);
         });
       } else {
-        return callback({ err: 'System config not found', serial: null });
+        return callback('System config not found', null);
       }
     });
+  },
+
+  getFullZipCode: function getFullZipCode (address, callback) {
+    var postData = querystring.stringify({
+      addr: address,
+      token: sails.config.myConf.addressApi.token
+    });
+
+    var options = {
+      hostname: sails.config.myConf.addressApi.url,
+      port: 80,
+      path: '/getZipCode?' + postData,
+      method: 'POST'
+    };
+
+    var req = http.request(options, function(res) {
+      res.setEncoding('utf8');
+
+      var buffer = '';
+      res.on('data', function (chunk) {
+        buffer += chunk;
+      });
+
+      res.on('end', function() {
+        return callback(null, JSON.parse(buffer));
+      });
+    });
+
+    req.on('error', function(e) {
+      console.log(e.message);
+      return callback(e.message, null);
+    });
+
+    req.end();
   }
 };

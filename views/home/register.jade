@@ -325,7 +325,7 @@ block body
     .content
       .title
         img(src='/images/title-term.png')
-      form(method='post', action='/home/register/#{id}')
+      form(method='post', action='/home/register/#{event.id}')
         input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
         h4 訂購人資料
         .contact
@@ -342,11 +342,17 @@ block body
             label(for='buyerEmail') 電子郵件
             input(type='text', id='buyerEmail', name='buyerEmail', required)
         hr
+        h4 票種選擇
+        .select
+          select(id='ticket', name='ticket')
+            each ticket in event.ticketType
+              option(value='#{ticket.name}') #{ticket.name}($#{ticket.price})
+        hr
         h4 數量選擇
         .select
-          select(id='quantity')
+          select(id='quantity', name='quantity')
             - for (var i = 1; i <= 10; i++)
-              option #{i}
+              option(value='#{i}', selected=i==1) #{i}
         .members
         hr
         h4 領取方式
@@ -373,11 +379,11 @@ block body
             input(type='text', id='expressAddress', name='expressAddress')
         hr
         h4 付費方式
-        input(type='radio', id='ibon' name='payment', value='ibon')
+        input(type='radio', id='ibon' name='paymentType', value='ibon')
         label(for='ibon')
           span
           | IBON
-        input(type='radio', id='credit' name='payment', value='credit')
+        input(type='radio', id='credit' name='paymentType', value='credit')
         label(for='credit')
           span
           | 線上刷卡
@@ -433,7 +439,7 @@ block body
       var generateUserForm = function (amount) {
         var base = $('form').children('.members').first();
         base.empty();
-        $.get("/home/generateForm?id=#{id}&count=" + amount, function(data) {
+        $.get("/home/generateForm?id=#{event.id}&count=" + amount, function(data) {
           base.append(data);
         });
       };
@@ -454,7 +460,7 @@ block body
       // Get address city list
       var cityResult = $.ajax({
         type: 'POST',
-        url: '#{sails.config.myConf.addressApi.url}' + 'getCity',
+        url: 'http://#{sails.config.myConf.addressApi.url}/getCity',
         data: { country: $('#expressAddressCountry option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
         dataType: 'json',
         async: false
@@ -481,7 +487,7 @@ block body
         } else {
           var cityAreaResult = $.ajax({
             type: 'POST',
-            url: '#{sails.config.myConf.addressApi.url}' + 'getArea',
+            url: 'http://#{sails.config.myConf.addressApi.url}/getArea',
             data: { city: $('#expressAddressCity option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
             dataType: 'json',
             async: false

@@ -72,11 +72,19 @@ block body
                   label(for='contactEmail', class='col-sm-2 control-label') 聯絡電子郵件
                   .col-sm-6
                     input(type='text', class='form-control', id='contactEmail', name='contactEmail')
+                .form-group.ticket-data
+                  label(for='ticketName-0', class='col-sm-2 control-label') 票種及票價
+                  .col-sm-3
+                    input(type='text', class='form-control', id='ticketName-0', name='ticketName[]', placeholder='票種')
+                  .col-sm-3
+                    input(type='text', class='form-control', id='ticketPrice-0', name='ticketPrice[]', placeholder='票價')
+                  .col-sm-1.reset-gap
+                    a(class='btn btn-sm btn-success ticket-plus')
+                      span(class='glyphicon glyphicon-plus')
                 .form-group
                   label(for='quantity', class='col-sm-2 control-label') 報名人數限制
                   .col-sm-6
                     input(type='text', class='form-control', id='quantity', name='quantity')
-                
                 .form-group.registration-data
                   label(for='registrationData-0', class='col-sm-2 control-label') 報名所需資料
                   .col-sm-3
@@ -90,7 +98,7 @@ block body
                       option(value='email') 電子郵件
                       option(value='select') 下拉式選單
                   .col-sm-1.reset-gap
-                    a(class='btn btn-sm btn-success col-plus') 
+                    a(class='btn btn-sm btn-success col-plus')
                       span(class='glyphicon glyphicon-plus')
 
             .panel-footer.text-right
@@ -109,7 +117,7 @@ block body
       $('.col-plus').on('click', function (e) {
         var index = $('.registration-data').length;
         var row = $('<div></div>').addClass('form-group registration-data');
-        var label = $("<label for='' class='col-sm-2 control-label'></label>")
+        var label = $("<label for='registrationData-" + index + "' class='col-sm-2 control-label'></label>")
         var input = $("<div class='col-sm-3'><input type='text' class='form-control' id='registrationData-" + index + "' name='registrationData[]' /></div>");
         var select = $("<div class='col-sm-3'> <select id='registrationDataType-" + index + "' name='registrationDataType[]' class='form-control registration-data-type'> <option value='text' selected>文字 <option value='number'>數字 <option value='date'>日期 <option value='tel'>電話 <option value='email'>電子郵件 <option value='select'>下拉式選單 </select> </div>");
         var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
@@ -121,6 +129,24 @@ block body
         });
         row.append(btn);
         $('.registration-data').last().after(row);
+        e.preventDefault();
+      });
+
+      $('.ticket-plus').on('click', function (e) {
+        var index = $('.ticket-data').length;
+        var row = $('<div></div>').addClass('form-group ticket-data');
+        var label = $("<label for='ticketName-" + index + "' class='col-sm-2 control-label'></label>")
+        var nameInput = $("<div class='col-sm-3'><input type='text' class='form-control' id='ticketName-" + index + "' name='ticketName[]' placeholder='票種' /></div>");
+        var priceInput = $("<div class='col-sm-3'><input type='text' class='form-control' id='ticketPrice-" + index + "' name='ticketPrice[]' placeholder='票價' /></div>");
+        var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
+        row.append(label);
+        row.append(nameInput);
+        row.append(priceInput);
+        btn.on('click', function (e) {
+          $(this).parent().remove();
+        });
+        row.append(btn);
+        $('.ticket-data').last().after(row);
         e.preventDefault();
       });
 

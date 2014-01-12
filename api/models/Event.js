@@ -88,6 +88,12 @@ module.exports = {
       email: true
     },
 
+    // 票種及票價
+    ticketType: {
+      type: 'array',
+      required: true
+    },
+
     // 報名所需資料
     registrationData: {
       type: 'array'
@@ -95,7 +101,7 @@ module.exports = {
 
     // 報名人數限制
     // Ex: 10000
-    quantity: {
+    quota: {
       type: 'integer',
       defaultsTo: 0
     },

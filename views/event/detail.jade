@@ -64,14 +64,29 @@ block body
                   label(for='contactEmail', class='col-sm-2 control-label') 聯絡電子郵件
                   .col-sm-6
                     p(class='form-control-static', id='contactEmail')= event.contactEmail
+                - var ticketCount = 0
+                each ticket in event.ticketType
+                  .form-group
+                    if ticketCount === 0
+                      label(for='ticketType', class='col-sm-2 control-label') 票種及票價
+                    else
+                      .col-sm-2
+                    .col-sm-6
+                      p(class='form-control-static') #{ticket.name}($#{ticket.price})
+                  - ticketCount++
                 .form-group
-                  label(for='quantity', class='col-sm-2 control-label') 報名人數限制
+                  label(for='quota', class='col-sm-2 control-label') 報名人數限制
                   .col-sm-6
-                    p(class='form-control-static', id='quantity')= event.quantity
+                    p(class='form-control-static', id='quota')= event.quota
+                if event.registrationData.length === 0
+                  .form-group
+                    label(for='registrationData', class='col-sm-2 control-label') 報名所需資料
+                    .col-sm-6
+                      p(class='form-control-static') 無
                 - var dataCount = 0
                 each regData in event.registrationData
                   .form-group
-                    if dataCount == 0
+                    if dataCount === 0
                       label(for='registrationData', class='col-sm-2 control-label') 報名所需資料
                     else
                       .col-sm-2
@@ -91,7 +106,7 @@ block body
                         when 'select'
                           - dataType = '下拉式選單'
                       p(class='form-control-static', id='registrationData#{dataCount}') #{regData.name}(#{dataType})
-                        if regData.type == 'select'
+                        if regData.type === 'select'
                           |  -  
                           - itemCount = 1
                           each item in regData.value
