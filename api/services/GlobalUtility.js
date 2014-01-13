@@ -41,7 +41,7 @@ module.exports = {
            return callback(err, null);
           }
 
-          var orderNumber = moment(system[0].orderDate).format('YYYYMMDD') + padNumber(system[0].orderSerial, 6);
+          var orderNumber = 'CA' + moment(system[0].orderDate).format('YYYYMMDD') + padNumber(system[0].orderSerial, 6);
           return callback(null, orderNumber);
         });
       } else {

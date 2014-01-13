@@ -18,6 +18,7 @@
 var jade = require('jade');
 var fs = require('fs');
 var async = require('async');
+var clt = require('clt-api');
 
 module.exports = {
   leading: function (req, res, next) {
@@ -94,6 +95,7 @@ module.exports = {
           },
           // Create order
           function(event, orderNo, addrInfo, callback) {
+            console.log(req.params.all());
             var orderObj = {};
             orderObj.orderNo = orderNo;
             orderObj.eventId = req.param('id');
@@ -106,6 +108,8 @@ module.exports = {
                 zipCode: addrInfo.zipCode,
                 address: addrInfo.addrSource
               };
+            } else {
+              orderObj.contactAddress = {};
             }
             orderObj.contactBirthday = new Date(req.param('buyerBirthday'));
             orderObj.delivery = req.param('way') === 'express' ? 2 : 1; // 1-現場領取 / 2-宅配
@@ -138,12 +142,66 @@ module.exports = {
                 return callback(err, null);
               }
 
-              return callback(null, event, orderObj);
+              return callback(null, event, order);
             });
           },
           // Call clt-api
-          function(event, orderInfo, callback) {
-            return callback(null, 'done');
+          function(event, orderData, callback) {
+            // Call CLT API
+            clt.config.update(sails.config.myConf.CLT_CONFIG);
+            var cvs = clt.CVS;
+
+            if (orderData.paymentType === 1) {
+              // ibon
+              cvs.orderRegister({
+                OrderNumber: orderData.orderNo,
+                Amount: orderData.grandTotal.toString(),
+                Name: orderData.contactName,
+                zipCode: orderData.contactAddress.zipCode,
+                Address: orderData.contactAddress.address,
+                CellPhone: orderData.contactPhone,
+                Email: orderData.contactEmail
+              }, function (err, result) {
+                orderData.paymentDetail = {
+                  orderAmount: result.response.order.order_amount,
+                  billAmount: result.response.order.bill_amount,
+                  ibonShopId: result.response.order.ibon_shopid,
+                  ibonCode: result.response.order.ibon_code,
+                  expireDate: new Date(result.response.order.expire_date)
+                }
+
+                // Update order information
+                Order.update(orderData.id, orderData, function (err, orders) {
+                  // If there's an error
+                  if (err) {
+                    return callback(err, null);
+                  }
+
+                  return callback(null, 'done');
+                });
+              });
+            } else {
+              // credit card
+              cocs.orderAppend({
+                OrderNumber: orderData.orderNo,
+                OrderAmount: orderData.grandTotal.toString(),
+                OrderDetail: event.title + ' - ' + orderData.commodity.name + ' x ' + orderData.commodity.quantity
+              }, function (err, result) {
+                orderData.paymentDetail = {
+                  url: result.url
+                }
+
+                // Update order information
+                Order.update(orderData.id, orderData, function (err, orders) {
+                  // If there's an error
+                  if (err) {
+                    return callback(err, null);
+                  }
+
+                  return callback(null, result.url);
+                });
+              });
+            }
           }
         ], function (err, result) {
           // If there's an error
@@ -153,8 +211,13 @@ module.exports = {
               err: err
             }
           } else {
-            // Redirect to finish page
-            return res.redirect('/home/finish');
+            if (req.param('paymentType') === 'ibon') {
+              // Redirect to finish page after payment by ibon
+              return res.redirect('/home/finish');
+            } else {
+              // Redirect to api callback url
+              return res.redirect(result);
+            }
           }
         });
       }
@@ -166,8 +229,8 @@ module.exports = {
     res.view();
   },
 
-  // 填寫信用卡資訊
-  payment: function (req, res, next) {
+  // 完成頁面
+  finish: function (req, res, next) {
     res.view();
   },
 

@@ -60,6 +60,11 @@ module.exports.routes = {
   '/generateForm': {
     controller: 'HomeController',
     action: 'generateForm'
+  },
+
+  '/finish': {
+    controller: 'HomeController',
+    action: 'finish'
   }
 
   /*

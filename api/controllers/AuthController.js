@@ -21,7 +21,14 @@ var passport = require('passport');
 module.exports = {
 
   facebook: function (req, res, next) {
-    passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login', scope: ['email', 'user_birthday'] },
+    var redirect = '';
+    if (req.header('Referer')) {
+      redirect = req.header('Referer');
+    } else {
+      redirect = '/';
+    }
+
+    passport.authenticate('facebook', { successRedirect: redirect, failureRedirect: redirect, scope: ['email', 'user_birthday'] },
       function (err, user) {
         req.logIn(user, function (err) {
           if (err) {
