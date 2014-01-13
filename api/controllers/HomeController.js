@@ -213,7 +213,7 @@ module.exports = {
           } else {
             if (req.param('paymentType') === 'ibon') {
               // Redirect to finish page after payment by ibon
-              return res.redirect('/home/finish');
+              return res.redirect('/home/finish?message=完成交易，請收取簡訊及電子郵件並於期限內繳款完畢，謝謝');
             } else {
               // Redirect to api callback url
               return res.redirect(result);
@@ -231,7 +231,7 @@ module.exports = {
 
   // 完成頁面
   finish: function (req, res, next) {
-    res.view();
+    res.view({ message: req.param('message') });
   },
 
   // 訂單資料

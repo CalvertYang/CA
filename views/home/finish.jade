@@ -11,7 +11,7 @@ block styles
       padding: 0;
     }
     .footer {
-       width: 1440px;
+      width: 1440px;
       height: 260px;
       margin: 0 auto;
       background: #000;
@@ -36,177 +36,13 @@ block styles
       color: white;
     }
     .content .title {
-      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
-      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
-      background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
       width: 100%;
     }
     .ml {
       margin-left: 10px;
-    }
-    button.next {
-      border: none;
-      width: 290px;
-      height: 80px;
-      background: url('/images/btn-next.png');
-      background-repeat: no-repeat;
-      margin: 3rem auto;
-    }
-    button.next:hover {
-      background-position: 0 -80px;
-    }
-    form {
-      color: #333;
-      width: 760px;
-      margin: 0 auto;
-    }
-    form h4 {
-      color: #595757;
-      padding: 10px;
-      letter-spacing: 3px;
-      font-weight: 600;
-    }
-    form hr {
-      width: 100%;
-      clear: both;
-    }
-    .address {
-      width: 100%;
-      display: none;
-    }
-    .address .column input[type="text"]{
-      float: none;
-    }
-    .member {
-      width: 500px;
-      margin: 0 auto;
-      position: relative;
-      padding-bottom: 1rem;
-    }
-    .member .column {
-      width: 50%;
-      float: left;
-      text-align: left;
-    }
-    .contact {
-      width: 50%;
-      margin: 0 auto;
-      text-align: center;
-      padding-left: 2rem;
-    }
-    .contact .column {
-      float: none;
-      clear: both;
-    }
-    .contact .column > label {
-      width: 10%;
-      text-align: right;
-    }
-    .column.right {
-      float: right;
-    }
-    .column > label, .member .column > label {
-      float: left;
-      margin-right: 1rem;
-      margin-top: 1rem;
-      color: #595757;
-      text-shadow: 1px 1px 1px white; 
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    .column input[type='text'],
-    .member .column input[type='text']
-    {
-      float: left;
-      border: 5px solid #595757; 
-      line-height: 1.5rem;
-      padding: 5px;
-      margin: 5px;
-      height: 3rem;
-      background: #fff; 
-      width: 60%;
-    }
-    .member .column .select, 
-    .address .column .select {
-      display:inline-block;
-      height: 34px;
-      width: 150px;
-      margin: 5px;
-      overflow: hidden;
-      background: url('/images/down-arrow.png') no-repeat right #fff;
-      border: 5px solid #595757;
-    }
-    .member .column .select select, 
-    .address .column .select select {
-      background: transparent;
-      width: 160px;
-      margin: 0;
-      padding: 0 2px;
-      line-height: 1;
-      border: 0;
-      border-radius: 0;
-      -webkit-appearance: none;
-    }
-    .select {
-      width: 200px;
-      height: 34px;
-      margin: 0 auto;
-      overflow: hidden;
-      background: url('/images/down-arrow.png') no-repeat right #fff;
-      border: 5px solid #595757;
-    }
-    .select select {
-      background: transparent;
-      margin: 0;
-      width: 220px;
-      padding: 0 5px;
-      line-height: 1;
-      border: 0;
-      border-radius: 0;
-      height: 2rem;
-      -webkit-appearance: none;
-    }
-    input[type="checkbox"] {
-      display:none;
-    }
-    input[type="checkbox"] + label {
-      margin-left: 2rem;
-    }
-    input[type="checkbox"] + label span {
-        display:inline-block;
-        width:19px;
-        height:19px;
-        margin:-1px 4px 0 0;
-        vertical-align:middle;
-        background:url('/images/check-radio-sheet.png') left top no-repeat;
-        cursor:pointer;
-    }
-    input[type="checkbox"]:checked + label span {
-        background:url('/images/check-radio-sheet.png') -19px top no-repeat;
-    }
-    input[type="radio"] {
-      display:none;
-    }
-    input[type="radio"] + label {
-      margin-left: 2rem;
-    }
-    input[type="radio"] + label span {
-        display:inline-block;
-        width:19px;
-        height:19px;
-        margin:-1px 4px 0 0;
-        vertical-align:middle;
-        background:url('/images/check-radio-sheet.png') -38px top no-repeat;
-        cursor:pointer;
-    }
-    input[type="radio"]:checked + label span {
-        background:url('/images/check-radio-sheet.png') -57px top no-repeat;
-    }
-    label.error {
-      color: red;
-      position: relative;
-      float: left;
-      
     }
 
 block body
@@ -215,74 +51,7 @@ block body
   .container
     .content
       .title
-        img(src='/images/title-term.png')
-      form(method='post', action='/register/#{event.id}')
-        input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
-        h4 訂購人資料
-        .contact
-          .column
-            label(for='buyerName') 姓名
-            input(type='text', id='buyerName', name='buyerName', required)
-          .column
-            label(for='buyerBirthday') 生日
-            input(type='text', id='buyerBirthday', name='buyerBirthday', required)
-          .column
-            label(for='buyerPhone') 電話
-            input(type='text', id='buyerPhone', name='buyerPhone', required)
-          .column
-            label(for='buyerEmail') 電子郵件
-            input(type='text', id='buyerEmail', name='buyerEmail', required)
-        hr
-        h4 票種選擇
-        .select
-          select(id='ticket', name='ticket')
-            each ticket in event.ticketType
-              option(value='#{ticket.name}') #{ticket.name}($#{ticket.price})
-        hr
-        h4 數量選擇
-        .select
-          select(id='quantity', name='quantity')
-            - for (var i = 1; i <= 10; i++)
-              option(value='#{i}', selected=i==1) #{i}
-        .members
-        hr
-        h4 領取方式
-        input(type='radio', id='takeLive' name='way', value='live')
-        label(for='takeLive')
-          span
-          | 現場領取
-        input(type='radio', id='express' name='way', value='express')
-        label(for='express')
-          span
-          | 宅配寄送
-        .address
-          .column
-            .select
-              select(id='expressAddressCountry', name='expressAddressCountry')
-                option(value='TW', selected) 台灣
-            .select
-              select(id='expressAddressCity', name='expressAddressCity')
-                option(value='') - 請選擇 -
-            .select
-              select(id='expressAddressArea', name='expressAddressArea')
-                option(value='') - 請選擇 -
-          .column
-            input(type='text', id='expressAddress', name='expressAddress')
-        hr
-        h4 付費方式
-        input(type='radio', id='ibon' name='paymentType', value='ibon')
-        label(for='ibon')
-          span
-          | IBON
-        input(type='radio', id='credit' name='paymentType', value='credit')
-        label(for='credit')
-          span
-          | 線上刷卡
-        
-        div
-          button(class='next')
-
-     
+    
 
 
   .footer
@@ -306,93 +75,19 @@ block body
           h5
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
+
+  div(class='modal fade', id='myModal', tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4(class='modal-title', id='myModalLabel') 提示
+        .modal-body
+          | #{message}
+
   block javascript
-  script(src='/js/vendor/jquery.validate.js')
-  script(src='/js/vendor/messages_zh_TW.js')
   script.
     $(function () {
-      $('html, body').scrollTop(700);
-
-      $("form").validate({
-        rules: {
-          buyerEmail:  {
-            email: true,
-            required: true
-          }
-        }
-      });
-
-      var quantity = $('select#quantity').val();
-      var generateUserForm = function (amount) {
-        var base = $('form').children('.members').first();
-        base.empty();
-        $.get("/generateForm?id=#{event.id}&count=" + amount, function(data) {
-          base.append(data);
-        });
-      };
-      $('input[name=way][type=radio]').on('click', function () {
-        var choose = $(this).val();
-        if (choose == 'express') {
-          $('.address').show();
-        } else {
-          $('.address').hide();
-        }
-      });
-      $(document).on('change', 'select#quantity', function () {
-        quantity = $('select#quantity').val();
-        generateUserForm(quantity);
-      }); 
-      generateUserForm(quantity);
-      
-      // Get address city list
-      var cityResult = $.ajax({
-        type: 'POST',
-        url: 'http://#{sails.config.myConf.addressApi.url}/getCity',
-        data: { country: $('#expressAddressCountry option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
-        dataType: 'json',
-        async: false
-      });
-
-      cityResult.error(function(msg) {
-        console.dir(msg);
-      });
-
-      cityResult.success(function(cities) {
-        $('#expressAddressCity option').remove();
-        $('#expressAddressCity').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
-        for(var idx in cities) {
-          $('#expressAddressCity').append($('<option></option>').attr('value', cities[idx].city).text(cities[idx].city));
-        }
-        $('#expressAddressCity').val($('#expressAddressCity option:first').val());
-      });
-
-      // Get address area list
-      $('#expressAddressCity').change(function() {
-        if ($('#expressAddressCity option:selected').val() == '') {
-          $("#expressAddressArea option").remove();
-          $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
-        } else {
-          var cityAreaResult = $.ajax({
-            type: 'POST',
-            url: 'http://#{sails.config.myConf.addressApi.url}/getArea',
-            data: { city: $('#expressAddressCity option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
-            dataType: 'json',
-            async: false
-          });
-
-          cityAreaResult.error(function(msg) {
-            console.dir(msg);
-          });
-
-          cityAreaResult.success(function(areas) {
-            $("#expressAddressArea option").remove();
-            $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
-            for(var idx in areas) {
-              $('#expressAddressArea').append($('<option></option>').attr('value', areas[idx].area).text(areas[idx].area));
-            }
-            $('#expressAddressArea').val($('#expressAddressArea option:first').val());
-          });
-        }
-      });
+      $('#myModal').modal('show');
 
     });

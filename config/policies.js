@@ -24,7 +24,8 @@ module.exports.policies = {
     'term': ['isAuthenticated', 'flash'],
     'register': ['isAuthenticated', 'flash'],
     'query': ['isAuthenticated', 'flash'],
-    'generateForm': ['isAuthenticated', 'flash']
+    'generateForm': ['isAuthenticated', 'flash'],
+    'finish': 'flash'
   },
 
   auth: {
@@ -49,6 +50,10 @@ module.exports.policies = {
   root: {
     'index': 'isAdmin',
     'login': true
+  },
+
+  api: {
+    '*': true
   }
 
   /*
