@@ -38,7 +38,7 @@ module.exports = {
           }
         });
       }
-    )(req, res);
+    )(req, res, next);
   },
 
   admin: function (req, res, next) {
