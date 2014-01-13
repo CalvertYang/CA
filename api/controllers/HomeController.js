@@ -236,7 +236,9 @@ module.exports = {
 
   // 訂單資料
   query: function (req, res, next) {
-    res.view();
+    Order.find({ fbid: req.param('id') }, function(err, orders) {
+      res.view({ orders: orders });
+    });
   },
 
   generateForm: function (req, res, next) {
