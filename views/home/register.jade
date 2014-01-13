@@ -202,11 +202,13 @@ block styles
     input[type="radio"]:checked + label span {
         background:url('/images/check-radio-sheet.png') -57px top no-repeat;
     }
-    label.error {
+    label.error, .column label.error{
       color: red;
       position: relative;
       float: left;
-      
+    }
+    input[type='text'].error {
+      border: 5px solid red !important;
     }
 
 block body
@@ -313,11 +315,50 @@ block body
     $(function () {
       $('html, body').scrollTop(700);
 
+      $.validator.addMethod("notEqualTo", function(value, element, param) {
+        var notEqual = true;
+        value = $.trim(value);
+        for (i = 0; i < param.length; i++) {
+          if (value == $.trim($(param[i]).val())) { notEqual = false;}
+        }
+        return this.optional(element) || notEqual;
+      }, "電話號碼不得相同。");
+
       $("form").validate({
         rules: {
           buyerEmail:  {
             email: true,
             required: true
+          },
+          "attenderField-0[1]": {
+            notEqualTo: [".tel-1", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-1[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-2[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-3[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-4[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-3", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-5[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-3", ".tel-4", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-6[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-1", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-7[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-1", ".tel-8", ".tel-9"]
+          },
+          "attenderField-8[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-1", ".tel-9"]
+          },
+          "attenderField-9[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-1"]
           }
         }
       });
