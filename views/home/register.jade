@@ -216,7 +216,7 @@ block body
     .content
       .title
         img(src='/images/title-term.png')
-      form(method='post', action='/home/register/#{event.id}')
+      form(method='post', action='/register/#{event.id}')
         input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
         h4 訂購人資料
         .contact
@@ -327,7 +327,7 @@ block body
       var generateUserForm = function (amount) {
         var base = $('form').children('.members').first();
         base.empty();
-        $.get("/home/generateForm?id=#{event.id}&count=" + amount, function(data) {
+        $.get("/generateForm?id=#{event.id}&count=" + amount, function(data) {
           base.append(data);
         });
       };

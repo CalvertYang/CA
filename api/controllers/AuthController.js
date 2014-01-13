@@ -31,7 +31,11 @@ module.exports = {
 
           var hour = 3600000;
           req.session.cookie.expires = new Date(Date.now() + hour);
-          return res.redirect('/');
+          if (req.header('Referer')) {
+            return res.redirect(req.header('Referer'));
+          } else {
+            return res.redirect('/');
+          }
         });
       }
     )(req, res);
@@ -39,7 +43,7 @@ module.exports = {
 
   admin: function (req, res, next) {
     if (req.method != 'POST') {
-      return res.redirect('/');
+      return res.redirect('/root/login');
     }
 
     if (req.session.authenticated) {
@@ -76,7 +80,7 @@ module.exports = {
           req.session.authenticated = true;
           req.session.Admin = admin.toJSON();
 
-          return res.redirect('/root/index');
+          return res.redirect('/event/index');
         });
       });
     }

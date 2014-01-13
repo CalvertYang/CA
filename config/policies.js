@@ -16,7 +16,40 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': true
+  '*': false,
+
+  home: {
+    'leading': 'flash',
+    'index': 'flash',
+    'term': ['isAuthenticated', 'flash'],
+    'register': ['isAuthenticated', 'flash'],
+    'query': ['isAuthenticated', 'flash'],
+    'generateForm': ['isAuthenticated', 'flash']
+  },
+
+  auth: {
+    '*': true
+  },
+
+  event: {
+    'index': 'isAdmin',
+    'create': 'isAdmin',
+    'detail': 'isAdmin',
+    'update': 'isAdmin'
+  },
+
+  member: {
+    'index': 'isAdmin'
+  },
+
+  order: {
+    'index': 'isAdmin'
+  },
+
+  root: {
+    'index': 'isAdmin',
+    'login': true
+  }
 
   /*
 	// Here's an example of adding some policies to a controller
