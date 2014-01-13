@@ -117,10 +117,10 @@ module.exports = {
     },
 
     // 物流處理進度
-    // Ex: 處理中 / 已寄送
+    // Ex: 1-未處理 / 2-處理中 / 3-已寄送
     expressStauts: {
-      type: 'string',
-      defaultsTo: ''
+      type: 'integer',
+      defaultsTo: 1
     },
 
     // 配送單號

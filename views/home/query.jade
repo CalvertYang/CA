@@ -60,15 +60,16 @@ block styles
     button.next:hover {
       background-position: 0 -80px;
     }
-    button.finish {
+    a.finish {
       border: none;
       width: 170px;
       height: 80px;
       background: url('/images/btn-finish.png');
       background-repeat: no-repeat;
       margin: 3rem auto;
+      display: block;
     }
-    button.finish:hover {
+    a.finish:hover {
       background-position: 0 -80px;
     }
     table.ca {
@@ -113,6 +114,7 @@ block body
           th 訂單編號
           th 購買數量
           th 購買總金額
+          th 配送方式
           th 訂單狀態
           th 物流狀態
           th.last 詳細資料
@@ -121,13 +123,34 @@ block body
             td #{order.orderNo}
             td #{order.commodity.quantity}
             td NT$ #{order.grandTotal}
-            td 已付款
-            td 處理中
+            case order.delivery
+              when 1
+                td 現場領取
+              when 2
+                td 宅配
+            case order.paymentStatus
+              when 1
+                td 未繳費
+              when 2
+                td 已繳費
+              when 3
+                td 逾期繳費
+              when 4
+                td 刷卡授權失敗
+              when 5
+                td 退費
+            case order.expressStauts
+              when 1
+                td 未處理
+              when 2
+                td 處理中
+              when 3
+                td 已寄送
             td 
               a(href='/editorder/#{order.id}') 查詢及編輯
 
       
-      button(class='finish')
+      a(href='/index', class='finish')
 
   .footer
     .body

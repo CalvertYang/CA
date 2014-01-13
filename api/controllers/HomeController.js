@@ -95,7 +95,6 @@ module.exports = {
           },
           // Create order
           function(event, orderNo, addrInfo, callback) {
-            console.log(req.params.all());
             var orderObj = {};
             orderObj.orderNo = orderNo;
             orderObj.eventId = req.param('id');
@@ -120,6 +119,7 @@ module.exports = {
                   quantity: ticketQuantity
                 };
                 orderObj.grandTotal = event.ticketType[i].price * ticketQuantity;
+                event.registedQuantity += ticketQuantity;
               }
             }
             orderObj.registrationData = [];
@@ -132,7 +132,7 @@ module.exports = {
             orderObj.paymentDetail = {};
             orderObj.paymentType = req.param('paymentType') === 'ibon' ? 1 : 2; // 1-ibon / 2-線上刷卡
             orderObj.paymentStatus = 1;
-            orderObj.expressStauts = '';
+            orderObj.expressStauts = 1;
             orderObj.trackingNumber = '';
 
             // Write order to database
@@ -177,7 +177,7 @@ module.exports = {
                     return callback(err, null);
                   }
 
-                  return callback(null, 'done');
+                  return callback(null, event, 'done');
                 });
               });
             } else {
@@ -198,10 +198,21 @@ module.exports = {
                     return callback(err, null);
                   }
 
-                  return callback(null, result.url);
+                  return callback(null, event, result.url);
                 });
               });
             }
+          },
+          function(event, finishArg, callback) {
+            // Update event registedQuantity
+            Event.update(event.id, event, function (err, events) {
+              // If there's an error
+              if (err) {
+                return callback(err, null);
+              }
+
+              return callback(null, finishArg);
+            });
           }
         ], function (err, result) {
           // If there's an error
@@ -226,7 +237,51 @@ module.exports = {
 
   // 修改訂單資料
   editOrder: function (req, res, next) {
-    res.view();
+    if (req.method != 'POST') {
+      Order.findOne(req.param('id'), function(err, order) {
+        return res.view({ order: order });
+      });
+    } else {
+      Order.findOne(req.param('id'), function(err, order) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          req.session.flash = {
+            err: err
+          }
+        }
+
+        Event.findOne(order.eventId, function(err, event) {
+          // If there's an error
+          if (err) {
+            console.log(err);
+            req.session.flash = {
+              err: err
+            }
+          }
+
+          order.registrationData = [];
+          for(var i = 0, len = order.commodity.quantity; i < len; i++) {
+            order.registrationData[i] = {};
+            for(var j = 0, regDataLen = event.registrationData.length; j < regDataLen; j++) {
+              order.registrationData[i]['field-' + j] = req.param('attenderField-' + i)[j];
+            }
+          }
+
+          Order.update(order.id, order, function (err, orders) {
+            // If there's an error
+            if (err) {
+              console.log(err);
+              req.session.flash = {
+                err: err
+              }
+            }
+
+            return res.redirect('/finish?message=資料修改成功');
+          });
+        });
+      });
+    }
   },
 
   // 完成頁面
@@ -259,9 +314,17 @@ module.exports = {
             throw err;
           }
 
-          var fn = jade.compile(data);
-          var html = fn({ count: req.param('count'), registrationData: event.registrationData });
-          return res.send(html);
+          if (req.param('orderId')) {
+            Order.findOne(req.param('orderId'), function(err, order) {
+              var fn = jade.compile(data);
+              var html = fn({ count: order.commodity.quantity, registrationData: event.registrationData, order: order });
+              return res.send(html);
+            });
+          } else {
+            var fn = jade.compile(data);
+            var html = fn({ count: req.param('count'), registrationData: event.registrationData, order: null });
+            return res.send(html);
+          }
         });
       } else {
         return res.send('');
