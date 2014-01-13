@@ -6,7 +6,10 @@
       .column
         label(for='attenderField-#{i}[#{j}]')= regData.name
         if regData.type === 'text' || regData.type === 'number' || regData.type === 'tel' || regData.type === 'email'
-          input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]')
+          if regData.type === 'tel'
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='tel')
+          else
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]')
         else if regData.type === 'date'
           input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='date')
         else if regData.type === 'select'
