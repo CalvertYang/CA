@@ -116,21 +116,15 @@ block body
           th 訂單狀態
           th 物流狀態
           th.last 詳細資料
-        tr
-          td 1234567
-          td 10
-          td NT 99999
-          td 已付款
-          td 處理中
-          td 
-            a(href='') 查詢及編輯
-        tr
-          td 1
-          td 2
-          td 3
-          td 3
-          td 3
-          td 3
+        each order in orders
+          tr
+            td #{order.orderNo}
+            td #{order.commodity.quantity}
+            td NT$ #{order.grandTotal}
+            td 已付款
+            td 處理中
+            td 
+              a(href='/editorder/#{order.id}') 查詢及編輯
 
       
       button(class='finish')

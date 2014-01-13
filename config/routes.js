@@ -52,9 +52,14 @@ module.exports.routes = {
     action: 'register'
   },
 
-  '/query': {
+  '/query/:id': {
     controller: 'HomeController',
     action: 'query'
+  },
+
+  '/editorder/:id': {
+    controller: 'HomeController',
+    action: 'editorder'
   },
 
   '/generateForm': {
