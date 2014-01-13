@@ -7,14 +7,18 @@ block styles
       background-color: #080605;
     }
     .video {
-      width: 1440px;
-      height: 680px;
+      width: 100%;
+      height: 720px;
+      background-color: #000;
       margin: 0 auto;
+      padding-top: 40px;
       overflow: hidden;
+      text-align: left;
     }
     .video video {
       position: relative;
-      left: -320px;
+      left: -10%;
+      width: 70%;
     }
     .container {
       width: 1440px;
@@ -52,7 +56,7 @@ block styles
 
 block body
   .video
-      video(autoplay, loop, muted, width='870px', preload)
+      video(autoplay, loop, muted, preload='auto')
         source(src='/video/shield-loop.ogv', type="video/ogg" )
         source(src='/video/shield-loop.mp4', type="video/mp4")
     .header-title
