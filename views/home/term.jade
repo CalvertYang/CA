@@ -6,24 +6,33 @@ block styles
       overflow-x: hidden;
     }
     .container {
-      width: 1440px;
+      width: 100%;
       margin: 0 auto;
       padding: 0;
     }
     .footer {
-      width: 1440px;
-      height: 260px;
+      width: 100%;
       margin: 0 auto;
       background: #000;
+      padding-bottom: 5rem;
     }
     .footer .body {
-      padding-top: 5rem;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
       color: white;
       width: 960px;
       margin: 0 auto;
     }
     .footer .body  img {
       margin: 5px;
+    }
+    .linear {
+      width: 100%;
+      height: 5rem;
+      position: relative;
+      top: -5rem;
+      background: rgb(125,126,125); 
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
     }
     .content {
       width: 100%;
@@ -60,13 +69,58 @@ block styles
     button.next:hover {
       background-position: 0 -80px;
     }
+    @media screen and (max-width: 768px) {
+      .term {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+       .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .black {
+        background: #000;
+        width: 100%;
+        height: 10rem;
+      }
+    }
     
 block body
   include ../partials/nav
   .container
+    .black
     .content
       .title
-        img(src='/images/title-term.png')
+        img(src='/images/title-term.png', class='title')
       .panel.panel-primary.term
         .panel-heading
           h3(class='panel-title') 授權，參賽條款
@@ -97,8 +151,8 @@ block body
                   span  同意授權
       
       button(class='next')
-
-  .footer
+  .leaner
+  .footer.clearfix
     .body
       .col-sm-6
         .row
