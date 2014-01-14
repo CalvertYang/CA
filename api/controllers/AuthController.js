@@ -74,7 +74,7 @@ module.exports = {
           req.session.flash = {
             err: noAccountError
           };
-          return res.redirect('/');
+          return res.redirect('/root/login');
         }
 
         // Compare password from the form params to the encrypted password of the admin found.
@@ -87,7 +87,7 @@ module.exports = {
             req.session.flash = {
               err: adminAccountPasswordMismatchError
             };
-            return res.redirect('/');
+            return res.redirect('/root/login');
           }
 
           // Log user in and let session expired after an hour

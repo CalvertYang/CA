@@ -37,7 +37,8 @@ module.exports.policies = {
     'index': 'isAdmin',
     'create': 'isAdmin',
     'detail': 'isAdmin',
-    'update': 'isAdmin'
+    'update': 'isAdmin',
+    'orderlist': 'isAdmin'
   },
 
   member: {

@@ -33,13 +33,15 @@ module.exports = {
         }
       }
 
-      // Change datetime format
-      events.forEach(function (event) {
-        event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
-        event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
-        event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
-        event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
-      });
+      if (events) {
+        // Change datetime format
+        events.forEach(function (event) {
+          event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
+          event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
+          event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
+          event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+        });
+      }
 
       return res.view({ events: events, keyword: keyword });
     });
@@ -202,6 +204,34 @@ module.exports = {
         return res.redirect('/event/index');
       });
     }
+  },
+
+  orderlist: function(req, res, next) {
+    Order.find({ eventId: req.param('id') }, function(err, orders) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+      }
+
+      if (orders) {
+        var paidAmount = 0;
+        var unPaidAmount = 0;
+
+        for(var i = 0, len = orders.length; i < len; i++) {
+          if (orders[i].paymentStatus === 1) {
+            unPaidAmount += orders[i].grandTotal;
+          } else if (orders[i].paymentStatus === 2) {
+            paidAmount += orders[i].grandTotal;
+          }
+          orders[i].createdAt = moment(orders[i].createdAt).format('YYYY/MM/DD HH:mm');
+        }
+      }
+
+      res.view({ orders: orders, paidAmount: paidAmount, unPaidAmount: unPaidAmount });
+    });
   },
 
 
