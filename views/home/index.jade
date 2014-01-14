@@ -396,6 +396,16 @@ block body
           h5
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
+
+    //- Modal
+    .modal.fade#warningLogin
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+            h4 提示
+          .modal-body
+            p 請先登入 Facebook 後進行報名。
   block javascript
   script(src='/js/vendor/perfect-scrollbar-with-mousewheel.min.js')
   script.
@@ -449,8 +459,18 @@ block body
         $(tabname).addClass('active');
         $('img.title').attr('src', path);
         $("html, body").animate({scrollTop: $('.title').offset().top }, 500);
-
-
       });
+
+      $('a.buy').on('click', function (e) {
+        var href = $(this).attr('href');
+        if (href.indexOf('facebook') != -1) {
+          $('#warningLogin').modal('show');
+          return false;
+        }
+      });
+      $('#warningLogin').on('hidden.bs.modal', function (e) {
+        $("html, body").animate({scrollTop: 0 }, 500);
+      });
+
 
     });
