@@ -25,7 +25,7 @@ module.exports = {
     if (req.header('Referer')) {
       redirect = req.header('Referer');
     } else {
-      redirect = '/';
+      redirect = '/index';
     }
 
     passport.authenticate('facebook', { failureRedirect: redirect, scope: ['email', 'user_birthday'] },
@@ -47,7 +47,7 @@ module.exports = {
             if (req.header('Referer')) {
               return res.redirect(req.header('Referer'));
             } else {
-              return res.redirect('/');
+              return res.redirect('/index');
             }
           });
         } else {
@@ -105,7 +105,7 @@ module.exports = {
   logout: function (req, res, next) {
     req.logout();
     req.session.destroy();
-    res.redirect('/');
+    res.redirect('/index');
   },
 
 

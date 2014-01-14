@@ -19,6 +19,6 @@ module.exports = function(req, res, next) {
   if (req.header('Referer')) {
     return res.redirect(req.header('Referer'));
   } else  {
-    return res.redirect('/');
+    return res.redirect('/index');
   }
 };
