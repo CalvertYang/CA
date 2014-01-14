@@ -9,6 +9,7 @@ block styles
       width: 100%;
       margin: 0 auto;
       padding: 0;
+      background: white;
     }
     .footer {
       width: 100%;
@@ -32,11 +33,6 @@ block styles
       position: relative;
       top: -5rem;
       background: rgb(125,126,125); 
-      background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); 
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); 
-      background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
-      background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
-      background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
       background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
     }
     .content {
@@ -121,6 +117,8 @@ block styles
     }
     .column > label, .member .column > label {
       float: left;
+      width: 5rem;
+      text-align: right;
       margin-right: 1rem;
       margin-top: 1rem;
       color: #595757;
@@ -218,20 +216,69 @@ block styles
     }
     label.error, .column label.error{
       color: red;
-      position: relative;
       float: left;
     }
     input[type='text'].error {
       border: 5px solid red !important;
     }
+    .member .column label.error {
+      width: 10rem;
+      float: right;
+    }
+    @media screen and (max-width: 768px) {
+      form {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+       .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .black {
+        background: #000;
+        width: 100%;
+        height: 10rem;
+      }
+    }
+
 
 block body
   include ../partials/nav
 
   .container
+    .black
     .content
       .title
-        img(src='/images/title-term.png')
+        img(src='/images/title-term.png', class='title')
       form(method='post', action='/register/#{event.id}')
         input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
         h4 訂購人資料
@@ -301,7 +348,7 @@ block body
      
 
   .leaner
-  .footer.chearfix
+  .footer.clearfix
     .body
       .col-sm-6
         .row

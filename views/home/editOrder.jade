@@ -5,11 +5,11 @@ block styles
     body {
       overflow-x: hidden;
     }
-    
     .container {
-      width: 1440px;
+      width: 100%;
       margin: 0 auto;
       padding: 0;
+      background: white;
     }
     .footer {
       width: 100%;
@@ -27,6 +27,14 @@ block styles
     .footer .body  img {
       margin: 5px;
     }
+    .linear {
+      width: 100%;
+      height: 5rem;
+      position: relative;
+      top: -5rem;
+      background: rgb(125,126,125); 
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+    }
     .content {
       width: 100%;
       height: auto;
@@ -38,23 +46,23 @@ block styles
       color: white;
     }
     .content .title {
-      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
-      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
-      background:-webkit-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
       width: 100%;
     }
     .ml {
       margin-left: 10px;
     }
-    button.finish {
+    button.next {
       border: none;
-      width: 170px;
+      width: 290px;
       height: 80px;
-      background: url('/images/btn-finish.png');
+      background: url('/images/btn-next.png');
       background-repeat: no-repeat;
       margin: 3rem auto;
     }
-    button.finish:hover {
+    button.next:hover {
       background-position: 0 -80px;
     }
     form {
@@ -90,11 +98,27 @@ block styles
       float: left;
       text-align: left;
     }
+    .contact {
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+      padding-left: 2rem;
+    }
+    .contact .column {
+      float: none;
+      clear: both;
+    }
+    .contact .column > label {
+      width: 10%;
+      text-align: right;
+    }
     .column.right {
       float: right;
     }
-    .column label, .member .column label {
+    .column > label, .member .column > label {
       float: left;
+      width: 5rem;
+      text-align: right;
       margin-right: 1rem;
       margin-top: 1rem;
       color: #595757;
@@ -189,6 +213,61 @@ block styles
     }
     input[type="radio"]:checked + label span {
         background:url('/images/check-radio-sheet.png') -57px top no-repeat;
+    }
+    label.error, .column label.error{
+      color: red;
+      float: left;
+    }
+    input[type='text'].error {
+      border: 5px solid red !important;
+    }
+    .member .column label.error {
+      width: 10rem;
+      float: right;
+    }
+    @media screen and (max-width: 768px) {
+      form {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+       .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .black {
+        background: #000;
+        width: 100%;
+        height: 10rem;
+      }
     }
 
 block body
