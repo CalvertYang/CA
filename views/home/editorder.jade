@@ -1,7 +1,22 @@
 extends ../layout
 
 block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
   style.
+    .ui-datepicker-title {
+      width: 75%;
+      display: inline-block;
+    }
+    .ui-datepicker-year, .ui-datepicker-month{
+      width: 70px !important;
+      line-height: 1.5rem;
+    }
+    .ui-datepicker-year {
+      float: left;
+    }
+    .ui-datepicker-month {
+      float: right;
+    }
     body {
       overflow-x: hidden;
     }
@@ -312,6 +327,8 @@ block body
             span(class='glyphicon glyphicon-home') 
             a(class='ml', href='') www.google.com
   block javascript
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
   script.
     $(function () {
       var quantity = $('select#quantity').val();
@@ -330,13 +347,13 @@ block body
           $('.address').hide();
         }
       });
-      $(document).on('change', 'select#quantity', function () {
-        quantity = $('select#quantity').val();
-        generateUserForm(quantity);
-      }); 
-      generateUserForm(quantity);
-      
-      
+
+      $('body').on('focus', '.date', function(){
+        $(this).datepicker({
+          changeMonth: true,
+          changeYear: true
+        });
+      })
 
 
     });
