@@ -16,6 +16,7 @@
  */
 
 var crypto = require('crypto');
+var moment = require('moment');
 
 module.exports = {
     
@@ -51,9 +52,9 @@ module.exports = {
             orderAmount: req.param('order_amount'),
             authCode: req.param('auth_code'),
             cardNo: req.param('card_no'),
-            sendTime: new Date(req.param('send_time')),
-            acquireTime: new Date(req.param('acquire_time')),
-            notifyTime: new Date(req.param('notify_time'))
+            sendTime: new Date(moment(req.param('send_time')).zone(-8).format()),
+            acquireTime: new Date(moment(req.param('acquire_time')).zone(-8).format()),
+            notifyTime: new Date(moment(req.param('notify_time')).zone(-8).format())
           };
           order.paymentStatus = 2;
 
@@ -97,8 +98,8 @@ module.exports = {
           order.paymentDetail.authReport = {
             status: req.param('ret'),
             orderAmount: req.param('order_amount'),
-            sendTime: new Date(req.param('send_time')),
-            notifyTime: new Date(req.param('notify_time'))
+            sendTime: new Date(moment(req.param('send_time')).zone(-8).format()),
+            notifyTime: new Date(moment(req.param('notify_time')).zone(-8).format())
           };
           order.paymentStatus = 4;
 
