@@ -3,12 +3,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 var verifyHandler = function (token, tokenSecret, profile, done) {
   process.nextTick(function () {
-    Member.findOne({
-      or : [
-        { fbid: parseInt(profile.id) },
-        { fbid: profile.id }
-      ]
-    }).done(function (err, member) {
+    Member.findOne({ fbid: profile.id }).done(function (err, member) {
+      if (err) return done(err);
+
       if (member) {
         return done(null, member);
       } else {
@@ -44,7 +41,6 @@ passport.deserializeUser(function (uid, done) {
     done(err, member)
   });
 });
-
 
 module.exports = {
   // Init custom express middleware

@@ -28,22 +28,31 @@ module.exports = {
       redirect = '/';
     }
 
-    passport.authenticate('facebook', { successRedirect: redirect, failureRedirect: redirect, scope: ['email', 'user_birthday'] },
+    passport.authenticate('facebook', { failureRedirect: redirect, scope: ['email', 'user_birthday'] },
       function (err, user) {
-        req.logIn(user, function (err) {
-          if (err) {
-            console.log(err);
-            return res.serverError(err);
-          }
+        if (err) {
+          console.log(err);
+          return res.redirect(redirect);
+        }
 
-          var hour = 3600000;
-          req.session.cookie.expires = new Date(Date.now() + hour);
-          if (req.header('Referer')) {
-            return res.redirect(req.header('Referer'));
-          } else {
-            return res.redirect('/');
-          }
-        });
+        if (user) {
+          req.logIn(user, function (err) {
+            if (err) {
+              console.log(err);
+              return res.serverError(err);
+            }
+
+            var hour = 3600000;
+            req.session.cookie.expires = new Date(Date.now() + hour);
+            if (req.header('Referer')) {
+              return res.redirect(req.header('Referer'));
+            } else {
+              return res.redirect('/');
+            }
+          });
+        } else {
+          return res.redirect(redirect);
+        }
       }
     )(req, res, next);
   },
