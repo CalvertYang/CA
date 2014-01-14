@@ -472,5 +472,11 @@ block body
         $("html, body").animate({scrollTop: 0 }, 500);
       });
 
+      $('.header-title').click(function () {
+        $('.mobile-click').children('ul').hide();
+      });
+      $('.container').click(function () {
+        $('.mobile-click').children('ul').hide();
+      });
 
     });

@@ -22,7 +22,7 @@ style.
     color: #eee;
   }
   /* </global> */
-   @media screen and (min-width: 992px) {
+  @media screen and (min-width: 992px) {
     .video {
       width: 100%;
       height: 100%;
@@ -104,9 +104,6 @@ style.
     }
     .topbar ul li:hover > ul {
       display: block;
-    }
-    .marvel-logo {
-      margin-top: 5rem;
     }
     .menu {
       width: 100%;
@@ -300,7 +297,7 @@ style.
        transition: all 0.15s ease-in-out 0s;
        margin-top: 0.2rem;
     }
-    .topbar > ul > li:hover > a {
+    .topbar > ul > li:focus > a {
        color: white;
        text-decoration: none;
     }
@@ -321,43 +318,42 @@ style.
       margin: 0 auto;
       padding: 1rem;
       text-align: center;
+      height: 4rem;
     }
     .topbar ul ul > li > a {
       color: rgba(188, 188, 188, 1);
       transition: all 0.15s ease-in-out 0s;
       text-decoration: none;
     }
-    .topbar ul ul > li:hover,
-    .topbar ul ul > li:hover > a {
+    .topbar ul ul > li:hover {
       color: white;
       background: #000;
       text-decoration: none;
     }
-    .topbar ul li:hover > ul {
-      display: block;
-    }
-    
     .header-title {
       width: 100%;
       height: auto;
       text-align: center;
-      margin-top:15rem;
+      margin-top: 30rem;
     }
     .header-title img {
       display: block;
       margin: 0 auto;
       width: 100%;
     }
+    .mobile-head {
+      width: 100%;
+    }
   }
-
-.video
+img(src='/images/mobile-head.png', class='mobile-head visible-xs')
+.video(class='hidden-xs')
   video(autoplay, loop, muted, preload='auto')
     source(src='/video/shield-loop.ogv', type="video/ogg" )
     source(src='/video/shield-loop.mp4', type="video/mp4")
 .header
   .topbar
     ul
-      li(class='visible-xs visible-sm')
+      li(class='visible-xs visible-sm mobile-click')
         a(href='') 活動
         ul
           li
@@ -376,14 +372,14 @@ style.
         li
           a(href='/auth/facebook') Facebook 登入
       else
-        li
+        li(class='mobile-click')
           a(href='#')= req.user.name
           ul
             li
               a(href='/query/#{req.user.fbid}') 訂單查詢
             li
               a(href='/auth/logout') 登出
-      li
+      li(class='mobile-click')
         a(href='#') 我要協助
         ul
           li
@@ -425,3 +421,18 @@ style.
           h4 參賽說明
         .modal-body
           p Hello, 參賽！
+script.
+  $(function () {
+    $('.mobile-click').on('click', function (e) {
+      if ($( window ).width() < 768) {
+        if ($(this).children('ul').is(':hidden')) {
+          $('.mobile-click').children('ul').hide();
+          $(this).children('ul').show();
+        } else {
+          $(this).children('ul').hide();
+        }
+        console.log($(this).children('ul').is(':hidden'));
+        e.preventDefault();
+      }
+    });
+  });
