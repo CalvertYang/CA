@@ -7,18 +7,19 @@ block styles
       background-color: #080605;
     }
     .container {
-      width: 1440px;
+      width: 100%;
       margin: 0 auto;
       padding: 0;
     }
     .footer {
-      width: 1440px;
-      height: 260px;
+      width: 100%;
       margin: 0 auto;
       background: #000;
+      padding-bottom: 5rem;
     }
     .footer .body {
-      padding-top: 5rem;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
       color: white;
       width: 960px;
       margin: 0 auto;
@@ -26,11 +27,25 @@ block styles
     .footer .body  img {
       margin: 5px;
     }
+    .linear {
+      width: 100%;
+      height: 5rem;
+      position: relative;
+      top: -5rem;
+      background: rgb(125,126,125); 
+      background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); 
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); 
+      background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+      background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+      background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+    }
     .content {
       width: 100%;
       height: auto;
       overflow: hidden;
       background: url('/images/main-bg.png');
+      background-size: 100% 100%;
       background-repeat: repeat-y;
       text-align: center;
       color: white;
@@ -75,7 +90,7 @@ block styles
       height: 106px;
       background: url('/images/btn-buy.png');
       background-repeat: no-repeat;
-      margin: 2rem auto;
+      margin: 2rem auto 6rem auto;
     }
     a.buy:hover {
       background-position: 0 -106px;
@@ -88,12 +103,88 @@ block styles
       width: 60%;
       margin: 0 auto;
     }
+    @media screen and (max-width: 768px) {
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 50% auto 0 auto;
+        overflow: hidden;
+        background: url('/images/main-bg.png');
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+      .tab {
+        display: none;
+        width: 90%;
+        margin: 0 auto;
+      }
+      .tab hr {
+        border:0; 
+        width: 80%;
+        height:1px; 
+        background-color: rgba(255, 255, 255, 0.2);
+        transation: all 1s linear 2s;
+      }
+      .tab h3 {
+        text-shadow: 0 0 20px red;
+      }
+      .tab h4, .tab h5, .yello-word {
+        color: #cabf3b;
+      }
+      .tab p {
+        color: #ddd;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+      }
+      .tab.active {
+        display: block;
+      }
+      .ml {
+        margin-left: 10px;
+      }
+      a.buy {
+        display: block;
+        width: 188px;
+        height: 53px;
+        background: url('/images/btn-buy.png');
+        background-repeat: no-repeat;
+        background-size: 188px 106px;
+        margin: 2rem auto 4rem auto;
+      }
+      a.buy:hover {
+        background-position: 0 -53px;
+      }
+      .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+    }
 block body
   include ../partials/nav
   .container
     .content
       .title
-        img(src='/images/about.png', width='1440px', class='title')
+        img(src='/images/about.png', class='title')
       .tab.about(id='about', name='about')
         hr
         h3 活動介紹
@@ -262,8 +353,8 @@ block body
         p 完跑後，可以在完跑點接受工作人員的授勳儀式，
         p 取得精緻的Marvel 授權美國隊長盾牌卡套喔。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
-
-  .footer
+  .linear
+  .footer.clearfix
     .body
       .col-sm-6
         .row

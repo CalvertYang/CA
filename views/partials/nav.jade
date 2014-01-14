@@ -1,123 +1,10 @@
 style.
-  
-  .video {
-    width: 100%;
-    height: 720px;
-    background-color: #000;
-    margin: 0 auto;
-    padding-top: 40px;
-    overflow: hidden;
-    text-align: left;
-  }
-  .video video {
-    position: relative;
-    left: -10%;
-    width: 70%;
+  /* <global> */
+  body {
+    background: #000;
   }
   ::-moz-focus-inner { border: 0 !important; }
-  .header {
-      width: 100%;
-      top: 0;
-      margin: 0 auto;
-      height: 600px;
-      background: transparent;
-      position: absolute;
-      left:0;
-      right:0;
-  }
-  .topbar {
-    width: 100%;
-    height: 3.2rem;
-    background: rgba(0,0,0,0.8);
-    border-bottom: 5px solid rgba(255, 255, 255, 0.1);
-  }
-  .topbar > ul {
-    position: relative;
-    color: #b2b2b2;
-    text-align: right;
-  }
-  .topbar ul a {
-     color: #b2b2b2;
-  }
-  .topbar ul a:hover {
-     color: rgba(170, 31, 36, 0.9);
-     text-decoration: none;
-  }
-  .topbar ul ul {
-    display: none;
-    padding: 0;
-    max-width: 8rem;
-    top: 2.7rem;
-    position: absolute;
-    text-align: left;
-    border-top: 5px solid rgba(170, 31, 36, 0.9);
-  }
-  .topbar ul ul li {
-    display: block !important;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-  }
-  .topbar ul li:hover > ul {
-    display: block;
-  }
-  .header-title {
-    width: 100%;
-    position: relative;
-    top: 20%;
-    left: 50%;
-  }
-  .marvel-logo {
-    margin-top: 5rem;
-  }
-  .menu {
-    width: 100%;
-    padding: 0;
-    background: transparent;
-    position: absolute;
-    top: 100px;
-  }
-  .menu .nav {
-    border-bottom: 5px solid rgba(255, 255, 255, 0.1);
-    background:linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.3));
-    background:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
-    background:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
-  }
-  ul {
-    list-style-type: none;
-    width: 960px;
-    margin: 0 auto;
-    height: 36px;
-    text-align: right;
-  }
-  ul li {
-    display: inline-block;
-    height: 3rem;
-    padding: 0.5rem;
-    margin-right: 1rem;
-  }
-  .menu ul li {
-    border-bottom: 5px solid rgba(170, 31, 36, 0);
-    line-height: 1.8rem;
-    text-decoration: none;
-    position: relative;
-    top: 5px;
-  }
-  .menu ul li a {
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 20px red;
-    font-size: 1.4rem;
-    margin: 5px 2px;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .menu ul li:hover, .menu ul li.active{
-    border-bottom: 5px solid rgba(170, 31, 36, 0.9);
-    background: rgba(0,0,0,0.7);
-  }
-  .menu ul li a:hover, .menu ul li.active a {
-    color: #a12124;
-  }
-  /* Modal */
+    /* Modal */
   .modal-content {
     background: rgba(0,0,0,0.5);
     box-shadow: 0 0 20px rgba(255,255,255,0.8);
@@ -134,16 +21,357 @@ style.
     background: rgba(0,0,0,0.5);
     color: #eee;
   }
+  /* </global> */
+   @media screen and (min-width: 992px) {
+    .video {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      margin: 0 auto;
+      padding-top: 40px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .video video {
+      position: relative;
+      left: -10%;
+      width: 70%;
+    }
+    .header {
+      width: 100%;
+      top: 0;
+      margin: 0 auto;
+      height: auto;
+      background: transparent;
+      position: absolute;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .topbar > ul {
+      position: relative;
+      font-weight: 700;
+      font-family: sans-serif !important;
+      text-align: right;
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    .topbar > ul > li {
+      display: inline-block;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:hover > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 7rem;
+      top: 3.1rem;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover,
+    .topbar ul ul > li:hover > a {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+    .marvel-logo {
+      margin-top: 5rem;
+    }
+    .menu {
+      width: 100%;
+      padding: 0;
+      background: transparent;
+      position: absolute;
+      top: 13rem;
+    }
+    .menu .nav {
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.3));
+      background: -moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+      background: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+    }
+    .menu .nav > ul {
+      position: relative;
+      font-weight: 700;
+      font-family: sans-serif !important;
+      text-align: right;
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+      top: 0.4rem;
+      text-align: right;
+    }
+    .menu .nav > ul > li {
+      border-bottom: 5px solid rgba(173, 3, 40, 0);
+      text-decoration: none;
+      display: inline-block;
+      padding: 0 0.8rem;
+      transition: all 0.15s ease-in-out 0s;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .menu .nav ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .menu ul li:hover, .menu ul li.active{
+      border-bottom: 5px solid rgba(173, 3, 40, 1);
+      background: rgba(0,0,0,1);
+    }
+    .menu ul li a:hover, .menu ul li.active a {
+      color: rgb(173, 3, 40);
+    }
+    .header-title {
+      position: relative;
+      top: 19rem;
+      left: 49%;
+    }
+  }
 
+  @media screen and (min-width: 769px) and (max-width: 991px)  {
+    .video video {
+      position: relative;
+      left: -10%;
+      width: 80%;
+    }
+    .header-title {
+      position: relative;
+      width: 50%;
+      top: 0;
+      left: 47%;
+    }
+    .header-title img {
+      display: block;
+      margin: 4rem 5rem;
+      width: 100%;
+    }
+    .header {
+      width: 100%;
+      top: 0;
+      margin: 0 auto;
+      height: auto;
+      background: transparent;
+      position: absolute;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .topbar > ul {
+      font-weight: 700;
+      font-family: sans-serif !important;
+      list-style-type: none;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .topbar > ul > li {
+      display: block;
+      float: right;
+      margin: 0;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:hover > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 100%;
+      top: 3.1rem;
+      right: 0;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover,
+    .topbar ul ul > li:hover > a {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+  } 
+  @media screen and (max-width: 768px) {
+    .video {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      margin: 0 auto;
+      padding-top: 40px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .video video {
+      width: 100%;
+      position: static;
+    }
+    .header {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: transparent;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .topbar > ul {
+      font-weight: 700;
+      font-family: sans-serif !important;
+      list-style-type: none;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .topbar > ul > li {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:hover > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 100%;
+      top: 3.1rem;
+      right: 0;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover,
+    .topbar ul ul > li:hover > a {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+    
+    .header-title {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      margin-top:15rem;
+    }
+    .header-title img {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
 
 .video
-  video(autoplay, loop, muted, preload)
+  video(autoplay, loop, muted, preload='auto')
     source(src='/video/shield-loop.ogv', type="video/ogg" )
     source(src='/video/shield-loop.mp4', type="video/mp4")
-   
 .header
   .topbar
     ul
+      li(class='visible-xs visible-sm')
+        a(href='') 活動
+        ul
+          li
+            a(href='/index#about', class='tab-menu') 關於
+          li
+            a(href='/index#how', class='tab-menu') 怎麼跑
+          li
+            a(href='/index#when', class='tab-menu') 何時跑
+          li
+            a(href='/index#where', class='tab-menu') 哪裡跑
+          li
+            a(href='/index#qna', class='tab-menu') Q&amp;A
+          li
+            a(href='/index#flow', class='tab-menu') 報名流程
       if !req.user
         li
           a(href='/auth/facebook') Facebook 登入
@@ -162,7 +390,7 @@ style.
             a(href='', data-toggle="modal" data-target="#backfee") 退款說明
           li 
             a(href='', data-toggle="modal" data-target="#description") 參賽說明
-  .menu
+  .menu(class='hidden-xs hidden-sm')
     .nav
       ul
         li
@@ -179,6 +407,7 @@ style.
           a(href='/index#flow', class='tab-menu') 報名流程
   .header-title
     img(src='/images/ca-title.png')
+
   //- modal of help
   .modal.fade#backfee
     .modal-dialog
