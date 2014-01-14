@@ -1,7 +1,22 @@
 extends ../layout
 
 block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
   style.
+    .ui-datepicker-title {
+      width: 75%;
+      display: inline-block;
+    }
+    .ui-datepicker-year, .ui-datepicker-month{
+      width: 70px !important;
+      line-height: 1.5rem;
+    }
+    .ui-datepicker-year {
+      float: left;
+    }
+    .ui-datepicker-month {
+      float: right;
+    }
     body {
       overflow-x: hidden;
     }
@@ -288,7 +303,7 @@ block body
             input(type='text', id='buyerName', name='buyerName', required)
           .column
             label(for='buyerBirthday') 生日
-            input(type='text', id='buyerBirthday', name='buyerBirthday', required)
+            input(type='text', id='buyerBirthday', name='buyerBirthday', class='datepicker', required)
           .column
             label(for='buyerPhone') 電話
             input(type='text', id='buyerPhone', name='buyerPhone', required)
@@ -372,6 +387,8 @@ block body
   block javascript
   script(src='/js/vendor/jquery.validate.js')
   script(src='/js/vendor/messages_zh_TW.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
   script.
     $(function () {
       $('html, body').scrollTop(700);
@@ -495,6 +512,11 @@ block body
             $('#expressAddressArea').val($('#expressAddressArea option:first').val());
           });
         }
+      });
+
+      $('.datepicker').datepicker({
+        changeMonth: true,
+        changeYear: true
       });
 
     });
