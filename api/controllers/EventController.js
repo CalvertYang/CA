@@ -69,7 +69,7 @@ module.exports = {
       for(var i = 0, len = ticketNames.length; i < len; i++) {
         var ticketTypeItem = {};
         ticketTypeItem.name = ticketNames[i];
-        ticketTypeItem.type = ticketPrices[i];
+        ticketTypeItem.price = ticketPrices[i];
 
         eventObj.ticketType.push(ticketTypeItem);
       }
