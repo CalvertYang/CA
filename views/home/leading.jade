@@ -4,51 +4,100 @@ block styles
   style.
     body {
       overflow-x: hidden;
-      background-color: #080605;
-    }
-    .video {
-      width: 100%;
-      height: 720px;
       background-color: #000;
-      margin: 0 auto;
-      padding-top: 40px;
-      overflow: hidden;
-      text-align: left;
     }
-    .video video {
-      position: relative;
-      left: -10%;
-      width: 70%;
-    }
-    .container {
-      width: 1440px;
-      margin: 0 auto;
-      padding: 0;
-      position: absolute;
-      top: 0;
-      background-color: transparent;
+    @media screen and (min-width: 992px) {
+      .video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+      .video video {
+        position: relative;
+        left: -14rem;
+        width: 72%;
+      }
+      .header-title {
+        width: 50%;
+        text-align: center;
+        position: relative;
+        top: 12rem;
+        left: 47%;
+      }
+      .header-title img {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+      }
     }
 
-    .header-title {
-      width: 100%;
-      position: absolute;
-      text-align: right;
-      padding-right:5%;
-      top: 180px;
-      right: 0;
+    @media screen and (min-width: 769px) and (max-width: 991px) {
+      .video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+      .video video {
+        position: relative;
+        left: -10rem;
+        width: 80%;
+      }
+      .header-title {
+        width: 50%;
+        text-align: center;
+        position: relative;
+        top: 8rem;
+        left: 48%;
+      }
+      .header-title img {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+      }
     }
-
+    @media screen and (max-width: 768px) {
+      .video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+      .video video {
+        width: 100%;
+      }
+      .header-title {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        top:  15rem;
+      }
+      .header-title img {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
     a.btn-run {
-      display:block;
-      position: absolute;
+      display: inline-block;
       width: 200px;
       height: 60px;
       background: url('/images/btn-run.png');
       background-size: 200px 120px;
       background-repeat: no-repeat;
-      right: 24rem;
-      bottom: 0;
-
     }
     a.btn-run:hover {
       background-position: 0 -60px;
