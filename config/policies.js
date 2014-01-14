@@ -42,11 +42,13 @@ module.exports.policies = {
   },
 
   member: {
-    'index': 'isAdmin'
+    'index': 'isAdmin',
+    'orderlist': 'isAdmin'
   },
 
   order: {
-    'index': 'isAdmin'
+    'index': 'isAdmin',
+    'detail': 'isAdmin'
   },
 
   root: {

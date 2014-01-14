@@ -374,7 +374,7 @@ style.
             a(href='/index#flow', class='tab-menu') 報名流程
       if !req.user
         li
-          a(href='/auth/facebook') Facebook 登入
+          a(href='/auth/facebook?register') Facebook 登入
       else
         li
           a(href='#')= req.user.name

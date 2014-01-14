@@ -31,6 +31,7 @@ module.exports = {
         req.session.flash = {
           err: err
         }
+        return next(err);
       }
 
       if (events) {
@@ -117,6 +118,7 @@ module.exports = {
         req.session.flash = {
           err: err
         }
+        return next(err);
       }
 
       // Change datetime format
@@ -138,6 +140,7 @@ module.exports = {
           req.session.flash = {
             err: err
           }
+          return next(err);
         }
 
         // Change datetime format
@@ -199,6 +202,7 @@ module.exports = {
           req.session.flash = {
             err: err
           }
+          return next(err);
         }
 
         return res.redirect('/event/index');
@@ -207,13 +211,19 @@ module.exports = {
   },
 
   orderlist: function(req, res, next) {
-    Order.find({ eventId: req.param('id') }, function(err, orders) {
+    var keyword = req.param('search') ? req.param('search') : '';
+    // var condition = {};
+
+    // condition.orderNo = new RegExp(keyword);
+
+    Order.find({ eventId: req.param('id'), orderNo: new RegExp(keyword) }, function(err, orders) {
       // If there's an error
       if (err) {
         console.log(err);
         req.session.flash = {
           err: err
         }
+        return next(err);
       }
 
       if (orders) {
@@ -230,7 +240,7 @@ module.exports = {
         }
       }
 
-      res.view({ orders: orders, paidAmount: paidAmount, unPaidAmount: unPaidAmount });
+      res.view({ eventId: req.param('id'), orders: orders, paidAmount: paidAmount, unPaidAmount: unPaidAmount, keyword: keyword });
     });
   },
 

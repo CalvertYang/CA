@@ -31,43 +31,78 @@ block body
                 .form-group
                   label(for='orderNo', class='col-sm-2 control-label') 訂單編號
                   .col-sm-6
-                    p(class='form-control-static', id='orderNo') 20140101000001
+                    p(class='form-control-static', id='orderNo') #{order.orderNo}
                 .form-group
                   label(for='fbId', class='col-sm-2 control-label') Facebook Id
                   .col-sm-6
-                    p(class='form-control-static', id='fbId') 4
+                    p(class='form-control-static', id='fbId') #{order.fbid}
                 .form-group
                   label(for='contactName', class='col-sm-2 control-label') 收件人
                   .col-sm-6
-                    p(class='form-control-static', id='contactName') 收件人姓名
+                    p(class='form-control-static', id='contactName') #{order.contactName}
                 .form-group
                   label(for='contactBirthday', class='col-sm-2 control-label ') 收件人生日
                   .col-sm-6
-                    p(class='form-control-static', id='contactBirthday') 2014/01/01
+                    p(class='form-control-static', id='contactBirthday') #{order.contactBirthday}
                 .form-group
                   label(for='delivery', class='col-sm-2 control-label') 配送方式
                   .col-sm-6
-                    p(class='form-control-static', id='delivery') 現場領取
+                    p(class='form-control-static', id='delivery')
+                      case order.delivery
+                        when 1
+                          | 現場領取
+                        when 2
+                          | 宅配
                 .form-group
                   label(for='commodity', class='col-sm-2 control-label') 商品資料
                   .col-sm-6
-                    input(type='text', class='form-control', id='commodity')
+                    p(class='form-control-static', id='commodity') #{order.commodity.name} x #{order.commodity.quantity}
+                if (order.registrationData)
+                  - var dataCount = 0
+                  each regData in order.registrationData
+                    .form-group
+                      if dataCount === 0
+                        label(for='', class='col-sm-2 control-label') 報名資料
+                      else
+                        .col-sm-2.control-label
+                      .col-sm-6
+                        - itemCount = 0
+                        each item in regData
+                          p(class='form-control-static') #{event.registrationData[itemCount].name}：#{item}
+                          - itemCount++
+                      - dataCount++
                 .form-group
                   label(for='paymentStatus', class='col-sm-2 control-label') 付款狀態
                   .col-sm-6
                     p(class='form-control-static', id='paymentStatus')
-                      span(class='label label-danger') 逾期繳費
+                      case order.paymentStatus
+                        when 1
+                          span(class='label label-danger') 未繳費
+                        when 2
+                          span(class='label label-success') 已繳費
+                        when 3
+                          span(class='label label-info') 逾期繳費
+                        when 4
+                          span(class='label label-danger') 刷卡授權失敗
+                        when 5
+                          span(class='label label-warning') 退費
                 .form-group
                   label(for='expressStauts', class='col-sm-2 control-label') 物流處理進度
                   .col-sm-6
                     p(class='form-control-static', id='expressStauts')
-                      span(class='label label-success') 已寄送
+                      case order.expressStauts
+                        when 1
+                          span(class='label label-default') 未處理
+                        when 2
+                          span(class='label label-warning') 處理中
+                        when 3
+                          span(class='label label-success') 已寄送
                 .form-group
                   label(for='trackingNumber', class='col-sm-2 control-label') 配送單號
                   .col-sm-6
-                    p(class='form-control-static', id='trackingNumber') 52-3831-9003
+                    p(class='form-control-static', id='trackingNumber') #{order.trackingNumber}
           .panel-footer.text-right
-            a(class='btn btn-success') 編輯
+            a(href='/member/orderlist/#{order.fbid}', class='btn btn-success') 返回
 
 block javascript
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')

@@ -23,7 +23,7 @@ block body
   .container
     .row
       .col-sm-3
-        form(method='get', action='/event/orderlist/#{eventId}')
+        form(method='get', action='/member/orderlist/#{fbid}')
           .input-group
             input(type='text', name='search', class='form-control', placeholder='搜尋...', value='#{keyword}')
             span(class='input-group-btn')
@@ -32,13 +32,10 @@ block body
       hr
     .row
       .col-sm-12
-        p 已入帳金額：#{paidAmount}
-        p 未入帳金額：#{unPaidAmount}
-    .row
-      .col-sm-12
         table(class='table table-bordered table-hover table-condensed table-responsive')
           tr
             th 訂單編號
+            th 活動名稱
             th 購買資料
             th 購買日期
             th 付費方式
@@ -49,6 +46,7 @@ block body
             tr
               td
                 a(href='/order/detail/#{order.id}') #{order.orderNo}
+              td= order.activity.title
               td #{order.commodity.name} x #{order.commodity.quantity}
               td= order.createdAt
               case order.paymentType
@@ -79,6 +77,6 @@ block body
                   td 處理中
                 when 3
                   td 已寄送
-        a(href='/event/index', class='btn btn-success btn-sm pull-right') 返回
+        a(href='/member/index', class='btn btn-success btn-sm pull-right') 返回
 
 block javascript

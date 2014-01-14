@@ -15,10 +15,12 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+ var moment = require('moment');
+
 module.exports = {
     
   index: function (req, res, next) {
-    res.view();
+
   },
 
   create: function (req, res, next) {
@@ -26,7 +28,32 @@ module.exports = {
   },
 
   detail: function (req, res, next) {
+    Order.findOne(req.param('id'), function(err, order) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+        return next(err);
+      }
 
+      // Change birthday format
+      order.contactBirthday = moment(order.contactBirthday).format('YYYY/MM/DD');
+
+      Event.findOne(order.eventId, function(err, event) {
+        // If there's an error
+        if (err) {
+          console.log(err);
+          req.session.flash = {
+            err: err
+          }
+          return next(err);
+        }
+
+        res.view({ order: order, event: event });
+      });
+    });
   },
 
   update: function (req, res, next) {

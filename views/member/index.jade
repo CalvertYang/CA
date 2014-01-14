@@ -56,6 +56,6 @@ block body
               td= member.email
               td= member.raceFinished === true ? '是' : '否'
               td(class='w30')
-                a(href='/member/orders', class='btn btn-sm') 訂單資訊
+                a(href='/member/orderlist/#{member.fbid}', class='btn btn-sm') 訂單資訊
     
 block javascript

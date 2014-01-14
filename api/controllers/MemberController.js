@@ -32,6 +32,7 @@ module.exports = {
         req.session.flash = {
           err: err
         }
+        return next(err);
       }
 
       // Change datetime format
@@ -53,6 +54,36 @@ module.exports = {
 
   update: function (req, res, next) {
 
+  },
+
+  orderlist: function(req, res, next) {
+    var keyword = req.param('search') ? req.param('search') : '';
+
+    Order.find({ fbid: req.param('id'), orderNo: new RegExp(keyword) }).done(function (err, orders) {
+      if(err) return next(err);
+      if(!orders) return next();
+
+      var eventFilter = [];
+      for(var i = 0, len = orders.length; i < len; i++) {
+        eventFilter.push(orders[i].eventId);
+      }
+
+      Event.find({id: eventFilter}).done(function (err, events) {
+        if(err) return next(err);
+        if(!events) return next();
+
+        for(var o in orders){
+          for(var e in events){
+            if(orders[o].eventId === events[e].id){
+              orders[o].createdAt = moment(orders[o].createdAt).format('YYYY/MM/DD HH:mm:ss');
+              orders[o].activity = events[e];
+            }
+          }
+        }
+
+        return res.view({ fbid: req.param('id'), orders: orders, keyword: keyword });
+      });
+    });
   },
 
 
