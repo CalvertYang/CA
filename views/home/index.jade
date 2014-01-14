@@ -97,6 +97,12 @@ block styles
       width: 60%;
       margin: 0 auto;
     }
+    #flow {
+      text-align: left;
+    }
+    #flow div h4 {
+      width: 50%;
+    }
     @media screen and (max-width: 768px) {
       .content {
         width: 100%;
@@ -171,6 +177,10 @@ block styles
         color: white;
         width: 70%;
         margin: 0 auto;
+      }
+      #flow div h4 {
+        margin-top: 3rem;
+        width: 50%;
       }
     }
 block body
@@ -275,19 +285,25 @@ block body
         h3 交通資訊
         hr
         h4 活動地點：臺北馬場町紀念公園
-
+        hr
+        div
+          img(src='/images/icon-official.png')
         p
           span(class='yello-word') A. 大會接駁車
         p 建議跑者搭乘大眾運輸系統至中正紀念堂站1號出口(2021南門市場站 
         p   牌)轉搭大會接駁公車到達會場，時間為13：30-15：30及20：30-22：30，
         p 總共4小時，每時段不間斷接駁
         p 。
+        div
+          img(src='/images/icon-car.png')
         p
           span(class='yello-word') B. 自行開車前往
         p 建議從華中河濱公園之華中疏散門進入停放於華中露營區
         p （計次：50元/次）或停放於青年公園地下停車場再步行進會場；
         p 騎乘機車前往者，建議停放於青年公園地下停車場或路邊機車停車格。
         p 
+        div
+          img(src='/images/icon-bus.png')
         p
           span(class='yello-word') C. 大眾運輸工具
         p 目前行駛於馬場町紀念公園周邊之公車有12、49、62、204、260、601、
@@ -314,38 +330,49 @@ block body
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
       .tab.flow(id='flow',name='flow')
+        
+        div.clearfix
+          img(src='/images/icon-flow-1.png', class='pull-left')
+          h4(class='pull-left') Step1-上網訂購禮品包
+          div(class='pull-left')
+            p 1/ 15中午12點整至1/22中午12點截止，在活動官網的訂購欄位填寫相關資料，
+            p 選擇繳費方式後，在2日內完成繳費，即可完成訂購程序。
         hr
-        h4 Step1-上網訂購禮品包
+        div.clearfix
+          img(src='/images/icon-flow-2.png', class='pull-left')
+          h4(class='pull-left') Step2-神盾局筆試測驗
+          div(class='pull-left')
+            p 所有參與者需至活動官網進行神盾局的筆試測驗，完成筆試後方可繼續進行神盾局的體能鑑測。
         hr
-        p 1/ 15中午12點整至1/22中午12點截止，在活動官網的訂購欄位填寫相關資料，
-        p 選擇繳費方式後，在2日內完成繳費，即可完成訂購程序。
+        div.clearfix
+          img(src='/images/icon-flow-3.png', class='pull-left')
+          h4(class='pull-left') Step3-活動禮品包送達
+          div(class='pull-left')
+            p 完成訂購程序後，將于Captain America Run活動前一周內，寄送Marvel授權的精美活動禮品包。
         hr
-        h4 Step2-神盾局筆試測驗
+        div.clearfix
+          img(src='/images/icon-flow-4.png', class='pull-left')
+          h4(class='pull-left') Step4-報到領物
+          div(class='pull-left')
+            p 3/2當日10:00AM集合，並用身分證至報到櫃檯完成現場領物/報到的流程
         hr
-        p 所有參與者需至活動官網進行神盾局的筆試測驗，
-        p 完成筆試後方可繼續進行神盾局的體能鑑測。
+        div.clearfix
+          img(src='/images/icon-flow-5.png', class='pull-left')  
+          h4(class='pull-left') Step5-開幕儀式
+          div(class='pull-left')
+            p 11:00 AM活動準時開幕，會有老師帶動熱舞操。
         hr
-        h4 Step3-活動禮品包送達
+        div.clearfix
+          img(src='/images/icon-flow-6.png', class='pull-left')  
+          h4(class='pull-left') Step6-活動開始
+          div(class='pull-left')
+            p 所有參賽者就位，帶上印有盾牌的背包，準備接受神盾局的測試流程！
         hr
-        p 完成訂購程序後，將于Captain America Run活動前一周內，
-        p 寄送Marvel授權的精美活動禮品包。
-        hr
-        h4 Step4-報到領物
-        hr
-        p 3/2當日10:00AM集合，並用身分證至報到櫃檯完成現場領物/報到的流程
-        hr   
-        h4 Step5-開幕儀式
-        hr
-        p 11:00 AM活動準時開幕，會有老師帶動熱舞操。
-        hr  
-        h4 Step6-活動開始
-        hr
-        p 所有參賽者就位，帶上印有盾牌的背包，準備接受神盾局的測試流程！
-        hr
-        h4 Step7-完跑領證
-        hr
-        p 完跑後，可以在完跑點接受工作人員的授勳儀式，
-        p 取得精緻的Marvel 授權美國隊長盾牌卡套喔。
+        div.clearfix
+          img(src='/images/icon-flow-7.png', class='pull-left')  
+          h4(class='pull-left') Step7-完跑領證
+          div(class='pull-left')
+            p 完跑後，可以在完跑點接受工作人員的授勳儀式，取得精緻的Marvel 授權美國隊長盾牌卡套喔。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
   .linear
   .footer.clearfix
