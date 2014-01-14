@@ -303,7 +303,7 @@ block body
             input(type='text', id='buyerName', name='buyerName', required)
           .column
             label(for='buyerBirthday') 生日
-            input(type='text', id='buyerBirthday', name='buyerBirthday', class='datepicker', required)
+            input(type='text', id='buyerBirthday', name='buyerBirthday', class='date', required)
           .column
             label(for='buyerPhone') 電話
             input(type='text', id='buyerPhone', name='buyerPhone', required)
@@ -514,9 +514,11 @@ block body
         }
       });
 
-      $('.datepicker').datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
+      $('body').on('focus', '.date', function(){
+        $(this).datepicker({
+          changeMonth: true,
+          changeYear: true
+        });
+      })
 
     });
