@@ -149,10 +149,11 @@ module.exports = {
           function(event, orderData, callback) {
             // Call CLT API
             clt.config.update(sails.config.myConf.CLT_CONFIG);
-            var cvs = clt.CVS;
 
             if (orderData.paymentType === 1) {
               // ibon
+              var cvs = clt.CVS;
+              
               cvs.orderRegister({
                 OrderNumber: orderData.orderNo,
                 Amount: orderData.grandTotal.toString(),
@@ -182,6 +183,8 @@ module.exports = {
               });
             } else {
               // credit card
+              var cocs = clt.COCS;
+
               cocs.orderAppend({
                 OrderNumber: orderData.orderNo,
                 OrderAmount: orderData.grandTotal.toString(),
