@@ -26,7 +26,8 @@ module.exports.policies = {
     'query': ['isAuthenticated', 'flash'],
     'editorder': ['isAuthenticated', 'flash'],
     'generateForm': ['isAuthenticated', 'flash'],
-    'finish': 'flash'
+    'finish': 'flash',
+    'notsupport': 'flash'
   },
 
   auth: {

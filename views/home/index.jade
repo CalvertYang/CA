@@ -224,16 +224,6 @@ block body
             | 。
           p 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
         hr
-        h3 活動規則
-        hr
-        .paragraph
-          p 凡是購買限量禮品包的民眾，憑著號碼布即可在 03 / 23(日) 當日，參加我們精心規劃的
-            span(class='yello-word')  Captain America Run 
-            | 神盾局探員招募測驗。
-        a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
-        
-      .tab.how(id='how',name='how')
-        hr
         h3 活動資訊
         hr
         .paragraph.w40
@@ -243,6 +233,32 @@ block body
             span(class='yello-word') 臺北馬場町紀念公園
           p 活動總長：
             span(class='yello-word') 5 KM
+        hr
+        h3 補充說明
+        hr
+        ol.list-unstyled
+          li A. 因天氣等不抗力因素致使活動必須臨時有所調整變動時，主辦單位將以安全第一為基本原則而採行緊急的應變措施。而若因此造成任何不便時，敬請諒解。
+          li B. 因天氣等不可抗力因素或受其他安全考量等因素所迫，大會得調整活動內容，甚至將活動延期或取消，相關公告將在前一天下午6:00在網站公告。
+          li C. 大會有權將此項比賽之錄影、相片及成績，於世界各地播放、展出或登載於主辦單位網站及刊物上，參賽者必須同意肖像及公布成績，用於比賽相關之宣傳活動上。
+          li D. 本活動如有任何變更或補充事項，將隨時公佈於大會活動網站（網址http://captainamericarun.com）並以大會公告為準。
+
+        a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
+        
+      .tab.how(id='how',name='how')
+        hr
+        h3 活動規則
+        hr
+        .paragraph
+          p 凡是購買限量禮品包的民眾，憑著號碼布即可在 03 / 23(日) 當日，參加我們精心規劃的
+            span(class='yello-word')  Captain America Run 
+            | 神盾局探員招募測驗。請跑者們將所有裝備放入袋中，參與體能測驗。
+        hr
+        h3 體能測驗說明
+        hr
+        p 欲加入神盾局的報名者，須完成5公里的跑步測驗，
+        p 並適用專屬APP程式一起克服途中的關卡測驗，
+        p 完成挑戰就有機會成為神盾局的神祕探員。
+        p WE WANT YOU
         hr
         h3 限量禮物包介紹及販售時間
         hr
@@ -265,12 +281,10 @@ block body
             li C. 售價：新臺幣1280元整 (市價超過2400元)
             li D. 限量禮品包數量：12,000份
 
-            li E. 領取方式
-              ol
-                li 1人：000元（尚未確定）; 2人：000元（尚未確定）; 3人：000元(尚未確定)
-                li 活動當日領取(3/2)：活動當日憑個人的身分證，
-                li 即可在取物帳篷領取限量禮品包 / 費用0元
 
+        hr
+        h3 領取方式
+        hr
         .gift-content
           ol.list-unstyled.mb1
             li  
@@ -291,15 +305,7 @@ block body
                 li 3月20~22日AM 10:00~PM18:00領取地址：另行公告。事前領取時憑個人的身分證，即可在取物櫃檯領取限量禮品包。
             li 
               span(class='yello-word') C. 服裝尺寸、數量與網路登記資料不符者，恕不予以更換。
-      
-        h3 其他
-        hr
-        ol.list-unstyled
-          li A. 因天氣等不抗力因素致使活動必須臨時有所調整變動時，主辦單位將以安全第一為基本原則而採行緊急的應變措施。而若因此造成任何不便時，敬請諒解。
-          li B. 因天氣等不可抗力因素或受其他安全考量等因素所迫，大會得調整活動內容，甚至將活動延期或取消，相關公告將在前一天下午6:00在網站公告。
-          li C. 大會有權將此項比賽之錄影、相片及成績，於世界各地播放、展出或登載於主辦單位網站及刊物上，參賽者必須同意肖像及公布成績，用於比賽相關之宣傳活動上。
-          li D. 本活動如有任何變更或補充事項，將隨時公佈於大會活動網站（網址http://captainamericarun.com）並以大會公告為準。
-
+        
 
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
@@ -444,6 +450,23 @@ block body
         hr
         p  當然非常歡迎喜愛Captain America的民眾自行打扮
         p  一起來參與本次的Captain America  Run。
+
+        hr
+        h4 Q10：現場如果下雨怎麼辦?
+        hr
+        p 大會現場將會幫每一位參與的民眾準備雨衣！
+
+        hr
+        h4 Q11：活動取消何時會通知?
+        hr
+        p 大會將統一在官網上發布訊息,同時將會傳送簡訊至報名者手機。請隨時注意官網上最新消息。
+
+        hr
+        h4 Q12：我們家小朋友也想要參加可以嗎?
+        hr
+        p Captain America Run是贈送給每一位購買Marvel官方限量禮品包的民眾們
+        p 本活動無限制年齡、性別。身高 110 公分以下孩童可以由一位成年參賽者陪同免費參加。免費參加之孩童將不發給活動紀念品。
+
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
       .tab.flow(id='flow',name='flow')

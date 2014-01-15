@@ -70,6 +70,11 @@ module.exports.routes = {
   '/finish': {
     controller: 'HomeController',
     action: 'finish'
+  },
+
+  '/notsupport': {
+    controller: 'HomeController',
+    action: 'notsupport'
   }
 
   /*

@@ -83,11 +83,14 @@ block styles
         width: 100%;
         text-align: center;
         position: relative;
-        top:  15rem;
+        top:  25%;
       }
       .header-title img {
         display: block;
         margin: 0 auto;
+        width: 100%;
+      }
+      .mobile-head {
         width: 100%;
       }
     }
@@ -126,13 +129,14 @@ block body
     audio(autoplay, loop, id='audioPlayer')
       source(src='/video/capLoop.mp3')
       source(src='/video/capLoop.mp3')
-  .video
-      video(autoplay, loop, muted, preload='auto')
-        source(src='/video/shield-loop.ogv', type="video/ogg" )
-        source(src='/video/shield-loop.mp4', type="video/mp4")
-    .header-title
-      img(src='/images/ca-title.png')
-      a(class='btn-run', href='/index')
+  img(src='/images/mobile-head.png', class='mobile-head visible-xs')
+  .video(class='hidden-xs')
+    video(autoplay, loop, muted, preload='auto')
+      source(src='/video/shield-loop.ogv', type="video/ogg" )
+      source(src='/video/shield-loop.mp4', type="video/mp4")
+  .header-title
+    img(src='/images/ca-title.png')
+    a(class='btn-run', href='/index')
     
   block javascript
   script.
