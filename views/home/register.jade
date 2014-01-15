@@ -382,27 +382,8 @@ block body
 
      
 
-  .linear
-  .footer.clearfix
-    .body
-      .col-sm-6
-        .row
-          h4 主辦單位
-        .row
-        img(src='/images/marvel-logo.png')
-      .col-sm-6
-        .row
-          h4 聯絡方式
-        .row
-          h5
-            span(class='glyphicon glyphicon-earphone') 
-            span(class='ml') 886-2-2758-8642
-          h5
-            span(class='glyphicon glyphicon-envelope')
-            a(class='ml', href='mailto:jimi.feng@wewoninc.com') 客服人員
-          //- h5
-            span(class='glyphicon glyphicon-home') 
-            a(class='ml', href='http://www.wewoninc.com') www.wewoninc.com
+  include ../partials/footer
+
   block javascript
   script(src='/js/vendor/jquery.validate.js')
   script(src='/js/vendor/messages_zh_TW.js')

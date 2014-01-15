@@ -278,7 +278,7 @@ block body
               ol
                 li 第一階段販售-2014/1/18中午12點～2014/1/24中午12點
                 li 第二階段販售-2014/1/29中午12點～2014/2/5 中午12點
-            li C. 售價：新臺幣1280元整 (市價超過2400元)
+            li C. 售價：新臺幣1280元整 (市價超過2100元)
             li D. 限量禮品包數量：12,000份
 
 
@@ -520,27 +520,8 @@ block body
           div(class='pull-left')
             p 完跑後，可以在完跑點接受工作人員的授勳儀式，取得完跑證明。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
-  .linear
-  .footer.clearfix
-    .body
-      .col-sm-6
-        .row
-          h4 主辦單位
-        .row
-        img(src='/images/marvel-logo.png')
-      .col-sm-6
-        .row
-          h4 聯絡方式
-        .row
-          h5
-            span(class='glyphicon glyphicon-earphone') 
-            span(class='ml') 886-2-2758-8642
-          h5
-            span(class='glyphicon glyphicon-envelope')
-            a(class='ml', href='mailto:jimi.feng@wewoninc.com') 客服人員
-          //- h5
-            span(class='glyphicon glyphicon-home') 
-            a(class='ml', href='http://www.wewoninc.com') www.wewoninc.com
+  include ../partials/footer
+  
 
     //- Modal
     .modal.fade#warningLogin
