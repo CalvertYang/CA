@@ -68,9 +68,32 @@ block styles
     .tab h4, .tab h5, .yello-word {
       color: #cabf3b;
     }
+    .tab h4.flow {
+      margin-left: 3rem;
+      display: inline-block;
+    }
+    .tab h4.flow + div {
+      margin-left: 4rem;
+      width: 50%;
+    }
+    .tab .mb1 li {
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
     .tab p {
       color: #ddd;
+      line-height: 1.8rem;
+      font-weight: 500;
       text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .tab .paragraph {
+      width: 60%;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .tab .paragraph.w40 {
+      width: 40%;
     }
     .tab.active {
       display: block;
@@ -193,32 +216,35 @@ block body
         hr
         h3 活動介紹
         hr
-        p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬•羅傑斯)正式加入神盾局
-        p 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人，
-        p 對手竟是昔日的戰友，今日他化身
-          span(class='yello-word') 「酷寒戰士」
-          | 。
-        p 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，
-        p 協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
+        .paragraph
+          p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬·羅傑斯)正式加入神盾局。
+          p 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人。
+          p 對手竟是昔日的戰友，今日他化身
+            span(class='yello-word') 「酷寒戰士」
+            | 。
+          p 我們代表神盾局在此招募各位戰士，將會透過以下訓練讓你們成為一名優秀的神盾局探員，協助美國隊長與其他英雄們執行任務，你/妳準備好了嗎？
         hr
         h3 活動規則
         hr
-        p 凡是購買限量禮品包的民眾，憑著號碼布即可在3/2號當日，參加我們精心規劃的
-        | Captain America Run 神盾局探員招募測驗。
+        .paragraph
+          p 凡是購買限量禮品包的民眾，憑著號碼布即可在 03 / 23(日) 當日，參加我們精心規劃的
+            span(class='yello-word')  Captain America Run 
+            | 神盾局探員招募測驗。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
         
       .tab.how(id='how',name='how')
         hr
         h3 活動資訊
         hr
-        p 活動時間：
-          span(class='yello-word') 3/2 早上10:00~下午1點30
-        p 活動地點：
-          span(class='yello-word') 臺北馬場町紀念公園
-        p 活動總長：
-          span(class='yello-word') 5 KM
+        .paragraph.w40
+          p 活動時間：
+            span(class='yello-word') 3/23 早上06:00 ~ 上午11:30
+          p 活動地點：
+            span(class='yello-word') 臺北馬場町紀念公園
+          p 活動總長：
+            span(class='yello-word') 5 KM
         hr
-        h3 禮物包介紹
+        h3 限量禮物包介紹及販售時間
         hr
         img(src='/images/gift.png')
         hr
@@ -230,53 +256,83 @@ block body
                 li 神盾局專屬紀念T恤 * 1 (市價699元)
                 li 美國隊長盾牌卡套 * 1 (市價320元)
                 li 美國隊長運動水壺 * 1（市價450元）
-                li Marvel Logo紀念小方巾 * 1 (市價250元)
                 li 美國隊長盾牌束口背包 * 1（市價390元）
                 li 活動參賽號碼布 * 1
-            li B. 開放販售時間：2014/1/15中午12點～2013/1/22中午12點
+            li B. 販售時間
+              ol
+                li 第一階段販售-2014/1/18中午12點～2014/1/24中午12點
+                li 第二階段販售-2014/1/29中午12點～2014/2/5 中午12點
             li C. 售價：新臺幣1280元整 (市價超過2400元)
             li D. 限量禮品包數量：12,000份
-            li E. 領取方式：1. 活動前一周宅配 / 需要自行負擔運費
+
+            li E. 領取方式
               ol
                 li 1人：000元（尚未確定）; 2人：000元（尚未確定）; 3人：000元(尚未確定)
                 li 活動當日領取(3/2)：活動當日憑個人的身分證，
                 li 即可在取物帳篷領取限量禮品包 / 費用0元
-          
+        hr
+        h3 領取方式
+        hr
+        .gift-content
+          ol.list-unstyled.mb1
+            li  
+              span(class='yello-word') A. 郵寄報到領取
+              ol.list-unstyled
+                li 郵寄代理報到費請於報名時與報名費一同繳交。團體因人數不同另有標準，大會將於活動7日前寄出至報名時所填地址，請務必填寫正確的郵寄地址及收件人姓名，以免包裹無法寄達。
+                li
+                  table(class='table table-bordered')
+                    tr
+                      td 人數
+                      td 1~5人
+                    tr
+                      td 郵寄代理報到費
+                      td 130元
+            li 
+              span(class='yello-word') B. 親自報到領取
+              ol.list-unstyled
+                li 3月20~22日AM 10:00~PM18:00領取地址：另行公告。事前領取時憑個人的身分證，即可在取物櫃檯領取限量禮品包。
+            li 
+              span(class='yello-word') C. 服裝尺寸、數量與網路登記資料不符者，恕不予以更換。
+
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
       .tab.when(id='when',name='when')
         hr
         h3 活動流程
         hr
-        p 活動時間：3/2 早上10:00~下午1點30
-        p 活動地點：臺北馬場町紀念公園
-        p 活動總長：5 KM
+        .paragraph.w40
+          p 活動時間：
+            span(class='yello-word') 3/23 早上06:00 ~ 上午11:30
+          p 活動地點：
+            span(class='yello-word') 臺北馬場町紀念公園
+          p 活動總長：
+            span(class='yello-word') 5 KM
         hr
         img(src='/images/how-time.png')
-        h3 10:00-10:45
+        h3 06:00-06:30
         h4 跑者集合
         p 跑者取物/集合
         hr
-        h3 10:45-10:55
+        h3 06:30-07:00
         h4 起跑準備
         p 1. 主持人/貴賓致詞  
         p 2. 規則說明  
         p 3. 暖身操
         hr
-        h3 10:55-11:00
+        h3 07:00-07:15
         h4 準備出發/迎戰
         p 1. 倒數準備  
         p 2. 跑者穿著佩戴號碼布 / 紀念T恤，分組出發前進關卡
         hr
-        h3 11:00-12:30
+        h3 07:00-09:00
         h4 Captain America Run 
         p 帶上印有盾牌的背包，準備接受神盾局的考驗
         hr
-        h3 12:30-13:30
+        h3 09:00-11:30
         h4 完跑活動
         p 攤位活動/完跑活動
         hr
-        h3 13:30
+        h3 11:30
         h4 活動結束
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
@@ -287,92 +343,152 @@ block body
         h4 活動地點：臺北馬場町紀念公園
         hr
         div
+          img(src='/images/info-map.png', width='600px')
+        hr
+        div
           img(src='/images/icon-official.png')
         p
           span(class='yello-word') A. 大會接駁車
-        p 建議跑者搭乘大眾運輸系統至中正紀念堂站1號出口(2021南門市場站 
-        p   牌)轉搭大會接駁公車到達會場，時間為13：30-15：30及20：30-22：30，
-        p 總共4小時，每時段不間斷接駁
-        p 。
+        p 建議跑者搭乘大眾運輸系統至中正紀念堂站1號出口(2021南門市場站牌)
+        p 轉搭大會接駁公車到達會場，時間為05:30- 07:30及10:30-12:30
+        p 總共4小時，每時段不間斷接駁。
+        hr
         div
           img(src='/images/icon-car.png')
         p
           span(class='yello-word') B. 自行開車前往
-        p 建議從華中河濱公園之華中疏散門進入停放於華中露營區
-        p （計次：50元/次）或停放於青年公園地下停車場再步行進會場；
+        p 建議從華中河濱公園之華中疏散門進入停放於華中露營區（計次：50元/次）
+        p 或停放於青年公園地下停車場再步行進會場；
         p 騎乘機車前往者，建議停放於青年公園地下停車場或路邊機車停車格。
-        p 
+        hr
         div
           img(src='/images/icon-bus.png')
         p
           span(class='yello-word') C. 大眾運輸工具
-        p 目前行駛於馬場町紀念公園周邊之公車有12、49、62、204、260、601、
-        p 630、673、藍28至華中河濱公園站，或201、202、246、307、2021
-        p 至果菜市場站或205、212、藍29、棕22至青年路下車即可達。
+        p 目前行駛於馬場町紀念公園周邊之公車有12、49、62、204、260、
+        p 601、630、673、藍28至華中河濱公園站，或201、202、246、
+        p 307、2021至果菜市場站或205、212、藍29、棕22至青年路下車即可達。
+
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
       .tab.qna(id='qna',name='qna')
         hr
         h4 Q1：怎麼參加活動？
         hr
-        p Captain America Run是贈送給每一位購買Marvel官方限量禮品包的民眾們，
-        p 如果您也想一起參與，請在禮品包販售期間
+        p Captain America Run是贈送給每一位購買Marvel官方限量禮品包的民眾們
+        p 如果您也想一起參與，請在禮品包販售期間訂購限量禮品包喔！
+
         hr
         h4 Q2：專業路跑與歡樂路跑或路跑派對的差異？
         hr
-        p 專業路跑的周延性有其賽事性的特性，因此競賽的規則與獎勵、選手安全與保護規範、
-        p 賽道的設計等都有專業人士進行規劃。相較於歡樂路跑或路跑派對，則以休閒娛樂為主，在競爭性上較不強調。
+        p 專業路跑的周延性有其賽事性的特性，因此競賽的規則與獎勵、
+        p 選手安全與保護規範、賽道的設計等都有專業人士進行規劃。
+        p 相較於歡樂路跑或路跑派對，則以休閒娛樂為主，在競爭性上較不強調。
+        
         hr
-        h4 Q3：為什麼是五公里？
+        h4 Q3：Captain America Run對於參加的安全有什麼特殊規畫?
         hr
-        p 五公里是專業路跑最基礎的里程數，對於初級路跑者剛剛好，而且特別設計在90分鐘內，只要配合呼吸，
-        p 緩慢規律的持續行走，在寒冷的冬天，也會微微的發熱、出汗，消耗一定的卡路里。
+        p  參加Captain America Run的民眾特別
+        ol
+          li 請參加民眾自行請攜帶IC健保卡及身份證明文件，選手如於比賽過程中感到身體不適，請立即停止比賽，活動當天若有任何不適請即停止比賽以自身安全為重。大會工作人員或醫師有權視參與者體能狀況，中止參與者繼續比賽資格。
+          li 號碼布順序做為起跑順序，有效陸續分批讓參加者起跑出場，不至於因人數眾多而影響路跑品質。
+          li 參加跑者請遵循大會規範的活動路線、交管措施及時間等安排，否則發生安全問題請自負。
+          li 大會為參加活動之跑者投保「大會公共意外責任險」，保險範圍限活動期間與活動範圍內，承擔歸責於大會規劃及執行所受之意外傷害的理賠。
+
+        hr
+        h4 Q4：報名Captain America Run的好處？
+        hr
+        p  報名完成後，將於賽前收到Marvel官方美國隊長限量禮品包(市價超過NTD$2,400)
+        p 包括：美國隊長2酷寒戰士電影票*1 (市價310元)、
+        p 神盾局專屬紀念T恤*1(市價699元)、美國隊長盾牌卡套*1(市價320元)、
+        p 美國隊長運動水壺*1（市價450元） 、美國隊長盾牌束口背包*1（市價390元）、活動參賽號碼布；
+        p 除限量好禮外，現場還能體驗到Captain America 2電影元素，透過闖關的方式挑出神盾局的優秀探員，等妳一起來挑戰喔。
+
+        hr
+        h4 Q5：甚麼是郵寄報到？
+        hr
+        p 在活動報名時，可選擇郵寄報到方式及事前報到。
+        p 選擇郵寄報到時，在活動前將會收到報到包，即完成報到手續。
+        p 如果在活動前一天尚未收到，請與主辦單位聯絡。
+
+        hr
+        h4 Q6：可以團體報名嗎？
+        hr
+        p 可以的。點選立即報名，即可選擇個人或團體報名喔
+        p 最多一組可以報名5個人，歡迎您的家人或是您的好朋友，一起來接受神盾局的招募測驗
+        p 訓練讓你們成為一名優秀的神盾局探員。
+
+
+        hr
+        h4 Q7：可否退費與退換貨？
+        hr
+        p  很抱歉，這次活動沒有退費和退換貨的流程。但如果收到的產品有瑕疵，請立即與我們聯繫，我們將重新寄發給您。
+
+        hr
+        h4 Q8：可以攜伴或寵物嗎?
+        hr
+        p  本次活動不開放攜伴或寵物報名，為了維護賽道的品質
+        p 以及廣大Captain America迷的權益，路跑當天務必攜帶「選手號碼布」及穿著大會紀念衫
+        p 大會將以此作為判別當日是否為選手的唯一證明，並請將「選手號碼布」別在胸前，才可以進入活動賽道喔。
+
+
+        hr
+        h4 Q9：當天可以打扮cosplay嗎?
+        hr
+        p  當然非常歡迎喜愛Captain America的民眾自行打扮
+        p  一起來參與本次的Captain America  Run。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
 
       .tab.flow(id='flow',name='flow')
         
         div.clearfix
           img(src='/images/icon-flow-1.png', class='pull-left')
-          h4(class='pull-left') Step1-上網訂購禮品包
+          h4(class='pull-left flow') Step1-上網訂購禮品包
           div(class='pull-left')
-            p 1/ 15中午12點整至1/22中午12點截止，在活動官網的訂購欄位填寫相關資料，
-            p 選擇繳費方式後，在2日內完成繳費，即可完成訂購程序。
+            p 第一階段販售-1/18中午12點整至1/24中午12點截止
+            p 第二階段販售-1/29 中午12點整至2/5中午12點截止
+            p 在活動官網的訂購欄位填寫相關資料，選擇繳費方式後，在2日內完成繳費，即可完成訂購序。
         hr
+
         div.clearfix
           img(src='/images/icon-flow-2.png', class='pull-left')
-          h4(class='pull-left') Step2-神盾局筆試測驗
+          h4(class='pull-left flow') Step2-神盾局筆試測驗
           div(class='pull-left')
             p 所有參與者需至活動官網進行神盾局的筆試測驗，完成筆試後方可繼續進行神盾局的體能鑑測。
         hr
+
         div.clearfix
           img(src='/images/icon-flow-3.png', class='pull-left')
-          h4(class='pull-left') Step3-活動禮品包送達
+          h4(class='pull-left flow') Step3-活動禮品包送達
           div(class='pull-left')
-            p 完成訂購程序後，將于Captain America Run活動前一周內，寄送Marvel授權的精美活動禮品包。
+            p 完成訂購程序後，選擇宅配寄送的購買這將于Captain America Run活動前一周
+            p 寄送Marvel授權的精美活動禮品包。
+            p 選擇現場取物的民眾則可以在指定時間與地點領取您的 Marvel 授權的精美活動禮品包。
+
         hr
         div.clearfix
           img(src='/images/icon-flow-4.png', class='pull-left')
-          h4(class='pull-left') Step4-報到領物
+          h4(class='pull-left flow') Step4-活動集合
           div(class='pull-left')
-            p 3/2當日10:00AM集合，並用身分證至報到櫃檯完成現場領物/報到的流程
+            p 3/23當日06:00AM在馬場町紀念公園集合 。
         hr
         div.clearfix
           img(src='/images/icon-flow-5.png', class='pull-left')  
-          h4(class='pull-left') Step5-開幕儀式
+          h4(class='pull-left flow') Step5-開幕儀式
           div(class='pull-left')
-            p 11:00 AM活動準時開幕，會有老師帶動熱舞操。
+            p 06:30 AM活動準時開幕，由有氧老師帶動熱舞操。
         hr
         div.clearfix
           img(src='/images/icon-flow-6.png', class='pull-left')  
-          h4(class='pull-left') Step6-活動開始
+          h4(class='pull-left flow') Step6-活動開始
           div(class='pull-left')
-            p 所有參賽者就位，帶上印有盾牌的背包，準備接受神盾局的測試流程！
+            p 07:30所有參賽者就位，帶上印有盾牌的背包，準備接受神盾局的測試流程！
         hr
         div.clearfix
           img(src='/images/icon-flow-7.png', class='pull-left')  
-          h4(class='pull-left') Step7-完跑領證
+          h4(class='pull-left flow') Step7-完跑領證
           div(class='pull-left')
-            p 完跑後，可以在完跑點接受工作人員的授勳儀式，取得精緻的Marvel 授權美國隊長盾牌卡套喔。
+            p 完跑後，可以在完跑點接受工作人員的授勳儀式，取得完跑證明。
         a(href=req.isAuthenticated() ? '/term' : '/auth/facebook', class='buy')
   .linear
   .footer.clearfix
@@ -381,21 +497,20 @@ block body
         .row
           h4 主辦單位
         .row
-        img(src='/images/suppor-logo.png')
-        img(src='/images/suppor-logo.png')
+        img(src='/images/marvel-logo.png')
       .col-sm-6
         .row
           h4 聯絡方式
         .row
           h5
             span(class='glyphicon glyphicon-earphone') 
-            span(class='ml') (02)2222-2222
+            span(class='ml') 886-2-2758-8642
           h5
             span(class='glyphicon glyphicon-envelope')
-            a(class='ml', href='mailto:who@passer.com') who@passer.com
-          h5
+            a(class='ml', href='jimi.feng@wewoninc.com') 客服人員
+          //- h5
             span(class='glyphicon glyphicon-home') 
-            a(class='ml', href='') www.google.com
+            a(class='ml', href='http://www.wewoninc.com') www.wewoninc.com
 
     //- Modal
     .modal.fade#warningLogin

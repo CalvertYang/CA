@@ -102,8 +102,30 @@ block styles
     a.btn-run:hover {
       background-position: 0 -60px;
     }
+    .audio {
+      position: absolute;
+      z-index: 999;
+      top: 2%;
+      width: 92%;
+      margin: 0 auto;
+      text-align: right;
+      font-size: 1.5rem;
+      color: white;
+    }
+    .audio a {
+      color: rgba(188, 188, 188, 1); 
+    }
+    .audio a:hover {
+      color: white;
+    }
 
 block body
+  .audio
+    a(class='controls', href='')
+      span(class='glyphicon glyphicon-volume-up')
+    audio(autoplay, loop, id='audioPlayer')
+      source(src='/video/capLoop.mp3')
+      source(src='/video/capLoop.mp3')
   .video
       video(autoplay, loop, muted, preload='auto')
         source(src='/video/shield-loop.ogv', type="video/ogg" )
@@ -115,6 +137,21 @@ block body
   block javascript
   script.
     $(function () {
+      $('a.controls').on('click', function (e) {
+        e.preventDefault();
+        var song = $(this).next('audio').get(0);
+         if (song.paused) {
+            song.play();
+            $(this).children('span').removeClass('glyphicon-volume-off');
+            $(this).children('span').addClass('glyphicon-volume-up');
+          } else {
+            song.pause();
+            $(this).children('span').removeClass('glyphicon-volume-up');
+            $(this).children('span').addClass('glyphicon-volume-off');
+          }
+           
+        return false;
+      });
       if (window.location.hash && window.location.hash === '#_=_') {
         // If you are using Modernizr, then the alternative is:
         //   `if (Modernizr.history) {`

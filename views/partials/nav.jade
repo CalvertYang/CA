@@ -21,6 +21,10 @@ style.
     background: rgba(0,0,0,0.5);
     color: #eee;
   }
+  a.controls {
+    font-size: 1.2rem;
+  }
+
   /* </global> */
   @media screen and (min-width: 992px) {
     .video {
@@ -152,7 +156,7 @@ style.
     }
     .header-title {
       position: relative;
-      top: 19rem;
+      top: 17rem;
       left: 49%;
     }
   }
@@ -384,8 +388,14 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
         ul
           li
             a(href='', data-toggle="modal" data-target="#backfee") 退款說明
-          li
+          //- li
             a(href='', data-toggle="modal" data-target="#description") 參賽說明
+      li
+        a(class='controls', href='')
+          span(class='glyphicon glyphicon-volume-up')
+        audio(autoplay, loop, id='audioPlayer')
+          source(src='/video/capLoop.mp3')
+          source(src='/video/capLoop.mp3')
   .menu(class='hidden-xs hidden-sm')
     .nav
       ul
@@ -412,7 +422,7 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
           button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
           h4 退款說明
         .modal-body
-          p Hello, 退款！
+          p 很抱歉，這次活動沒有退費和退換貨的流程。但如果收到的產品有瑕疵，請立即與我們聯繫，我們將重新寄發給您。
   .modal.fade#description
     .modal-dialog
       .modal-content
@@ -420,7 +430,7 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
           button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
           h4 參賽說明
         .modal-body
-          p Hello, 參賽！
+          p 詳情請參閱
 script.
   $(function () {
     $('.mobile-click').on('click', function (e) {
@@ -434,5 +444,20 @@ script.
         console.log($(this).children('ul').is(':hidden'));
         e.preventDefault();
       }
+    });
+    $('a.controls').on('click', function (e) {
+      e.preventDefault();
+      var song = $(this).next('audio').get(0);
+       if (song.paused) {
+          song.play();
+          $(this).children('span').removeClass('glyphicon-volume-off');
+          $(this).children('span').addClass('glyphicon-volume-up');
+        } else {
+          song.pause();
+          $(this).children('span').removeClass('glyphicon-volume-up');
+          $(this).children('span').addClass('glyphicon-volume-off');
+        }
+         
+      return false;
     });
   });
