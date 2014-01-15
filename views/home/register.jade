@@ -305,7 +305,7 @@ block body
             label(for='buyerBirthday') 生日
             input(type='text', id='buyerBirthday', name='buyerBirthday', class='date', required)
           .column
-            label(for='buyerPhone') 電話
+            label(for='buyerPhone') 手機號碼
             input(type='text', id='buyerPhone', name='buyerPhone', required)
           .column
             label(for='buyerEmail') 電子郵件
@@ -517,7 +517,8 @@ block body
       $('body').on('focus', '.date', function(){
         $(this).datepicker({
           changeMonth: true,
-          changeYear: true
+          changeYear: true,
+          yearRange: "-120:+0"
         });
       })
 

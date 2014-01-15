@@ -123,6 +123,10 @@ module.exports = {
                 event.registedQuantity += ticketQuantity;
               }
             }
+            // Add express charge
+            if (req.param('way') === 'express') {
+              orderObj.grandTotal = parseInt(orderObj.grandTotal) + 150;
+            }
             orderObj.registrationData = [];
             for(var i = 0, len = ticketQuantity; i < len; i++) {
               orderObj.registrationData[i] = {};
