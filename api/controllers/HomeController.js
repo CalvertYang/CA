@@ -26,6 +26,10 @@ module.exports = {
     res.view();
   },
 
+  notsupport: function (req, res, next) {
+    res.view();
+  },
+
   index: function (req, res, next) {
     res.view();
   },
