@@ -128,6 +128,13 @@ module.exports = {
     trackingNumber: {
       type: 'string',
       defaultsTo: ''
+    },
+
+    // 完賽註記
+    // Ex: true
+    raceFinished: {
+      type: 'boolean',
+      defaultsTo: false
     }
     
   }

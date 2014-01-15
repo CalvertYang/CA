@@ -139,6 +139,7 @@ module.exports = {
             orderObj.paymentStatus = 1;
             orderObj.expressStauts = 1;
             orderObj.trackingNumber = '';
+            orderObj.raceFinished = false;
 
             // Write order to database
             Order.create(orderObj, function (err, order) {
