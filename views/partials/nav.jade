@@ -24,7 +24,6 @@ style.
   a.controls {
     font-size: 1.2rem;
   }
-
   /* </global> */
   @media screen and (min-width: 992px) {
     .video {
@@ -58,7 +57,7 @@ style.
     .topbar > ul {
       position: relative;
       font-weight: 700;
-      font-family: sans-serif !important;
+      font-family: "微軟正黑體" sans-serif !important;
       text-align: right;
       list-style-type: none;
       width: 960px;
@@ -125,7 +124,7 @@ style.
     .menu .nav > ul {
       position: relative;
       font-weight: 700;
-      font-family: sans-serif !important;
+      font-family: "微軟正黑體" sans-serif !important;
       text-align: right;
       list-style-type: none;
       width: 960px;
@@ -157,7 +156,13 @@ style.
     .header-title {
       position: relative;
       top: 17rem;
-      left: 49%;
+      left: 54%;
+      width: 45%;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .video video {
+      width: 65%;
     }
   }
   @media screen and (max-width: 321px) {
@@ -169,18 +174,18 @@ style.
   @media screen and (min-width: 769px) and (max-width: 991px)  {
     .video video {
       position: relative;
-      left: -10%;
-      width: 80%;
+      left: -15%;
+      width: 75%;
     }
     .header-title {
       position: relative;
-      width: 50%;
-      top: 0;
-      left: 47%;
+      width: 40%;
+      top: 20%;
+      left: 55%;
     }
     .header-title img {
       display: block;
-      margin: 4rem 5rem;
+      margin: 8rem 0;
       width: 100%;
     }
     .header {
@@ -201,7 +206,7 @@ style.
     }
     .topbar > ul {
       font-weight: 700;
-      font-family: sans-serif !important;
+      font-family: "微軟正黑體" sans-serif !important;
       list-style-type: none;
       width: 100%;
       margin: 0;
@@ -293,7 +298,7 @@ style.
     }
     .topbar > ul {
       font-weight: 700;
-      font-family: sans-serif !important;
+      font-family: "微軟正黑體" sans-serif !important;
       list-style-type: none;
       width: 100%;
       margin: 0;
@@ -347,12 +352,13 @@ style.
     .header-title {
       width: 100%;
       text-align: center;
-      margin: 26rem auto 0 auto;
+      margin: 28rem auto 0 auto;
+      padding-top: 2rem;
     }
     .header-title img {
       display: block;
       margin: 0 auto;
-      width: 100%;
+      width: 90%;
     }
     .mobile-head {
       width: 100%;
@@ -425,7 +431,7 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
         li
           a(href='/index#flow', class='tab-menu') 報名流程
   .header-title
-    img(src='/images/ca-title.png')
+    img(src='/images/ca-title.png', class='img-responsive')
 
   //- modal of help
   .modal.fade#backfee
