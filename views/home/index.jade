@@ -59,7 +59,7 @@ block styles
       border:0; 
       width: 80%;
       height:1px; 
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.3);
       transation: all 1s linear 2s;
     }
     .tab h3 {
@@ -91,9 +91,20 @@ block styles
       margin: 0 auto;
       text-align: left;
     }
-
+    .tab .paragraph.w60 {
+      width: 60%;
+    }
     .tab .paragraph.w40 {
       width: 40%;
+    }
+    .tab .paragraph.w30 {
+      width: 30%;
+    }
+    .tab .paragraph.w25 {
+      width: 25%;
+    }
+    .tab .paragraph.w20 {
+      width: 20%;
     }
     .tab.active {
       display: block;
@@ -121,6 +132,7 @@ block styles
       margin: 0 auto;
     }
     #flow {
+      padding-left: 8rem;
       text-align: left;
     }
     #flow div h4 {
@@ -231,6 +243,7 @@ block body
         hr
         h3 活動介紹
         hr
+        img(src='/images/ca-poster.jpg', class='img-responsive', style='width:48%; margin:0 auto;box-shadow:0 0 20px #fff;margin-bottom:1rem;')
         .paragraph
           p 自從上次復仇者聯盟在紐約大戰之後，美國隊長(史蒂芬·羅傑斯)正式加入神盾局。
           p 作為最強悍的後盾，沒想到好景不長，在現今的華盛頓特區遇到一名強大且神出鬼沒的敵人。
@@ -249,13 +262,18 @@ block body
           p 活動總長：
             span(class='yello-word') 5 KM
         hr
+        h3 美國隊長2酷寒戰士 官方預告
+        hr
+        iframe(width="560", height="315", src="//www.youtube.com/embed/8DDZ6OKRQJs", frameborder="0", allowfullscreen)
+        hr
         h3 補充說明
         hr
-        ol.list-unstyled
-          li A. 因天氣等不抗力因素致使活動必須臨時有所調整變動時，主辦單位將以安全第一為基本原則而採行緊急的應變措施。而若因此造成任何不便時，敬請諒解。
-          li B. 因天氣等不可抗力因素或受其他安全考量等因素所迫，大會得調整活動內容，甚至將活動延期或取消，相關公告將在前一天下午6:00在網站公告。
-          li C. 大會有權將此項比賽之錄影、相片及成績，於世界各地播放、展出或登載於主辦單位網站及刊物上，參賽者必須同意肖像及公布成績，用於比賽相關之宣傳活動上。
-          li D. 本活動如有任何變更或補充事項，將隨時公佈於大會活動網站（網址http://captainamericarun.com）並以大會公告為準。
+        .paragraph.w60
+          ol.list-unstyled(style='list-style-type:upper-alpha')
+            li 因天氣等不抗力因素致使活動必須臨時有所調整變動時，主辦單位將以安全第一為基本原則而採行緊急的應變措施。而若因此造成任何不便時，敬請諒解。
+            li 因天氣等不可抗力因素或受其他安全考量等因素所迫，大會得調整活動內容，甚至將活動延期或取消，相關公告將在前一天下午6:00在網站公告。
+            li 大會有權將此項比賽之錄影、相片及成績，於世界各地播放、展出或登載於主辦單位網站及刊物上，參賽者必須同意肖像及公布成績，用於比賽相關之宣傳活動上。
+            li 本活動如有任何變更或補充事項，將隨時公佈於大會活動網站（網址http://captainamericarun.com）並以大會公告為準。
 
         a(href=req.isAuthenticated() ? '/term/52d4901307f3c3b70204cf74' : '/auth/facebook', class='buy')
         
@@ -271,9 +289,12 @@ block body
         h3 體能測驗說明
         hr
         p 欲加入神盾局的報名者，須完成5公里的跑步測驗，
-        p 並適用專屬APP程式一起克服途中的關卡測驗，
-        p 完成挑戰就有機會成為神盾局的神祕探員。
-        p WE WANT YOU
+          br 
+          | 並適用專屬APP程式一起克服途中的關卡測驗，
+          br 
+          | 完成挑戰就有機會成為神盾局的神祕探員。
+          br 
+          | WE WANT YOU
         hr
         h3 限量禮物包介紹及販售時間
         hr
@@ -281,7 +302,7 @@ block body
         hr
         .gift-content
           ol.list-unstyled
-            li A. Marvel官方美國隊長限量禮品包內容
+            li(style='margin-bottom:1rem;') A. Marvel官方美國隊長限量禮品包內容
               ol
                 li 美國隊長2酷寒戰士電影票 * 1 (市價310元)
                 li 神盾局專屬紀念T恤 * 1 (市價699元)
@@ -289,12 +310,12 @@ block body
                 li 美國隊長運動水壺 * 1（市價450元）
                 li 美國隊長盾牌束口背包 * 1（市價390元）
                 li 活動參賽號碼布 * 1
-            li B. 販售時間
+            li(style='margin-bottom:1rem;') B. 販售時間
               ol
                 li 第一階段販售-2014/1/18中午12點～2014/1/24中午12點
                 li 第二階段販售-2014/1/29中午12點～2014/2/5 中午12點
-            li C. 售價：新臺幣1280元整 (市價超過2100元)
-            li D. 限量禮品包數量：12,000份
+            li(style='margin-bottom:1rem;') C. 售價：新臺幣1280元整 (市價超過2100元)
+            li(style='margin-bottom:1rem;') D. 限量禮品包數量：12,000份
 
 
         hr
@@ -313,7 +334,7 @@ block body
                       td 1~5人
                     tr
                       td 郵寄代理報到費
-                      td 130元
+                      td 150元
             li 
               span(class='yello-word') B. 親自報到領取
               ol.list-unstyled
@@ -339,22 +360,26 @@ block body
         img(src='/images/how-time.png')
         h3 06:00-06:30
         h4 跑者集合
-        p 跑者取物/集合
+        .paragraph.w20
+          p 跑者取物/集合
         hr
         h3 06:30-07:00
         h4 起跑準備
-        p 1. 主持人/貴賓致詞  
-        p 2. 規則說明  
-        p 3. 暖身操
+        .paragraph.w20
+          p 1. 主持人/貴賓致詞  
+          p 2. 規則說明  
+          p 3. 暖身操
         hr
         h3 07:00-07:15
         h4 準備出發/迎戰
-        p 1. 倒數準備  
-        p 2. 跑者穿著佩戴號碼布 / 紀念T恤，分組出發前進關卡
+        .paragraph.w20
+          p 1. 倒數準備  
+          p 2. 跑者穿著佩戴號碼布 / 紀念T恤，分組出發前進關卡
         hr
         h3 07:00-09:00
         h4 Captain America Run 
-        p 帶上印有盾牌的背包，準備接受神盾局的考驗
+        .paragraph.w40
+          p 帶上印有盾牌的背包，準備接受神盾局的考驗
         hr
         h3 09:00-11:30
         h4 完跑活動
