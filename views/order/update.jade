@@ -1,0 +1,78 @@
+extends ../layout
+
+block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
+  style.
+    body {
+      padding-top: 60px;
+    }
+    .center {
+      margin: 0 auto;
+      float: none;
+    }
+    span.divider {
+      display: inline-block;
+      width: 5px;
+    }
+
+block body
+  include ../partials/topbar
+
+  .container
+    .row
+      .col-sm-8.center
+        .panel.panel-default
+          .panel-heading
+            h3(class='panel-title') 訂單編輯
+          form(class='form-horizontal', role='form', method='post', action='')
+            .panel-body
+              
+                //- input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
+                .form-group
+                  label(for='orderNo', class='col-sm-2 control-label') 訂單編號
+                  .col-sm-6
+                    input(type='text', class='form-control', id='orderNo')
+                .form-group
+                  label(for='fbId', class='col-sm-2 control-label') Facebook Id
+                  .col-sm-6
+                    input(type='text', class='form-control', id='fbId')
+                .form-group
+                  label(for='contactName', class='col-sm-2 control-label') 收件人
+                  .col-sm-6
+                    input(type='text', class='form-control', id='contactName')
+                .form-group
+                  label(for='contactBirthday', class='col-sm-2 control-label ') 收件人生日
+                  .col-sm-6
+                    input(type='text', class='form-control datepicker', id='contactBirthday')
+                .form-group
+                  label(for='delivery', class='col-sm-2 control-label') 配送方式
+                  .col-sm-6
+                    input(type='text', class='form-control', id='delivery')
+                .form-group
+                  label(for='commodity', class='col-sm-2 control-label') 商品資料
+                  .col-sm-6
+                    input(type='text', class='form-control', id='commodity')
+                .form-group
+                  label(for='paymentStatus', class='col-sm-2 control-label') 付款狀態
+                  .col-sm-6
+                    input(type='text', class='form-control', id='paymentStatus')
+                .form-group
+                  label(for='expressStauts', class='col-sm-2 control-label') 物流處理進度
+                  .col-sm-6
+                    input(type='text', class='form-control', id='expressStauts')
+                .form-group
+                  label(for='trackingNumber', class='col-sm-2 control-label') 配送單號
+                  .col-sm-6
+                    input(type='text', class='form-control', id='trackingNumber')
+          .panel-footer.text-right
+            a(class='btn btn-default') 取消
+            span.divider
+            a(class='btn btn-primary') 確認
+
+block javascript
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
+  script.
+    $(function() {
+      $('.datepicker').datepicker();
+    });

@@ -1,0 +1,20 @@
+- for (var i = 0; i < count; i++)
+  .member.clearfix
+    h4 成員資料 - #{i + 1}
+    - var j = 0
+    each regData in registrationData
+      .column
+        label(for='attenderField-#{i}[#{j}]')= regData.name
+        if regData.type === 'text' || regData.type === 'number' || regData.type === 'tel' || regData.type === 'email'
+          if regData.type === 'tel'
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='tel-#{i}', required, value=order ? order.registrationData[i]['field-'+j] : '')
+          else
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', required, value=order ? order.registrationData[i]['field-'+j] : '')
+        else if regData.type === 'date'
+          input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='date', value=order ? order.registrationData[i]['field-'+j] : '')
+        else if regData.type === 'select'
+          .select
+            select(id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]')
+              each item in regData.value
+                option(value='#{item}', selected=order ? order.registrationData[i]['field-'+j]==item : false)= item
+      - j++

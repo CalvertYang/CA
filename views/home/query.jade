@@ -1,0 +1,223 @@
+extends ../layout
+
+block styles
+  style.
+    body {
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      background: white;
+    }
+    .footer {
+      width: 100%;
+      margin: 0 auto;
+      background: #000;
+      padding-bottom: 5rem;
+    }
+    .footer .body {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      color: white;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .footer .body  img {
+      margin: 5px;
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
+      text-align: center;
+      color: white;
+    }
+    .content .title {
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.2),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      width: 100%;
+    }
+    .ml {
+      margin-left: 10px;
+    }
+    button.next {
+      border: none;
+      width: 290px;
+      height: 80px;
+      background: url('/images/btn-next.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+    }
+    button.next:hover {
+      background-position: 0 -80px;
+    }
+    a.finish {
+      border: none;
+      width: 170px;
+      height: 80px;
+      background: url('/images/btn-finish.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+      display: block;
+    }
+    a.finish:hover {
+      background-position: 0 -80px;
+    }
+    table.ca {
+      width: 970px;
+      margin: 0 auto;
+    }
+    table.ca th{
+      background: #0c1a37;
+      padding: 1rem;
+      font-weight: 700;
+      text-align: center;
+      border-left: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 3px solid #ccc;
+    }
+    table.ca td {
+      background: rgba(0,0,0,0.3);
+      color: #333;
+      padding: 1rem;
+      border-bottom: 3px solid #ccc;
+      text-align:left;
+    }
+    table.ca th.last {
+      width: 100px;
+    }
+    table.ca td a {
+      color: #173471;
+    }
+    table.ca td a:hover {
+      color: #eee;
+      text-decoration: none;
+    }
+    @media screen and (max-width: 768px) {
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+       .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .black {
+        background: #000;
+        width: 100%;
+        height: 10rem;
+      }
+    }
+    
+block body
+  include ../partials/nav
+  .container
+    .black
+    .content
+      .title
+        img(src='/images/title-order.png')
+
+      table.ca
+        tr
+          th 訂單編號
+          th 購買數量
+          th 購買總金額
+          th 付費方式
+          th 配送方式
+          th 訂單狀態
+          th 物流狀態
+          th.last 詳細資料
+        each order in orders
+          tr
+            td #{order.orderNo}
+            td #{order.commodity.quantity}
+            td NT$ #{order.grandTotal}
+            case order.paymentType
+              when 1
+                td ibon
+              when 2
+                td 線上刷卡
+            case order.delivery
+              when 1
+                td 現場領取
+              when 2
+                td 宅配
+            case order.paymentStatus
+              when 1
+                td 未繳費
+              when 2
+                td 已繳費
+              when 3
+                td 逾期繳費
+              when 4
+                td 刷卡授權失敗
+              when 5
+                td 退費
+            case order.expressStauts
+              when 1
+                td 未處理
+              when 2
+                td 處理中
+              when 3
+                td 已寄送
+            td 
+              a(href='/editorder/#{order.id}') 查詢及編輯
+
+      
+      a(href='/index', class='finish')
+
+  include ../partials/footer
+
+  div(class='modal fade', id='myModal', tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4(class='modal-title', id='myModalLabel') 提示
+        .modal-body
+          | 請詳閱參賽聲明並同意授權。
+
+  block javascript
+  script.
+    $(function () {
+      $("html, body").delay(200).animate({scrollTop: $('.title').offset().top }, 500);
+
+      $('.next').on('click', function(e) {
+        if ($('input').prop("checked")) {
+          window.location.href='/home/register/52ccbf04a7c658ce1cd45c55';
+        } else {
+          $('#myModal').modal('show');
+        }
+      });
+
+    });

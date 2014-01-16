@@ -1,0 +1,82 @@
+extends ../layout
+
+block styles
+  style.
+    body {
+      padding-top: 60px;
+    }
+    .panel.center {
+      margin: 0 auto;
+      width: 30rem;
+    }
+    .w {
+      width: 210px;
+    }
+    span.divider {
+      width: 5px;
+      display: inline-block;
+    }
+
+block body
+  include ../partials/topbar
+
+  .container
+    .row
+      .col-sm-3
+        form(method='get', action='/member/orderlist/#{fbid}')
+          .input-group
+            input(type='text', name='search', class='form-control', placeholder='搜尋...', value='#{keyword}')
+            span(class='input-group-btn')
+              button(class='btn btn-default', type='submit') 搜尋
+    .row
+      hr
+    .row
+      .col-sm-12
+        table(class='table table-bordered table-hover table-condensed table-responsive')
+          tr
+            th 訂單編號
+            th 活動名稱
+            th 購買資料
+            th 購買日期
+            th 付費方式
+            th 配送方式
+            th 訂單狀態
+            th 物流狀態
+          each order in orders
+            tr
+              td
+                a(href='/order/detail/#{order.id}') #{order.orderNo}
+              td= order.activity.title
+              td #{order.commodity.name} x #{order.commodity.quantity}
+              td= order.createdAt
+              case order.paymentType
+                when 1
+                  td ibon 超商代收
+                when 2
+                  td 線上刷卡
+              case order.delivery
+                when 1
+                  td 現場領取
+                when 2
+                  td 宅配
+              case order.paymentStatus
+                when 1
+                  td 未繳費
+                when 2
+                  td 已繳費
+                when 3
+                  td 逾期繳費
+                when 4
+                  td 刷卡授權失敗
+                when 5
+                  td 退費
+              case order.expressStauts
+                when 1
+                  td 未處理
+                when 2
+                  td 處理中
+                when 3
+                  td 已寄送
+        a(href='/member/index', class='btn btn-success btn-sm pull-right') 返回
+
+block javascript

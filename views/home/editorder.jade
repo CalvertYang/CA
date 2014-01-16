@@ -1,0 +1,352 @@
+extends ../layout
+
+block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
+  style.
+    .ui-datepicker-title {
+      width: 75%;
+      display: inline-block;
+    }
+    .ui-datepicker-year, .ui-datepicker-month{
+      width: 70px !important;
+      line-height: 1.5rem;
+    }
+    .ui-datepicker-year {
+      float: left;
+    }
+    .ui-datepicker-month {
+      float: right;
+    }
+    body {
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      background: white;
+    }
+    .footer {
+      width: 100%;
+      margin: 0 auto;
+      background: #000;
+      padding-bottom: 5rem;
+    }
+    .footer .body {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      color: white;
+      width: 960px;
+      margin: 0 auto;
+    }
+    .footer .body  img {
+      margin: 5px;
+    }
+    .linear {
+      width: 100%;
+      height: 5rem;
+      position: relative;
+      top: -5rem;
+      background: rgb(125,126,125); 
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); 
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: url('/images/pattern.png');
+      background-repeat: repeat;
+      text-align: center;
+      color: white;
+    }
+    .content .title {
+      background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+      width: 100%;
+    }
+    .ml {
+      margin-left: 10px;
+    }
+    button.next {
+      border: none;
+      width: 290px;
+      height: 80px;
+      background: url('/images/btn-next.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+    }
+    button.next:hover {
+      background-position: 0 -80px;
+    }
+    button.finish {
+      border: none;
+      width: 170px;
+      height: 80px;
+      background: url('/images/btn-finish.png');
+      background-repeat: no-repeat;
+      margin: 3rem auto;
+      display: block;
+    }
+    button.finish:hover {
+      background-position: 0 -80px;
+    }
+    form {
+      color: #333;
+      width: 760px;
+      margin: 0 auto;
+    }
+    form h4 {
+      color: #595757;
+      padding: 10px;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+    form hr {
+      width: 100%;
+      clear: both;
+    }
+    .address {
+      width: 100%;
+      display: none;
+    }
+    .address .column input[type="text"]{
+      float: none;
+    }
+    .member {
+      width: 500px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    .member .column {
+      width: 50%;
+      float: left;
+      text-align: left;
+    }
+    .contact {
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+      padding-left: 2rem;
+    }
+    .contact .column {
+      float: none;
+      clear: both;
+    }
+    .contact .column > label {
+      width: 10%;
+      text-align: right;
+    }
+    .column.right {
+      float: right;
+    }
+    .column > label, .member .column > label {
+      float: left;
+      width: 5rem;
+      text-align: right;
+      margin-right: 1rem;
+      margin-top: 1rem;
+      color: #595757;
+      text-shadow: 1px 1px 1px white; 
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .column input[type='text'],
+    .member .column input[type='text']
+    {
+      float: left;
+      border: 5px solid #595757; 
+      line-height: 1.5rem;
+      padding: 5px;
+      margin: 5px;
+      height: 3rem;
+      background: #fff; 
+      width: 60%;
+    }
+    .member .column .select, 
+    .address .column .select {
+      display:inline-block;
+      height: 34px;
+      width: 150px;
+      margin: 5px;
+      overflow: hidden;
+      background: url('/images/down-arrow.png') no-repeat right #fff;
+      border: 5px solid #595757;
+    }
+    .member .column .select select, 
+    .address .column .select select {
+      background: transparent;
+      width: 160px;
+      margin: 0;
+      padding: 0 2px;
+      line-height: 1;
+      border: 0;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .select {
+      width: 200px;
+      height: 34px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: url('/images/down-arrow.png') no-repeat right #fff;
+      border: 5px solid #595757;
+    }
+    .select select {
+      background: transparent;
+      margin: 0;
+      width: 220px;
+      padding: 0 5px;
+      line-height: 1;
+      border: 0;
+      border-radius: 0;
+      height: 2rem;
+      -webkit-appearance: none;
+    }
+    input[type="checkbox"] {
+      display:none;
+    }
+    input[type="checkbox"] + label {
+      margin-left: 2rem;
+    }
+    input[type="checkbox"] + label span {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        margin:-1px 4px 0 0;
+        vertical-align:middle;
+        background:url('/images/check-radio-sheet.png') left top no-repeat;
+        cursor:pointer;
+    }
+    input[type="checkbox"]:checked + label span {
+        background:url('/images/check-radio-sheet.png') -19px top no-repeat;
+    }
+    input[type="radio"] {
+      display:none;
+    }
+    input[type="radio"] + label {
+      margin-left: 2rem;
+    }
+    input[type="radio"] + label span {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        margin:-1px 4px 0 0;
+        vertical-align:middle;
+        background:url('/images/check-radio-sheet.png') -38px top no-repeat;
+        cursor:pointer;
+    }
+    input[type="radio"]:checked + label span {
+        background:url('/images/check-radio-sheet.png') -57px top no-repeat;
+    }
+    label.error, .column label.error{
+      color: red;
+      float: left;
+    }
+    input[type='text'].error {
+      border: 5px solid red !important;
+    }
+    .member .column label.error {
+      width: 10rem;
+      float: right;
+    }
+    @media screen and (max-width: 768px) {
+      form {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .content {
+        width: 100%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: repeat-y;
+        text-align: center;
+        color: white;
+      }
+      .content .title {
+        background:linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-moz-linear-gradient(top,rgba(0,0,0,1), rgba(0,0,0,0.1), rgba(0,0,0,0));
+        background:-webkit-linear-gradient(top,rgba(0,0,0,1),rgba(0,0,0,0.1), rgba(0,0,0,0));
+        width: 100%;
+        text-align: center;
+      }
+      .content .title img {
+        width: 300%;
+        display: block;
+        position: relative;
+        left: -100%;
+      }
+       .footer {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .footer .body {
+        color: white;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .black {
+        background: #000;
+        width: 100%;
+        height: 10rem;
+      }
+    }
+
+block body
+  include ../partials/nav
+
+  .container
+    .content
+      .title
+        img(src='/images/title-term.png')
+      form(method='post', action='/editorder/#{order.id}')
+        input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
+        //- h4 數量選擇
+        //- .select
+        //-   select(id='quantity')
+        //-     option 1
+        //-     option 2
+        //-     option 3
+        .members
+
+        div
+          button(class='finish')
+  include ../partials/footer
+
+  
+  block javascript
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
+  script.
+    $(function () {
+      var quantity = $('select#quantity').val();
+
+      var base = $('form').children('.members').first();
+      base.empty();
+      $.get("/generateForm?id=#{order.eventId}&orderId=#{order.id}", function(data) {
+        base.append(data);
+      });
+
+      $('input[name=way][type=radio]').on('click', function () {
+        var choose = $(this).val();
+        if (choose == 'express') {
+          $('.address').show();
+        } else {
+          $('.address').hide();
+        }
+      });
+
+      $('body').on('focus', '.date', function(){
+        $(this).datepicker({
+          changeMonth: true,
+          changeYear: true
+        });
+      })
+
+
+    });

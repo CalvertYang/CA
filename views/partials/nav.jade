@@ -1,0 +1,477 @@
+style.
+  /* <global> */
+  body {
+    background: #000;
+  }
+  ::-moz-focus-inner { border: 0 !important; }
+    /* Modal */
+  .modal-content {
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+  }
+  .modal-header .close {
+    color: white;
+     opacity: 1;
+  }
+  .modal-header {
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .modal-body {
+    background: rgba(0,0,0,0.5);
+    color: #eee;
+  }
+  a.controls {
+    font-size: 1.2rem;
+  }
+
+  /* </global> */
+  @media screen and (min-width: 992px) {
+    .video {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      margin: 0 auto;
+      padding-top: 40px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .video video {
+      position: relative;
+      left: -10%;
+      width: 70%;
+    }
+    .header {
+      width: 100%;
+      top: 0;
+      margin: 0 auto;
+      height: auto;
+      background: transparent;
+      position: absolute;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .topbar > ul {
+      position: relative;
+      font-weight: 700;
+      font-family: sans-serif !important;
+      text-align: right;
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    .topbar > ul > li {
+      display: inline-block;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:hover > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 7rem;
+      top: 3.1rem;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover,
+    .topbar ul ul > li:hover > a {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+    .menu {
+      width: 100%;
+      padding: 0;
+      background: transparent;
+      position: absolute;
+      top: 13rem;
+    }
+    .menu .nav {
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(top,rgba(0,0,0,0), rgba(0,0,0,0.3));
+      background: -moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+      background: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+    }
+    .menu .nav > ul {
+      position: relative;
+      font-weight: 700;
+      font-family: sans-serif !important;
+      text-align: right;
+      list-style-type: none;
+      width: 960px;
+      margin: 0 auto;
+      top: 0.4rem;
+      text-align: right;
+    }
+    .menu .nav > ul > li {
+      border-bottom: 5px solid rgba(173, 3, 40, 0);
+      text-decoration: none;
+      display: inline-block;
+      padding: 0 0.8rem;
+      transition: all 0.15s ease-in-out 0s;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .menu .nav ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .menu ul li:hover, .menu ul li.active{
+      border-bottom: 5px solid rgba(173, 3, 40, 1);
+      background: rgba(0,0,0,1);
+    }
+    .menu ul li a:hover, .menu ul li.active a {
+      color: rgb(173, 3, 40);
+    }
+    .header-title {
+      position: relative;
+      top: 17rem;
+      left: 49%;
+    }
+  }
+  @media screen and (max-width: 321px) {
+    .header-title {
+      margin-top: 20rem !important;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 991px)  {
+    .video video {
+      position: relative;
+      left: -10%;
+      width: 80%;
+    }
+    .header-title {
+      position: relative;
+      width: 50%;
+      top: 0;
+      left: 47%;
+    }
+    .header-title img {
+      display: block;
+      margin: 4rem 5rem;
+      width: 100%;
+    }
+    .header {
+      width: 100%;
+      top: 0;
+      margin: 0 auto;
+      height: auto;
+      background: transparent;
+      position: absolute;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .topbar > ul {
+      font-weight: 700;
+      font-family: sans-serif !important;
+      list-style-type: none;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .topbar > ul > li {
+      display: block;
+      float: right;
+      margin: 0;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:hover > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 100%;
+      top: 3.1rem;
+      right: 0;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover,
+    .topbar ul ul > li:hover > a {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .topbar ul li:hover > ul {
+      display: block;
+    }
+  } 
+  @media screen and (max-width: 768px) {
+    .video {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      margin: 0 auto;
+      padding-top: 40px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .video video {
+      width: 100%;
+      position: static;
+    }
+    .header {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: transparent;
+    }
+    .topbar {
+      width: 100%;
+      height: 3.5rem;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+    }
+    .mobile-click  li a {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .topbar > ul {
+      font-weight: 700;
+      font-family: sans-serif !important;
+      list-style-type: none;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .topbar > ul > li {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0.8rem;
+    }
+    .topbar > ul > li > a {
+       color: rgba(188, 188, 188, 1);
+       transition: all 0.15s ease-in-out 0s;
+       margin-top: 0.2rem;
+    }
+    .topbar > ul > li:focus > a {
+       color: white;
+       text-decoration: none;
+    }
+    .topbar ul ul {
+      display: none;
+      padding: 0;
+      width: 100%;
+      top: 3.1rem;
+      right: 0;
+      position: absolute;
+      text-align: left;
+      border-top: 5px solid rgba(170, 31, 36, 1);
+      background: rgba(54, 54, 54, 1);
+    }
+    .topbar ul ul > li {
+      display: block !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem;
+      text-align: center;
+      height: 4rem;
+    }
+    .topbar ul ul > li > a {
+      color: rgba(188, 188, 188, 1);
+      transition: all 0.15s ease-in-out 0s;
+      text-decoration: none;
+    }
+    .topbar ul ul > li:hover {
+      color: white;
+      background: #000;
+      text-decoration: none;
+    }
+    .header-title {
+      width: 100%;
+      text-align: center;
+      margin: 26rem auto 0 auto;
+    }
+    .header-title img {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .mobile-head {
+      width: 100%;
+    }
+  }
+img(src='/images/mobile-head.png', class='mobile-head visible-xs')
+.video(class='hidden-xs')
+  video(autoplay, loop, muted, preload='auto')
+    source(src='/video/shield-loop.ogv', type="video/ogg" )
+    source(src='/video/shield-loop.mp4', type="video/mp4")
+.header
+  .topbar
+    ul
+      li(class='visible-xs visible-sm mobile-click')
+        a(href='') 活動
+        ul
+          //- li
+            a(href='/index#news', class='tab-menu') 公告
+          li
+            a(href='/index#about', class='tab-menu') 關於
+          li
+            a(href='/index#how', class='tab-menu') 怎麼跑
+          li
+            a(href='/index#when', class='tab-menu') 何時跑
+          li
+            a(href='/index#where', class='tab-menu') 哪裡跑
+          li
+            a(href='/index#qna', class='tab-menu') Q&amp;A
+          li
+            a(href='/index#flow', class='tab-menu') 報名流程
+      if !req.user
+        li
+          a(href='/auth/facebook') Facebook 登入
+      else
+        li(class='mobile-click')
+          a(href='#')= req.user.name
+          ul
+            li
+              a(href='/query/#{req.user.fbid}') 訂單查詢
+            li
+              a(href='/auth/logout') 登出
+      li(class='mobile-click')
+        a(href='#') 我要協助
+        ul
+          li
+            a(href='', data-toggle="modal" data-target="#backfee") 退款說明
+          //- li
+            a(href='', data-toggle="modal" data-target="#description") 參賽說明
+      li
+        a(class='controls', href='')
+          span(class='glyphicon glyphicon-volume-up')
+        audio(autoplay, loop, id='audioPlayer')
+          source(src='/video/capLoop.mp3')
+          source(src='/video/capLoop.mp3')
+  .menu(class='hidden-xs hidden-sm')
+    .nav
+      ul
+        //- li
+          a(href='/index#news', class='tab-menu') 公告
+        li
+          a(href='/index#about', class='tab-menu') 關於
+        li
+          a(href='/index#how', class='tab-menu') 怎麼跑
+        li
+          a(href='/index#when', class='tab-menu') 何時跑
+        li
+          a(href='/index#where', class='tab-menu') 哪裡跑
+        li
+          a(href='/index#qna', class='tab-menu') Q&amp;A
+        li
+          a(href='/index#flow', class='tab-menu') 報名流程
+  .header-title
+    img(src='/images/ca-title.png')
+
+  //- modal of help
+  .modal.fade#backfee
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4 退款說明
+        .modal-body
+          p 很抱歉，這次活動沒有退費和退換貨的流程。但如果收到的產品有瑕疵，請立即與我們聯繫，我們將重新寄發給您。
+  .modal.fade#description
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4 參賽說明
+        .modal-body
+          p 詳情請參閱
+script.
+  $(function () {
+    var BrowserDetect={init:function(){this.browser=this.searchString(this.dataBrowser)||"An unknown browser";this.version=this.searchVersion(navigator.userAgent)||this.searchVersion(navigator.appVersion)||"an unknown version";this.OS=this.searchString(this.dataOS)||"an unknown OS"},searchString:function(d){for(var a=0;a<d.length;a++){var b=d[a].string;var c=d[a].prop;this.versionSearchString=d[a].versionSearch||d[a].identity;if(b){if(b.indexOf(d[a].subString)!=-1){return d[a].identity}}else{if(c){return d[a].identity}}}},searchVersion:function(b){var a=b.indexOf(this.versionSearchString);if(a==-1){return}return parseFloat(b.substring(a+this.versionSearchString.length+1))},dataBrowser:[{string:navigator.userAgent,subString:"Chrome",identity:"Chrome"},{string:navigator.userAgent,subString:"OmniWeb",versionSearch:"OmniWeb/",identity:"OmniWeb"},{string:navigator.vendor,subString:"Apple",identity:"Safari",versionSearch:"Version"},{prop:window.opera,identity:"Opera",versionSearch:"Version"},{string:navigator.vendor,subString:"iCab",identity:"iCab"},{string:navigator.vendor,subString:"KDE",identity:"Konqueror"},{string:navigator.userAgent,subString:"Firefox",identity:"Firefox"},{string:navigator.vendor,subString:"Camino",identity:"Camino"},{string:navigator.userAgent,subString:"Netscape",identity:"Netscape"},{string:navigator.userAgent,subString:"MSIE",identity:"Explorer",versionSearch:"MSIE"},{string:navigator.userAgent,subString:"Gecko",identity:"Mozilla",versionSearch:"rv"},{string:navigator.userAgent,subString:"Mozilla",identity:"Netscape",versionSearch:"Mozilla"}],dataOS:[{string:navigator.platform,subString:"Win",identity:"Windows"},{string:navigator.platform,subString:"Mac",identity:"Mac"},{string:navigator.userAgent,subString:"iPhone",identity:"iPhone/iPod"},{string:navigator.platform,subString:"Linux",identity:"Linux"}]};BrowserDetect.init();switch(BrowserDetect.browser){case"Explorer":if(BrowserDetect.version < 10){window.location="/notsupport"}break};
+    $(document).on('click', '.mobile-click', function (e) {
+      if ($( window ).width() < 768) {
+        if ($(this).children('ul').is(':hidden')) {
+          $('.mobile-click').children('ul').hide();
+          $(this).children('ul').show();
+          e.preventDefault();
+        } else {
+          $(this).children('ul').hide();
+        }
+        
+      }
+    });
+    $('a.controls').on('click', function (e) {
+      e.preventDefault();
+      var song = $(this).next('audio').get(0);
+       if (song.paused) {
+          song.play();
+          $(this).children('span').removeClass('glyphicon-volume-off');
+          $(this).children('span').addClass('glyphicon-volume-up');
+        } else {
+          song.pause();
+          $(this).children('span').removeClass('glyphicon-volume-up');
+          $(this).children('span').addClass('glyphicon-volume-off');
+        }
+         
+      return false;
+    });
+  });

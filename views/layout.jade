@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    //- Viewport mobile tag for sensible mobile support
+    meta(name='viewport',content='width=device-width, initial-scale=1, maximum-scale=1')
+    
+    meta(name='description', content='')
+    meta(name='author', content='AndyYou, CalvertYang, MillyChuang')
+    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/images/ico/favicon_144x144.png')
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/images/ico/favicon_114x114.png')
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/images/ico/favicon_72x72.png')
+    link(rel='apple-touch-icon-precomposed', href='/images/ico/favicon_57x57.png')
+    link(rel='shortcut icon', href='/images/ico/favicon.png')
+    link(rel='stylesheet', href='/styles/normalize.css')
+    link(rel='stylesheet', href='/styles/bootstrap.min.css')
+    block styles
+
+    script(src='/js/vendor/jquery.min.js')
+    script(src='/js/vendor/bootstrap.min.js')
+  body
+    block body
+
+    block javascript
+    script.
+      
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-31213508-3', 'captainamericarun.com');
+      ga('send', 'pageview');
+
+    //- Bring in the socket.io client
+    //- script(type='text/javascript', src='/js/socket.io.js')
+    //- then beef it up with some convenience logic for talking to Sails.js'
+    //- script(type='text/javascript', src='/js/sails.io.js')
+    //- listen on socket.io for incoming messages
+    //- script(type='text/javascript', src='/js/app.js')

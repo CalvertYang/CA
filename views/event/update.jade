@@ -1,0 +1,254 @@
+extends ../layout
+
+block styles
+  link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.css')
+  link(rel='stylesheet', href='/styles/jquery-ui-timepicker-addon.css')
+  style.
+    body {
+      padding-top: 60px;
+    }
+    .center {
+      margin: 0 auto;
+      float: none;
+    }
+    span.divider {
+      display: inline-block;
+      width: 5px;
+    }
+    .reset-gap {
+      padding: 0;
+      margin: 0;
+      width: 3.5rem;
+    }
+    .mt {
+      margin-top: 8px;
+    }
+
+block body
+  include ../partials/topbar
+
+  .container
+    .row
+      .col-sm-8.center
+        .panel.panel-default
+          .panel-heading
+            h3(class='panel-title') 編輯活動
+          form(class='form-horizontal', role='form', method='post', action='/event/update/#{event.id}')
+            .panel-body
+                input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
+                .form-group
+                  label(for='title', class='col-sm-2 control-label') 活動名稱
+                  .col-sm-6
+                    input(type='text', class='form-control', id='title', name='title', value='#{event.title}')
+                .form-group
+                  label(for='registrationStartOn', class='col-sm-2 control-label') 報名日期-起
+                  .col-sm-6
+                    input(type='text', class='form-control datepicker', id='registrationStartOn', name='registrationStartOn', value='#{event.registrationStartOn}')
+                .form-group
+                  label(for='registrationEndOn', class='col-sm-2 control-label') 報名日期-迄
+                  .col-sm-6
+                    input(type='text', class='form-control datepicker', id='registrationEndOn', name='registrationEndOn', value='#{event.registrationEndOn}')
+                .form-group
+                  label(for='startOn', class='col-sm-2 control-label ') 活動日期-起
+                  .col-sm-6
+                    input(type='text', class='form-control datepicker', id='startOn', name='startOn', value='#{event.startOn}')
+                .form-group
+                  label(for='endOn', class='col-sm-2 control-label') 活動日期-迄
+                  .col-sm-6
+                    input(type='text', class='form-control datepicker', id='endOn', name='endOn', value='#{event.endOn}')
+                .form-group
+                  label(for='sponsor', class='col-sm-2 control-label') 主辦單位
+                  .col-sm-6
+                    input(type='text', class='form-control', id='sponsor', name='sponsor', value='#{event.sponsor}')
+                .form-group
+                  label(for='contact', class='col-sm-2 control-label') 聯絡人
+                  .col-sm-6
+                    input(type='text', class='form-control', id='contact', name='contact', value='#{event.contact}')
+                .form-group
+                  label(for='contactPhone', class='col-sm-2 control-label') 聯絡電話
+                  .col-sm-6
+                    input(type='text', class='form-control', id='contactPhone', name='contactPhone', value='#{event.contactPhone}')
+                .form-group
+                  label(for='contactEmail', class='col-sm-2 control-label') 聯絡電子郵件
+                  .col-sm-6
+                    input(type='text', class='form-control', id='contactEmail', name='contactEmail', value='#{event.contactEmail}')
+                if event.ticketType.length === 0
+                  .form-group.ticket-data
+                    label(for='ticketName-0', class='col-sm-2 control-label') 票種及票價
+                    .col-sm-3
+                      input(type='text', class='form-control', id='ticketName-0', name='ticketName[]', placeholder='票種')
+                    .col-sm-3
+                      input(type='text', class='form-control', id='ticketPrice-0', name='ticketPrice[]', placeholder='票價')
+                    .col-sm-1.reset-gap
+                      a(class='btn btn-sm btn-success ticket-plus')
+                        span(class='glyphicon glyphicon-plus')
+                - var ticketCount = 0
+                each ticket in event.ticketType
+                  div(class='form-group ticket-data', id='ticketTypes#{ticketCount}')
+                    if ticketCount === 0
+                      label(for='ticketName-#{ticketCount}', class='col-sm-2 control-label') 票種及票價
+                    else
+                      .col-sm-2
+                    .col-sm-3
+                      input(type='text', class='form-control', id='ticketName-#{ticketCount}', name='ticketName[]', placeholder='票種', value='#{ticket.name}')
+                    .col-sm-3
+                      input(type='text', class='form-control', id='ticketPrice-#{ticketCount}', name='ticketPrice[]', placeholder='票價', value='#{ticket.price}')
+                    .col-sm-1.reset-gap
+                      if ticketCount === 0
+                        a(class='btn btn-sm btn-success ticket-plus')
+                          span(class='glyphicon glyphicon-plus')
+                      else
+                        a(class='btn btn-sm btn-danger col-minus', onclick='removeTicketType(#{ticketCount});')
+                          span(class='glyphicon glyphicon-minus')
+                  - ticketCount++
+                .form-group
+                  label(for='quota', class='col-sm-2 control-label') 報名人數限制
+                  .col-sm-6
+                    input(type='text', class='form-control', id='quota', name='quota', value=event.quota ? event.quota : '')
+                if event.registrationData.length === 0
+                  .form-group.registration-data
+                    label(for='registrationData-0', class='col-sm-2 control-label') 報名所需資料
+                    .col-sm-3
+                      input(type='text', class='form-control', id='registrationData-0', name='registrationData[]')
+                    .col-sm-3
+                      select(id='registrationDataType-0', name='registrationDataType[]', class='form-control registration-data-type')
+                        option(value='text', selected) 文字
+                        option(value='number') 數字
+                        option(value='date') 日期
+                        option(value='tel') 電話
+                        option(value='email') 電子郵件
+                        option(value='select') 下拉式選單
+                    .col-sm-1.reset-gap
+                      a(class='btn btn-sm btn-success col-plus')
+                        span(class='glyphicon glyphicon-plus')
+                - var dataCount = 0
+                each regData in event.registrationData
+                  div(class='form-group registration-data', id='registrationDatas#{dataCount}')
+                    if dataCount === 0
+                      label(for='registrationData-#{dataCount}', class='col-sm-2 control-label') 報名所需資料
+                    else
+                      .col-sm-2
+                    .col-sm-3
+                      input(type='text', class='form-control', id='registrationData-#{dataCount}', name='registrationData[]', value='#{regData.name}')
+                    .col-sm-3
+                      select(id='registrationDataType-#{dataCount}', name='registrationDataType[]', class='form-control registration-data-type')
+                        option(value='text', selected=regData.type === 'text') 文字
+                        option(value='number', selected=regData.type === 'number') 數字
+                        option(value='date', selected=regData.type === 'date') 日期
+                        option(value='tel', selected=regData.type === 'tel') 電話
+                        option(value='email', selected=regData.type === 'email') 電子郵件
+                        option(value='select', selected=regData.type === 'select') 下拉式選單
+                    .col-sm-1.reset-gap
+                      if dataCount === 0
+                        a(class='btn btn-sm btn-success col-plus')
+                          span(class='glyphicon glyphicon-plus')
+                      else
+                        a(class='btn btn-sm btn-danger col-minus', onclick='removeRegistrationDataType(#{dataCount});')
+                          span(class='glyphicon glyphicon-minus')
+                    if regData.type === 'select'
+                      .col-sm-1.reset-gap.type-plus
+                        a(class='btn btn-sm btn-info', onclick='addSelectItem(this, #{dataCount});return false;')
+                          span(class="glyphicon glyphicon-plus-sign")
+                      - selectCount = 0
+                      each selectItem in regData.value
+                        .registration-type-column
+                          .col-sm-offset-5.col-sm-3.mt
+                            input(type='text', class='form-control' name='selectItem[#{dataCount}]', value='#{selectItem}')
+                          if selectCount > 0
+                            .col-sm-1.reset-gap.mt
+                              a(class='btn btn-sm btn-warning', onclick='removeSelectItem(this);return false;')
+                                span(class='glyphicon glyphicon-minus-sign')
+                        - selectCount++
+                  - dataCount++
+
+            .panel-footer.text-right
+              a(href='/event/index', class='btn btn-default') 返回
+              span.divider
+              input(type='submit', class='btn btn-primary', value='確認')
+
+block javascript
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
+  script(src='/js/vendor/jquery-ui-timepicker-addon.js')
+  script.
+    $(function() {
+      $('.datepicker').datetimepicker();
+
+      $('.col-plus').on('click', function (e) {
+        var index = $('.registration-data').length;
+        var row = $('<div></div>').addClass('form-group registration-data');
+        var label = $("<label for='' class='col-sm-2 control-label'></label>")
+        var input = $("<div class='col-sm-3'><input type='text' class='form-control' id='registrationData-" + index + "' name='registrationData[]' /></div>");
+        var select = $("<div class='col-sm-3'> <select id='registrationDataType-" + index + "' name='registrationDataType[]' class='form-control registration-data-type'> <option value='text' selected>文字 <option value='number'>數字 <option value='date'>日期 <option value='tel'>電話 <option value='email'>電子郵件 <option value='select'>下拉式選單 </select> </div>");
+        var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
+        row.append(label);
+        row.append(input);
+        row.append(select);
+        btn.on('click', function (e) {
+          $(this).parent().remove();
+        });
+        row.append(btn);
+        $('.registration-data').last().after(row);
+        e.preventDefault();
+      });
+
+      $('.ticket-plus').on('click', function (e) {
+        var index = $('.ticket-data').length;
+        var row = $('<div></div>').addClass('form-group ticket-data');
+        var label = $("<label for='ticketName-" + index + "' class='col-sm-2 control-label'></label>")
+        var nameInput = $("<div class='col-sm-3'><input type='text' class='form-control' id='ticketName-" + index + "' name='ticketName[]' placeholder='票種' /></div>");
+        var priceInput = $("<div class='col-sm-3'><input type='text' class='form-control' id='ticketPrice-" + index + "' name='ticketPrice[]' placeholder='票價' /></div>");
+        var btn = $("<div class='col-sm-1 reset-gap'><a class='btn btn-sm btn-danger col-minus'><span class='glyphicon glyphicon-minus'></span></a></div>");
+        row.append(label);
+        row.append(nameInput);
+        row.append(priceInput);
+        btn.on('click', function (e) {
+          $(this).parent().remove();
+        });
+        row.append(btn);
+        $('.ticket-data').last().after(row);
+        e.preventDefault();
+      });
+
+      $(document).on('change', 'select.registration-data-type', function (e) {
+        if ($(this).val() == 'select') {
+          var index = $(this).attr('id').replace("registrationDataType-", "");
+          var btnTypePlus = $("<div class='col-sm-1 reset-gap type-plus'><a class='btn btn-sm btn-info'><span class='glyphicon glyphicon-plus-sign'></span></a></div>")
+          var firstColumn = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div></div>");
+          btnTypePlus.on('click', function (e) {
+            var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>");
+            column.find('a').on('click', function (e) {
+              $(this).parent().parent().remove();
+            });
+            $(this).nextAll().last().after(column);
+          });
+          $(this).parent().next().after(btnTypePlus);
+          $(this).parent().parent().append(firstColumn);
+        } else {
+          $(this).parent().parent().find('.type-plus').remove();
+          $(this).parent().parent().find('.registration-type-column').remove();
+        }
+
+      });
+
+    });
+
+    function removeRegistrationDataType (num) {
+      $('#registrationDatas' + num).remove();
+    }
+
+    function removeTicketType (num) {
+      $('#ticketTypes' + num).remove();
+    }
+
+    function addSelectItem (obj, index) {
+      var column = $("<div class='registration-type-column'><div class='col-sm-offset-5 col-sm-3 mt'><input type='text' class='form-control' name=selectItem[" + index + "] /></div><div class='col-sm-1 reset-gap mt'><a class='btn btn-sm btn-warning'><span class='glyphicon glyphicon-minus-sign'></span></a></div></div>"); 
+      column.find('a').on('click', function (e) {
+        $(this).parent().parent().remove();
+      });
+      $(obj).parent().nextAll().last().after(column);
+    }
+
+    function removeSelectItem (obj) {
+      $(obj).parent().parent().remove();
+    }

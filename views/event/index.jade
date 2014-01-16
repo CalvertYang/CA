@@ -1,0 +1,60 @@
+extends ../layout
+
+block styles
+  style.
+    body {
+      padding-top: 60px;
+    }
+    .panel.center {
+      margin: 0 auto;
+      width: 30rem;
+    }
+    .w {
+      width: 210px;
+    }
+    span.divider {
+      width: 5px;
+      display: inline-block;
+    }
+
+block body
+  include ../partials/topbar
+
+  .container
+    .row
+      .col-sm-3
+        form(method='get', action='/event/index')
+          .input-group
+            input(type='text', name='search', class='form-control', placeholder='搜尋...', value='#{keyword}')
+            span(class='input-group-btn')
+              button(class='btn btn-default', type='submit') 搜尋
+    .row
+      hr
+    .row
+      .col-sm-12
+        table(class='table table-bordered table-hover table-condensed table-responsive')
+          tr
+            th 活動名稱
+            th 報名日期（起始）
+            th 報名日期（結束）
+            th 人數限制
+            th 報名人數
+            //- th 金額（已入帳 / 未入帳）
+            th 
+              a(href='/event/create', class='btn btn-primary btn-sm') 新增
+          each event in events
+            tr
+              td= event.title
+              td= event.registrationStartOn
+              td= event.registrationEndOn
+              td= event.quota
+              td= event.registedQuantity
+              //- td
+              td(class='w')
+                a(href='/event/update/#{event.id}', class='btn btn-success btn-sm') 編輯
+                span(class="divider")
+                a(href='/event/detail/#{event.id}', class='btn btn-default btn-sm') 詳細資訊
+                span(class="divider")
+                a(href='/event/orderlist/#{event.id}', class='btn btn-default btn-sm') 查看訂單
+    
+block javascript
