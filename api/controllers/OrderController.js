@@ -39,7 +39,7 @@ module.exports = {
       }
 
       // Change birthday format
-      order.contactBirthday = moment(order.contactBirthday).zone(-8).format('YYYY/MM/DD');
+      order.contactBirthday = moment(order.contactBirthday).format('YYYY/MM/DD');
 
       Event.findOne(order.eventId, function(err, event) {
         // If there's an error

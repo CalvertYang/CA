@@ -45,7 +45,7 @@ module.exports = {
         }
       }
 
-      if (moment().zone(-8).isAfter(moment(event.registrationStartOn).zone(-8)) && moment().zone(-8).isBefore(moment(event.registrationEndOn).zone(-8))) {
+      if (moment().isAfter(moment(event.registrationStartOn)) && moment().isBefore(moment(event.registrationEndOn))) {
         return res.view();
       } else {
         return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
@@ -57,7 +57,7 @@ module.exports = {
   register: function (req, res, next) {
     if (req.method != 'POST') {
       Event.findOne(req.param('id'), function (err, event) {
-        if (moment().zone(-8).isAfter(moment(event.registrationStartOn).zone(-8)) && moment().zone(-8).isBefore(moment(event.registrationEndOn).zone(-8))) {
+        if (moment().isAfter(moment(event.registrationStartOn)) && moment().isBefore(moment(event.registrationEndOn))) {
           return res.view({ event: event });
         } else {
           return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
@@ -133,7 +133,7 @@ module.exports = {
             } else {
               orderObj.contactAddress = {};
             }
-            orderObj.contactBirthday = new Date(moment(req.param('buyerBirthday')).zone(0).format());
+            orderObj.contactBirthday = new Date(req.param('buyerBirthday'));
             orderObj.delivery = req.param('way') === 'express' ? 2 : 1; // 1-現場領取 / 2-宅配
             for (var i = 0, len = event.ticketType.length; i < len; i++) {
               if (event.ticketType[i].name === req.param('ticket')) {
@@ -196,7 +196,7 @@ module.exports = {
                   billAmount: result.response.order.bill_amount,
                   ibonShopId: result.response.order.ibon_shopid,
                   ibonCode: result.response.order.ibon_code,
-                  expireDate: new Date(moment(result.response.order.expire_date).zone(0).format())
+                  expireDate: new Date(result.response.order.expire_date)
                 }
 
                 // Update order information
