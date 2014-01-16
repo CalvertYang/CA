@@ -126,6 +126,12 @@ block styles
     #flow div h4 {
       width: 50%;
     }
+    .news-block {
+      width: 70%;
+      margin: 5% auto;
+      height: 60px;
+      background: white;
+    }
     @media screen and (max-width: 768px) {
       .content {
         width: 100%;
@@ -186,7 +192,7 @@ block styles
         background: url('/images/btn-buy.png');
         background-repeat: no-repeat;
         background-size: 188px 106px;
-        margin: 2rem auto 4rem auto;
+        margin: 2rem auto 7rem auto;
       }
       a.buy:hover {
         background-position: 0 -53px;
@@ -212,6 +218,9 @@ block body
     .content
       .title
         img(src='/images/about.png', class='title')
+      .tab.news(id='news', name='news')
+        .news-block
+
       .tab.about(id='about', name='about')
         hr
         h3 活動介紹

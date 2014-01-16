@@ -162,9 +162,7 @@ style.
   }
   @media screen and (max-width: 321px) {
     .header-title {
-      position: relative;
-      top: 20rem !important;
-      left: 49%;
+      margin-top: 20rem !important;
     }
   }
 
@@ -343,9 +341,8 @@ style.
     }
     .header-title {
       width: 100%;
-      height: auto;
       text-align: center;
-      margin-top: 30rem;
+      margin: 26rem auto 0 auto;
     }
     .header-title img {
       display: block;
@@ -367,6 +364,8 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
       li(class='visible-xs visible-sm mobile-click')
         a(href='') 活動
         ul
+          //- li
+            a(href='/index#news', class='tab-menu') 公告
           li
             a(href='/index#about', class='tab-menu') 關於
           li
@@ -406,6 +405,8 @@ img(src='/images/mobile-head.png', class='mobile-head visible-xs')
   .menu(class='hidden-xs hidden-sm')
     .nav
       ul
+        //- li
+          a(href='/index#news', class='tab-menu') 公告
         li
           a(href='/index#about', class='tab-menu') 關於
         li

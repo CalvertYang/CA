@@ -7,9 +7,9 @@
         label(for='attenderField-#{i}[#{j}]')= regData.name
         if regData.type === 'text' || regData.type === 'number' || regData.type === 'tel' || regData.type === 'email'
           if regData.type === 'tel'
-            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='tel-#{i}', value=order ? order.registrationData[i]['field-'+j] : '')
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='tel-#{i}', required, value=order ? order.registrationData[i]['field-'+j] : '')
           else
-            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', value=order ? order.registrationData[i]['field-'+j] : '')
+            input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', required, value=order ? order.registrationData[i]['field-'+j] : '')
         else if regData.type === 'date'
           input(type='text', id='attenderField-#{i}[#{j}]', name='attenderField-#{i}[#{j}]', class='date', value=order ? order.registrationData[i]['field-'+j] : '')
         else if regData.type === 'select'
