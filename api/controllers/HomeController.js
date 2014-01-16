@@ -133,7 +133,7 @@ module.exports = {
             } else {
               orderObj.contactAddress = {};
             }
-            orderObj.contactBirthday = new Date(moment(req.param('buyerBirthday')).zone(-8).format());
+            orderObj.contactBirthday = new Date(moment(req.param('buyerBirthday')).zone(0).format());
             orderObj.delivery = req.param('way') === 'express' ? 2 : 1; // 1-現場領取 / 2-宅配
             for (var i = 0, len = event.ticketType.length; i < len; i++) {
               if (event.ticketType[i].name === req.param('ticket')) {
@@ -196,7 +196,7 @@ module.exports = {
                   billAmount: result.response.order.bill_amount,
                   ibonShopId: result.response.order.ibon_shopid,
                   ibonCode: result.response.order.ibon_code,
-                  expireDate: new Date(moment(result.response.order.expire_date).zone(-8).format())
+                  expireDate: new Date(moment(result.response.order.expire_date).zone(0).format())
                 }
 
                 // Update order information

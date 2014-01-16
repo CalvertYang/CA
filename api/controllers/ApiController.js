@@ -52,9 +52,9 @@ module.exports = {
             orderAmount: req.param('order_amount'),
             authCode: req.param('auth_code'),
             cardNo: req.param('card_no'),
-            sendTime: new Date(moment(req.param('send_time')).zone(-8).format()),
-            acquireTime: new Date(moment(req.param('acquire_time')).zone(-8).format()),
-            notifyTime: new Date(moment(req.param('notify_time')).zone(-8).format())
+            sendTime: new Date(moment(req.param('send_time')).zone(0).format()),
+            acquireTime: new Date(moment(req.param('acquire_time')).zone(0).format()),
+            notifyTime: new Date(moment(req.param('notify_time')).zone(0).format())
           };
           order.paymentStatus = 2;
 
@@ -98,8 +98,8 @@ module.exports = {
           order.paymentDetail.authReport = {
             status: req.param('ret'),
             orderAmount: req.param('order_amount'),
-            sendTime: new Date(moment(req.param('send_time')).zone(-8).format()),
-            notifyTime: new Date(moment(req.param('notify_time')).zone(-8).format())
+            sendTime: new Date(moment(req.param('send_time')).zone(0).format()),
+            notifyTime: new Date(moment(req.param('notify_time')).zone(0).format())
           };
           order.paymentStatus = 4;
 
