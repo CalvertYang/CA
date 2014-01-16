@@ -36,14 +36,32 @@ module.exports = {
 
   // 條款
   term: function (req, res, next) {
-    res.view();
+    Event.findOne(req.param('id'), function (err, event) {
+      // If there's an error
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+      }
+
+      if (moment().zone(-8).isAfter(moment(event.registrationStartOn).zone(-8)) && moment().zone(-8).isBefore(moment(event.registrationEndOn).zone(-8))) {
+        return res.view();
+      } else {
+        return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
+      }
+    });
   },
 
   // 填寫訂單資料
   register: function (req, res, next) {
     if (req.method != 'POST') {
       Event.findOne(req.param('id'), function (err, event) {
-        return res.view({ event: event });
+        if (moment().zone(-8).isAfter(moment(event.registrationStartOn).zone(-8)) && moment().zone(-8).isBefore(moment(event.registrationEndOn).zone(-8))) {
+          return res.view({ event: event });
+        } else {
+          return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
+        }
       });
     } else {
       // Parse attender quantity

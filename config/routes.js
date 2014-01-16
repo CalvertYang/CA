@@ -42,7 +42,7 @@ module.exports.routes = {
     action: 'index'
   },
 
-  '/term': {
+  '/term/:id': {
     controller: 'HomeController',
     action: 'term'
   },
