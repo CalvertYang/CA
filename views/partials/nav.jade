@@ -452,10 +452,11 @@ script.
         if ($(this).children('ul').is(':hidden')) {
           $('.mobile-click').children('ul').hide();
           $(this).children('ul').show();
+          e.preventDefault();
         } else {
           $(this).children('ul').hide();
         }
-        e.preventDefault();
+        
       }
     });
     $('a.controls').on('click', function (e) {
