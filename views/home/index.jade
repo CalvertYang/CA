@@ -192,10 +192,16 @@ block styles
         background: url('/images/btn-buy.png');
         background-repeat: no-repeat;
         background-size: 188px 106px;
-        margin: 2rem auto 7rem auto;
+        margin: 2rem auto 6rem auto;
       }
       a.buy:hover {
         background-position: 0 -53px;
+      }
+      a.tab-menu {
+        display: block;
+        width: 100%;
+        height: 100%;
+
       }
       .footer {
         position: relative;
@@ -532,15 +538,15 @@ block body
   include ../partials/footer
   
 
-    //- Modal
-    .modal.fade#warningLogin
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
-            h4 提示
-          .modal-body
-            p 請先登入 Facebook 後進行報名。
+    
+  .modal.fade#warningLogin
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true') &times;
+          h4 提示
+        .modal-body
+          p 請先登入 Facebook 後進行報名。
   block javascript
   script(src='/js/vendor/perfect-scrollbar-with-mousewheel.min.js')
   script.
