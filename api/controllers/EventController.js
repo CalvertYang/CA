@@ -236,7 +236,7 @@ module.exports = {
           } else if (orders[i].paymentStatus === 2) {
             paidAmount += orders[i].grandTotal;
           }
-          orders[i].createdAt = moment(orders[i].createdAt).format('YYYY/MM/DD HH:mm');
+          orders[i].createdAt = moment(orders[i].createdAt).zone(-8).format('YYYY/MM/DD HH:mm');
         }
       }
 
