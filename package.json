@@ -1,7 +1,7 @@
 {
   "name": "CA",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.8",
@@ -15,7 +15,8 @@
     "passport": "~0.1.18",
     "passport-facebook": "~1.0.2",
     "async": "~0.2.9",
-    "clt-api": "~1.2.0"
+    "clt-api": "~1.2.0",
+    "excel-export": "~0.3.10"
   },
   "scripts": {
     "start": "node app.js",

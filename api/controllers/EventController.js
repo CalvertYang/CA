@@ -15,6 +15,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var moment = require('moment');
+var nodeExcel = require('excel-export');
 
 module.exports = {
     
@@ -236,11 +237,100 @@ module.exports = {
           } else if (orders[i].paymentStatus === 2) {
             paidAmount += orders[i].grandTotal;
           }
-          orders[i].createdAt = moment(orders[i].createdAt).format('YYYY/MM/DD HH:mm');
+          orders[i].createdAt = moment(orders[i].createdAt).zone(-8).format('YYYY/MM/DD HH:mm');
         }
       }
 
       res.view({ eventId: req.param('id'), orders: orders, paidAmount: paidAmount, unPaidAmount: unPaidAmount, keyword: keyword });
+    });
+  },
+
+  generateReport: function(req, res, next) {
+    Event.findOne(req.param('id')).done(function (err, event) {
+      if (err) console.log(err);
+
+      if (event) {
+        Order.find({ where: { eventId: event.id, paymentStatus: 2 }, sort: 'orderNo ASC' }).done(function (err, orders) {
+          // create Json data
+          // orderNo, receiver, type, address, mobile
+          var conf = {};
+          conf.cols = [];
+          conf.rows = [];
+          conf.cols.push({ caption: 'ID', type: 'string' });
+          conf.cols.push({ caption: '訂單編號', type: 'string' });
+          conf.cols.push({ caption: '報名日期', type: 'string' });
+          conf.cols.push({ caption: '訂單明細', type: 'string' });
+          conf.cols.push({ caption: '收件人姓名', type: 'string' });
+          conf.cols.push({ caption: '收件人電話', type: 'string' });
+          conf.cols.push({ caption: '收件人生日', type: 'string' });
+          conf.cols.push({ caption: '郵遞區號', type: 'string' });
+          conf.cols.push({ caption: '寄送地址', type: 'string' });
+          conf.cols.push({ caption: 'Email', type: 'string' });
+          conf.cols.push({ caption: '配送方式', type: 'string' });
+
+          for (var i = 0, m = orders.length; i < m; i++) {
+            var data = [];
+            data.push(i + 1);
+            data.push(orders[i].orderNo);
+            data.push(moment(orders[i].createdAt).zone(-8).format('YYYY/MM/DD HH:mm'));
+            data.push(orders[i].commodity.name + ' x ' + orders[i].commodity.quantity);
+            data.push(orders[i].contactName);
+            data.push(orders[i].contactPhone);
+            data.push(moment(orders[i].contactBirthday).format('YYYY/MM/DD'));
+            if (orders[i].delivery === 1) {
+              data.push('');
+              data.push('');
+            } else {
+              data.push(orders[i].contactAddress.zipCode);
+              data.push(orders[i].contactAddress.address);
+            }
+            data.push(orders[i].contactEmail);
+            if (orders[i].delivery === 1) {
+              data.push('現場領取');
+            } else {
+              data.push('宅配');
+            }
+
+            if (orders[i].registrationData.length > 0) {
+              for (var j = 0, n = orders[i].registrationData.length; j < n; j++) {
+                if (j > 0) {
+                  var data = [];
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                  data.push('');
+                }
+
+                for (var k = 0, o = event.registrationData.length; k < o; k++) {
+                  if (i == 0) {
+                    conf.cols.push({ caption: event.registrationData[k].name, type: 'string' });
+                  }
+                  data.push(orders[i].registrationData[j]['field-' + k]);
+                }
+                conf.rows.push(data);
+              }
+            } else {
+              for (var j = 0, n = event.registrationData.length; j < n; j++) {
+                data.push('');
+              }
+              conf.rows.push(data);
+            }
+          }
+
+          var result = nodeExcel.execute(conf);
+          res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+          res.setHeader('Content-Disposition', 'attachment; filename=' + req.param('id') + '-Report.xlsx');
+          res.end(result, 'binary');
+        });
+      } else {
+        res.view('404');
+        return;
+      }
     });
   },
 

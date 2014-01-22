@@ -75,7 +75,7 @@ module.exports = {
         for(var o in orders){
           for(var e in events){
             if(orders[o].eventId === events[e].id){
-              orders[o].createdAt = moment(orders[o].createdAt).format('YYYY/MM/DD HH:mm:ss');
+              orders[o].createdAt = moment(orders[o].createdAt).zone(-8).format('YYYY/MM/DD HH:mm:ss');
               orders[o].activity = events[e];
             }
           }

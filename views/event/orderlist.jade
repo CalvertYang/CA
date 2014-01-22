@@ -45,6 +45,7 @@ block body
             th 配送方式
             th 訂單狀態
             th 物流狀態
+            th 完賽註記
           each order in orders
             tr
               td
@@ -79,6 +80,7 @@ block body
                   td 處理中
                 when 3
                   td 已寄送
+              td= order.raceFinished === true ? '是' : '否'
         a(href='/event/index', class='btn btn-success btn-sm pull-right') 返回
 
 block javascript

@@ -46,7 +46,11 @@ module.exports = {
       }
 
       if (moment().isAfter(moment(event.registrationStartOn)) && moment().isBefore(moment(event.registrationEndOn))) {
-        return res.view();
+        if (event.registedQuantity < event.quota) {
+          return res.view();
+        } else {
+          return res.redirect('/home/finish?message=很抱歉，已達到報名人數限制');
+        }
       } else {
         return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
       }
@@ -58,7 +62,11 @@ module.exports = {
     if (req.method != 'POST') {
       Event.findOne(req.param('id'), function (err, event) {
         if (moment().isAfter(moment(event.registrationStartOn)) && moment().isBefore(moment(event.registrationEndOn))) {
-          return res.view({ event: event });
+          if (event.registedQuantity < event.quota) {
+            return res.view({ event: event });
+          } else {
+            return res.redirect('/home/finish?message=很抱歉，已達到報名人數限制');
+          }
         } else {
           return res.redirect('/home/finish?message=報名尚未開始或已截止報名');
         }
@@ -147,7 +155,7 @@ module.exports = {
             }
             // Add express charge
             if (req.param('way') === 'express') {
-              orderObj.grandTotal = parseInt(orderObj.grandTotal) + 150;
+              orderObj.grandTotal = parseInt(orderObj.grandTotal) + 200;
             }
             orderObj.registrationData = [];
             for(var i = 0, len = ticketQuantity; i < len; i++) {
@@ -248,10 +256,13 @@ module.exports = {
         ], function (err, result) {
           // If there's an error
           if (err) {
+            console.log('Monkey');
             console.log(err);
             req.session.flash = {
               err: err
             }
+
+            return res.redirect('/home/finish?message=很抱歉，發生了錯誤。我們已調派一群訓練有素的猴子來處理狀況。');
           } else {
             if (req.param('paymentType') === 'ibon') {
               // Redirect to finish page after payment by ibon

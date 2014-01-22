@@ -10,7 +10,7 @@ block styles
       width: 30rem;
     }
     .w {
-      width: 210px;
+      width: 290px;
     }
     span.divider {
       width: 5px;
@@ -56,5 +56,7 @@ block body
                 a(href='/event/detail/#{event.id}', class='btn btn-default btn-sm') 詳細資訊
                 span(class="divider")
                 a(href='/event/orderlist/#{event.id}', class='btn btn-default btn-sm') 查看訂單
+                span(class="divider")
+                a(href='/event/generateReport/#{event.id}', class='btn btn-default btn-sm') 產生報表
     
 block javascript

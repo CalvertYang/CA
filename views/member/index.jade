@@ -45,7 +45,6 @@ block body
             th 生日
             th 性別
             th Email
-            th 完賽註記
             th
           each member in members
             tr
@@ -54,7 +53,6 @@ block body
               td= member.birthday
               td= member.gender !== null ? (member.gender === 'male' ? '男' : '女') : ''
               td= member.email
-              td= member.raceFinished === true ? '是' : '否'
               td(class='w30')
                 a(href='/member/orderlist/#{member.fbid}', class='btn btn-sm') 訂單資訊
     
