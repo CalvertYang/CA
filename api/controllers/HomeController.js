@@ -140,7 +140,9 @@ module.exports = {
             if (req.param('way') === 'express') {
               orderObj.contactAddress = {
                 zipCode: addrInfo.zipCode,
-                address: req.param('expressAddressCity') + req.param('expressAddressArea') + req.param('expressAddress')
+                city: req.param('expressAddressCity'),
+                area: req.param('expressAddressArea'),
+                address: req.param('expressAddress')
               };
             } else {
               orderObj.contactAddress = {};
@@ -285,36 +287,33 @@ module.exports = {
   editOrder: function (req, res, next) {
     if (req.method != 'POST') {
       Order.findOne(req.param('id'), function(err, order) {
+        order.contactBirthday = moment(order.contactBirthday).format('YYYY/MM/DD');
+
         return res.view({ order: order });
       });
     } else {
-      Order.findOne(req.param('id'), function(err, order) {
-        // If there's an error
-        if (err) {
-          console.log(err);
-          req.session.flash = {
-            err: err
-          }
-        }
+      async.waterfall([
+        // Get order number
+        function(callback) {
+          if (order.delivery === 2) {
+            var address = req.param('expressAddressCity') + req.param('expressAddressArea') + req.param('expressAddress');
+            GlobalUtility.getFullZipCode(address, function (err, addrInfo) {
+              if (err) {
+                return callback(err, null);
+              }
 
-        Event.findOne(order.eventId, function(err, event) {
-          // If there's an error
-          if (err) {
-            console.log(err);
-            req.session.flash = {
-              err: err
-            }
-          }
+              if (!addrInfo) {
+                console.log('Get full zipcode fail, Addr: ' + address);
+              }
 
-          order.registrationData = [];
-          for(var i = 0, len = order.commodity.quantity; i < len; i++) {
-            order.registrationData[i] = {};
-            for(var j = 0, regDataLen = event.registrationData.length; j < regDataLen; j++) {
-              order.registrationData[i]['field-' + j] = req.param('attenderField-' + i)[j];
-            }
+              return callback(null, addrInfo);
+            });
+          } else {
+            return callback(null, null);
           }
-
-          Order.update(order.id, order, function (err, orders) {
+        },
+        function(addrInfo, callback) {
+          Order.findOne(req.param('id'), function(err, order) {
             // If there's an error
             if (err) {
               console.log(err);
@@ -323,9 +322,53 @@ module.exports = {
               }
             }
 
-            return res.redirect('/finish?message=資料修改成功');
+            Event.findOne(order.eventId, function(err, event) {
+              // If there's an error
+              if (err) {
+                console.log(err);
+                req.session.flash = {
+                  err: err
+                }
+              }
+
+              order.contactName = req.param('buyerName');
+              order.contactBirthday = new Date(req.param('buyerBirthday'));
+              order.contactPhone = req.param('buyerPhone');
+              order.contactEmail = req.param('buyerEmail');
+
+              if (order.delivery === 2) {
+                order.contactAddress = {
+                  zipCode: addrInfo.zipCode,
+                  city: req.param('expressAddressCity'),
+                  area: req.param('expressAddressArea'),
+                  address: req.param('expressAddress')
+                };
+              }
+
+              order.registrationData = [];
+              for(var i = 0, len = order.commodity.quantity; i < len; i++) {
+                order.registrationData[i] = {};
+                for(var j = 0, regDataLen = event.registrationData.length; j < regDataLen; j++) {
+                  order.registrationData[i]['field-' + j] = req.param('attenderField-' + i)[j];
+                }
+              }
+
+              Order.update(order.id, order, function (err, orders) {
+                // If there's an error
+                if (err) {
+                  console.log(err);
+                  req.session.flash = {
+                    err: err
+                  }
+                }
+
+                return res.redirect('/finish?message=資料修改成功');
+              });
+            });
           });
-        });
+        }
+      ], function (err, result) {
+        
       });
     }
   },

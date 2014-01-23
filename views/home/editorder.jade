@@ -109,7 +109,6 @@ block styles
     }
     .address {
       width: 100%;
-      display: none;
     }
     .address .column input[type="text"]{
       float: none;
@@ -252,10 +251,29 @@ block styles
       width: 10rem;
       float: right;
     }
+
     @media screen and (max-width: 768px) {
       form {
         width: 90%;
         margin: 0 auto;
+      }
+      .contact {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        padding-left: 2rem;
+      }
+      .member {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+      .member .column {
+        width: 100%;
+        float: none;
+        clear: both;
+        text-align: left;
       }
       .content {
         width: 100%;
@@ -306,13 +324,40 @@ block body
         img(src='/images/title-term.png')
       form(method='post', action='/editorder/#{order.id}')
         input(type='hidden', name='_csrf', value=_csrf, id='_csrf')
-        //- h4 數量選擇
-        //- .select
-        //-   select(id='quantity')
-        //-     option 1
-        //-     option 2
-        //-     option 3
+        h4 訂購人資料
+        .contact
+          .column
+            label(for='buyerName') 姓名
+            input(type='text', id='buyerName', name='buyerName', required, value=order.contactName)
+          .column
+            label(for='buyerBirthday') 生日
+            input(type='text', id='buyerBirthday', name='buyerBirthday', class='date', required, value=order.contactBirthday)
+          .column
+            label(for='buyerPhone') 手機號碼
+            input(type='text', id='buyerPhone', name='buyerPhone', required, value=order.contactPhone)
+          .column
+            label(for='buyerEmail') 電子郵件
+            input(type='text', id='buyerEmail', name='buyerEmail', required, value=order.contactEmail)
+        hr
         .members
+        if order.delivery === 2
+          hr
+          h4 宅配地址
+          .address
+            .column
+              .select
+                select(id='expressAddressCountry', name='expressAddressCountry')
+                  option(value='TW', selected) 台灣
+              .select
+                input(type='hidden', id='selectedCity', value=order.contactAddress.city ? order.contactAddress.city : '')
+                select(id='expressAddressCity', name='expressAddressCity')
+                  option(value='') - 請選擇 -
+              .select
+                input(type='hidden', id='selectedArea', value=order.contactAddress.area ? order.contactAddress.area : '')
+                select(id='expressAddressArea', name='expressAddressArea')
+                  option(value='') - 請選擇 -
+            .column
+              input(type='text', id='expressAddress', name='expressAddress', value=order.contactAddress.address)
 
         div
           button(class='finish')
@@ -320,25 +365,64 @@ block body
 
   
   block javascript
+  script(src='/js/vendor/jquery.validate.js')
+  script(src='/js/vendor/messages_zh_TW.js')
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
   script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.js')
   script.
     $(function () {
-      var quantity = $('select#quantity').val();
+      $.validator.addMethod("notEqualTo", function(value, element, param) {
+        var notEqual = true;
+        value = $.trim(value);
+        for (i = 0; i < param.length; i++) {
+          if (value == $.trim($(param[i]).val())) { notEqual = false;}
+        }
+        return this.optional(element) || notEqual;
+      }, "電話號碼不得相同。");
+
+      $("form").validate({
+        rules: {
+          buyerEmail:  {
+            email: true,
+            required: true
+          },
+          "attenderField-0[1]": {
+            notEqualTo: [".tel-1", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-1[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-2[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-3[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-4[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-3", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-5[1]": {
+            notEqualTo: [".tel-0", ".tel-1", ".tel-2", ".tel-3", ".tel-4", ".tel-6", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-6[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-1", ".tel-7", ".tel-8", ".tel-9"]
+          },
+          "attenderField-7[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-1", ".tel-8", ".tel-9"]
+          },
+          "attenderField-8[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-1", ".tel-9"]
+          },
+          "attenderField-9[1]": {
+            notEqualTo: [".tel-0", ".tel-2", ".tel-3", ".tel-4", ".tel-5", ".tel-6", ".tel-7", ".tel-8", ".tel-1"]
+          }
+        }
+      });
 
       var base = $('form').children('.members').first();
       base.empty();
       $.get("/generateForm?id=#{order.eventId}&orderId=#{order.id}", function(data) {
         base.append(data);
-      });
-
-      $('input[name=way][type=radio]').on('click', function () {
-        var choose = $(this).val();
-        if (choose == 'express') {
-          $('.address').show();
-        } else {
-          $('.address').hide();
-        }
       });
 
       $('body').on('focus', '.date', function(){
@@ -348,5 +432,82 @@ block body
         });
       })
 
+      // Get address city list
+      var cityResult = $.ajax({
+        type: 'POST',
+        url: 'http://#{sails.config.myConf.addressApi.url}/getCity',
+        data: { country: $('#expressAddressCountry option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
+        dataType: 'json',
+        async: false
+      });
 
+      cityResult.error(function(msg) {
+        console.dir(msg);
+      });
+
+      cityResult.success(function(cities) {
+        $('#expressAddressCity option').remove();
+        $('#expressAddressCity').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+        for(var idx in cities) {
+          $('#expressAddressCity').append($('<option></option>').attr('value', cities[idx].city).text(cities[idx].city));
+        }
+        if ($('#selectedCity').val()) {
+          $('#expressAddressCity').val($('#selectedCity').val());
+        } else {
+          $('#expressAddressCity').val($('#expressAddressCity option:first').val());
+        }
+
+        if ($('#expressAddressCity option:selected').val() != '') {
+          // Get city area
+          var cityAreaResult = $.ajax({
+            type: 'POST',
+            url: 'http://#{sails.config.myConf.addressApi.url}/getArea',
+            data: { city: $('#expressAddressCity option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
+            dataType: 'json',
+            async: false
+          });
+
+          cityAreaResult.error(function(msg) {
+            console.dir(msg);
+          });
+
+          cityAreaResult.success(function(areas) {
+            $("#expressAddressArea option").remove();
+            $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+            for(var idx in areas) {
+              $('#expressAddressArea').append($('<option></option>').attr('value', areas[idx].area).text(areas[idx].area));
+            }
+            $('#expressAddressArea').val($('#selectedArea').val());
+          });
+        }
+      });
+
+      // Get address area list
+      $('#expressAddressCity').change(function() {
+        if ($('#expressAddressCity option:selected').val() == '') {
+          $("#expressAddressArea option").remove();
+          $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+        } else {
+          var cityAreaResult = $.ajax({
+            type: 'POST',
+            url: 'http://#{sails.config.myConf.addressApi.url}/getArea',
+            data: { city: $('#expressAddressCity option:selected').val(), token: '#{sails.config.myConf.addressApi.token}' },
+            dataType: 'json',
+            async: false
+          });
+
+          cityAreaResult.error(function(msg) {
+            console.dir(msg);
+          });
+
+          cityAreaResult.success(function(areas) {
+            $("#expressAddressArea option").remove();
+            $('#expressAddressArea').append($('<option></option>').attr('value', '').text('- 請選擇 -'));
+            for(var idx in areas) {
+              $('#expressAddressArea').append($('<option></option>').attr('value', areas[idx].area).text(areas[idx].area));
+            }
+            $('#expressAddressArea').val($('#expressAddressArea option:first').val());
+          });
+        }
+      });
     });
