@@ -118,7 +118,11 @@ module.exports = {
                   return callback(err, null);
                 }
 
-                return callback(null, event, orderNo, addrInfo);
+                if (addrInfo) {
+                  return callback(null, event, orderNo, addrInfo);
+                } else {
+                  return callback('Get full zip code fail', null);
+                }
               });
             } else {
               return callback(null, event, orderNo, null);
