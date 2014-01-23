@@ -118,11 +118,11 @@ module.exports = {
                   return callback(err, null);
                 }
 
-                if (addrInfo) {
-                  return callback(null, event, orderNo, addrInfo);
-                } else {
-                  return callback('Get full zip code fail', null);
+                if (!addrInfo) {
+                  console.log('Get full zipcode fail, Addr: ' + address);
                 }
+
+                return callback(null, event, orderNo, addrInfo);
               });
             } else {
               return callback(null, event, orderNo, null);
@@ -140,7 +140,7 @@ module.exports = {
             if (req.param('way') === 'express') {
               orderObj.contactAddress = {
                 zipCode: addrInfo.zipCode,
-                address: addrInfo.addrSource
+                address: req.param('expressAddressCity') + req.param('expressAddressArea') + req.param('expressAddress')
               };
             } else {
               orderObj.contactAddress = {};
