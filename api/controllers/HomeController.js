@@ -295,7 +295,7 @@ module.exports = {
       async.waterfall([
         // Get order number
         function(callback) {
-          if (order.delivery === 2) {
+          if (req.param('expressAddressCity') || req.param('expressAddressArea') || req.param('expressAddress')) {
             var address = req.param('expressAddressCity') + req.param('expressAddressArea') + req.param('expressAddress');
             GlobalUtility.getFullZipCode(address, function (err, addrInfo) {
               if (err) {

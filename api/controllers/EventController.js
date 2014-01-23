@@ -282,7 +282,10 @@ module.exports = {
               data.push('');
             } else {
               data.push(orders[i].contactAddress.zipCode);
-              data.push(orders[i].contactAddress.address);
+              var address = orders[i].contactAddress.city ? orders[i].contactAddress.city : '';
+              address += orders[i].contactAddress.area ? orders[i].contactAddress.area : '';
+              address += orders[i].contactAddress.address ? orders[i].contactAddress.address : '';
+              data.push(address);
             }
             data.push(orders[i].contactEmail);
             if (orders[i].delivery === 1) {
