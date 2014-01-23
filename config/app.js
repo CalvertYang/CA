@@ -1,3 +1,3 @@
 module.exports = {
-  appName : 'Captain America Run'
+  appName : 'Super Hero Run 神盾局探員招募測驗'
 };
