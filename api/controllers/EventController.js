@@ -38,10 +38,10 @@ module.exports = {
       if (events) {
         // Change datetime format
         events.forEach(function (event) {
-          event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
-          event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
-          event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
-          event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+          event.startOn = moment(event.startOn).zone(-8).format('YYYY/MM/DD HH:mm');
+          event.endOn = moment(event.endOn).zone(-8).format('YYYY/MM/DD HH:mm');
+          event.registrationStartOn = moment(event.registrationStartOn).zone(-8).format('YYYY/MM/DD HH:mm');
+          event.registrationEndOn = moment(event.registrationEndOn).zone(-8).format('YYYY/MM/DD HH:mm');
         });
       }
 
@@ -55,10 +55,10 @@ module.exports = {
     } else {
       var eventObj = {};
       eventObj.title = req.param('title');
-      eventObj.startOn = new Date(req.param('startOn'));
-      eventObj.endOn = new Date(req.param('endOn'));
-      eventObj.registrationStartOn = new Date(req.param('registrationStartOn'));
-      eventObj.registrationEndOn = new Date(req.param('registrationEndOn'));
+      eventObj.startOn = moment(req.param('startOn')).zone(+8)._d;
+      eventObj.endOn = moment(req.param('endOn')).zone(+8)._d;
+      eventObj.registrationStartOn = moment(req.param('registrationStartOn')).zone(+8)._d;
+      eventObj.registrationEndOn = moment(req.param('registrationEndOn')).zone(+8)._d;
       eventObj.sponsor = req.param('sponsor');
       eventObj.contact = req.param('contact');
       eventObj.contactPhone = req.param('contactPhone');
@@ -123,10 +123,10 @@ module.exports = {
       }
 
       // Change datetime format
-      event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
-      event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
-      event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
-      event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+      event.startOn = moment(event.startOn).zone(-8).format('YYYY/MM/DD HH:mm');
+      event.endOn = moment(event.endOn).zone(-8).format('YYYY/MM/DD HH:mm');
+      event.registrationStartOn = moment(event.registrationStartOn).zone(-8).format('YYYY/MM/DD HH:mm');
+      event.registrationEndOn = moment(event.registrationEndOn).zone(-8).format('YYYY/MM/DD HH:mm');
 
       return res.view({ event: event });
     });
@@ -145,20 +145,20 @@ module.exports = {
         }
 
         // Change datetime format
-        event.startOn = moment(event.startOn).format('YYYY/MM/DD HH:mm');
-        event.endOn = moment(event.endOn).format('YYYY/MM/DD HH:mm');
-        event.registrationStartOn = moment(event.registrationStartOn).format('YYYY/MM/DD HH:mm');
-        event.registrationEndOn = moment(event.registrationEndOn).format('YYYY/MM/DD HH:mm');
+        event.startOn = moment(event.startOn).zone(-8).format('YYYY/MM/DD HH:mm');
+        event.endOn = moment(event.endOn).zone(-8).format('YYYY/MM/DD HH:mm');
+        event.registrationStartOn = moment(event.registrationStartOn).zone(-8).format('YYYY/MM/DD HH:mm');
+        event.registrationEndOn = moment(event.registrationEndOn).zone(-8).format('YYYY/MM/DD HH:mm');
 
         return res.view({ event: event });
       });
     } else {
       var eventObj = {};
       eventObj.title = req.param('title');
-      eventObj.startOn = new Date(req.param('startOn'));
-      eventObj.endOn = new Date(req.param('endOn'));
-      eventObj.registrationStartOn = new Date(req.param('registrationStartOn'));
-      eventObj.registrationEndOn = new Date(req.param('registrationEndOn'));
+      eventObj.startOn = moment(req.param('startOn')).zone(+8)._d;
+      eventObj.endOn = moment(req.param('endOn')).zone(+8)._d;
+      eventObj.registrationStartOn = moment(req.param('registrationStartOn')).zone(+8)._d;
+      eventObj.registrationEndOn = moment(req.param('registrationEndOn')).zone(+8)._d;
       eventObj.sponsor = req.param('sponsor');
       eventObj.contact = req.param('contact');
       eventObj.contactPhone = req.param('contactPhone');
