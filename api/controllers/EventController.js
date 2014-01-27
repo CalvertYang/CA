@@ -259,7 +259,8 @@ module.exports = {
           conf.cols.push({ caption: 'ID', type: 'string' });
           conf.cols.push({ caption: '訂單編號', type: 'string' });
           conf.cols.push({ caption: '報名日期', type: 'string' });
-          conf.cols.push({ caption: '訂單明細', type: 'string' });
+          conf.cols.push({ caption: '訂購項目', type: 'string' });
+          conf.cols.push({ caption: '數量', type: 'string' });
           conf.cols.push({ caption: '收件人姓名', type: 'string' });
           conf.cols.push({ caption: '收件人電話', type: 'string' });
           conf.cols.push({ caption: '收件人生日', type: 'string' });
@@ -273,7 +274,8 @@ module.exports = {
             data.push(i + 1);
             data.push(orders[i].orderNo);
             data.push(moment(orders[i].createdAt).zone(-8).format('YYYY/MM/DD HH:mm'));
-            data.push(orders[i].commodity.name + ' x ' + orders[i].commodity.quantity);
+            data.push(orders[i].commodity.name);
+            data.push(orders[i].commodity.quantity);
             data.push(orders[i].contactName);
             data.push(orders[i].contactPhone);
             data.push(moment(orders[i].contactBirthday).format('YYYY/MM/DD'));
