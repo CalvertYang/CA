@@ -65,7 +65,7 @@ block body
                   .form-group
                     label(for='contactAddress', class='col-sm-2 control-label ') 宅配地址
                     .col-sm-6
-                      p(class='form-control-static', id='contactAddress') #{order.contactAddress.zipCode} #{order.contactAddress.address}
+                      p(class='form-control-static', id='contactAddress') #{order.contactAddress.zipCode} #{order.contactAddress.city}#{order.contactAddress.area}#{order.contactAddress.address}
                 .form-group
                   label(for='commodity', class='col-sm-2 control-label') 商品資料
                   .col-sm-6
