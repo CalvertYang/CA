@@ -205,6 +205,22 @@ module.exports = {
                 CellPhone: orderData.contactPhone,
                 Email: orderData.contactEmail
               }, function (err, result) {
+                // If there's an error
+                if (err) {
+                  console.log('========== Error order info start =========');
+                  console.dir(orderData);
+                  console.log('========== Error order info end ==========');
+                  return callback(err, null);
+                }
+
+                if (result.response.status === 'ERROR') {
+                  console.log('========== Error order info start =========');
+                  console.dir(orderData);
+                  console.log('========== Error order info end ==========');
+                  return callback(result, null);
+                }
+
+                console.dir(result);
                 orderData.paymentDetail = {
                   orderAmount: result.response.order.order_amount,
                   billAmount: result.response.order.bill_amount,
@@ -232,6 +248,15 @@ module.exports = {
                 OrderAmount: orderData.grandTotal.toString(),
                 OrderDetail: event.title + ' - ' + orderData.commodity.name + ' x ' + orderData.commodity.quantity
               }, function (err, result) {
+                // If there's an error
+                if (err) {
+                  console.log('========== Error order info start =========');
+                  console.dir(orderData);
+                  console.log('========== Error order info end ==========');
+                  return callback(err, null);
+                }
+
+                console.dir(result);
                 orderData.paymentDetail = {
                   url: result.url
                 }
