@@ -311,6 +311,7 @@ module.exports = {
                   data.push('');
                   data.push('');
                   data.push('');
+                  data.push('');
                 }
 
                 for (var k = 0, o = event.registrationData.length; k < o; k++) {
