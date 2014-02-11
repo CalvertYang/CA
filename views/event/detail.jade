@@ -33,6 +33,10 @@ block body
                   .col-sm-6
                     p(class='form-control-static', id='title')= event.title
                 .form-group
+                  label(for='title', class='col-sm-2 control-label') 活動代碼
+                  .col-sm-6
+                    p(class='form-control-static', id='title')= event.id
+                .form-group
                   label(for='registrationStartOn', class='col-sm-2 control-label') 報名日期-起
                   .col-sm-6
                     p(class='form-control-static', id='registrationStartOn')= event.registrationStartOn
