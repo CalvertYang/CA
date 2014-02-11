@@ -32,7 +32,7 @@ module.exports = {
   //  notify_time: 通報時間，為本次傳送訊息的時間(每一次傳輸均會更新)，格式為 YYYY-MM-DD HH:NN:SS，例如: 2013-04-03 07:19:46
   //  chk: 檢核碼，檢核碼產生方式為將 hash_base、order_amount、send_time、ret、acquire_time、auth_code、card_no、notify_time 及 cust_order_no
   //       各欄位以 '$' 串接，再以 MD5 演算法取得。
-  cltCardAuthSuccess: function (req, res, next) {
+  cltCardAuthSuccess: function(req, res, next) {
     if (req.param('ret') == 'OK') {
       var data = sails.config.myConf.CLT_CONFIG.cocsHashBase + '$' + req.param('order_amount') + '$' + req.param('send_time') + '$' +
                  req.param('ret') + '$' + req.param('acquire_time') + '$' + req.param('auth_code') + '$' +
@@ -81,7 +81,7 @@ module.exports = {
   //  notify_time: 通報時間，為本次傳送訊息的時間(每一次傳輸均會更新)，格式為 YYYY-MM-DD HH:NN:SS，例如: 2013-04-03 07:19:46
   //  chk: 檢核碼，檢核碼產生方式為將 hash_base、order_amount、send_time、ret、notify_time 及 cust_order_no
   //       各欄位以 '$' 串接，再以 MD5 演算法取得。
-  cltCardAuthFail: function (req, res, next) {
+  cltCardAuthFail: function(req, res, next) {
     if (req.param('ret') == 'FAIL') {
       var data = sails.config.myConf.CLT_CONFIG.cocsHashBase + '$' + req.param('order_amount') + '$' + req.param('send_time') + '$' +
                  req.param('ret') + '$' + req.param('notify_time') + '$' + req.param('cust_order_no');
@@ -114,6 +114,26 @@ module.exports = {
       }
     } else {
       return res.redirect('/');
+    }
+  },
+
+  getTicketType: function(req, res, next) {
+    var token = '1K8zsd99EOy8k2NKD59ZTnCAaH4z8is9';
+
+    if (req.method !== 'POST' || req.param('token') !== token) {
+      return res.forbidden();
+    } else {
+      Event.findOne(req.param('id'), function(err, event) {
+        if (err) {
+          return res.serverError(err);
+        } else {
+          if (event) {
+            return res.json(event.ticketType);
+          } else {
+            return res.json({ msg: 'Event not found.' });
+          }
+        }
+      });
     }
   },
 
