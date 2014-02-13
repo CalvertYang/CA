@@ -240,7 +240,8 @@ module.exports = {
     try {
       memberSource = JSON.parse(req.param('member'));
     } catch (parserError) {
-      return res.json({msg: 'please check your member json'});
+      console.log(parserError);
+      return res.json({msg: 'please check your member json', err: parserError.name + ' : ' + parserError.message });
     }
     if (req.method !== 'POST' || req.param('token') !== token) {
       return res.forbidden();
@@ -248,7 +249,7 @@ module.exports = {
       return res.json({msg: 'no fbid value'});
     } else {
       Member.findOne({ fbid: memberSource.fbid}).done(function (err, dbMember){
-        if(dbMember.length > 0){
+        if(dbMember){
           return res.json({msg: 'fbid is exist'});
         }else{
           var member = {};
@@ -284,7 +285,8 @@ module.exports = {
     try {
       orderSource = JSON.parse(req.param('order'));
     } catch (parserError) {
-      return res.json({msg: 'please check your order json'});
+      console.dir(parserError);
+      return res.json({msg: 'please check your order json', err: parserError.name + ' : ' + parserError.message });
     }
     if (req.method !== 'POST' || req.param('token') !== token) {
       return res.forbidden();
@@ -367,7 +369,7 @@ module.exports = {
         }
       ], function(err, result){
         if(err){
-          console.dir(JSON.stringify(result));
+          console.dir(err + ' : ' + JSON.stringify(result));
           return res.json({msg: err,err: result});
         }else{
           return res.json(result);
@@ -383,7 +385,7 @@ module.exports = {
       memberSource = JSON.parse(req.param('member'));
     } catch (parserError) {
       console.dir(parserError);
-      return res.json({msg: 'please check your member json', err: parserError});
+      return res.json({msg: 'please check your member json', err: parserError.name + ' : ' + parserError.message });
     }
     if (req.method !== 'POST' || req.param('token') !== token) {
       return res.forbidden();
@@ -429,9 +431,9 @@ module.exports = {
     var orderSource;
     try {
      orderSource = JSON.parse(req.param('order'));
-    } catch (parserError) {
+    } catch (parserError) { 
       console.dir(parserError);
-      return res.json({msg: 'please check your order json', err: parserError});
+      return res.json({msg: 'please check your order json', err: parserError.name + ' : ' + parserError.message });
     }
     if (req.method !== 'POST' || req.param('token') !== token) {
       return res.forbidden();
